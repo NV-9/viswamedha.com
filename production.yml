@@ -14,7 +14,7 @@ services:
 
     image: mysite_production_django
     volumes:
-      - production_django_media:/app/mysite/media
+      - production_django_media:/app/apps/media
     depends_on:
       - postgres
       - redis

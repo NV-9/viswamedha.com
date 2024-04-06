@@ -6,8 +6,8 @@ from pathlib import Path
 import environ
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# mysite/
-APPS_DIR = BASE_DIR / "mysite"
+# apps/
+APPS_DIR = BASE_DIR / "apps"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -87,7 +87,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "mysite.main",
+    "apps.main",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -96,7 +96,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "mysite.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "apps.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -311,13 +311,13 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://docs.allauth.org/en/latest/account/configuration.html
-# ACCOUNT_ADAPTER = "mysite.users.adapters.AccountAdapter"
+# ACCOUNT_ADAPTER = "apps.users.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
-# ACCOUNT_FORMS = {"signup": "mysite.users.forms.UserSignupForm"}
+# ACCOUNT_FORMS = {"signup": "apps.users.forms.UserSignupForm"}
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-# SOCIALACCOUNT_ADAPTER = "mysite.users.adapters.SocialAccountAdapter"
+# SOCIALACCOUNT_ADAPTER = "apps.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-# SOCIALACCOUNT_FORMS = {"signup": "mysite.users.forms.UserSocialSignupForm"}
+# SOCIALACCOUNT_FORMS = {"signup": "apps.users.forms.UserSocialSignupForm"}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -356,4 +356,4 @@ WEBPACK_LOADER = {
 # ------------------------------------------------------------------------------
 DEFAULT_HOST = 'www'
 
-ROOT_HOSTCONF = 'mysite.urls.hosts'
+ROOT_HOSTCONF = 'apps.urls.hosts'

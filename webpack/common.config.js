@@ -6,13 +6,13 @@ module.exports = {
   target: 'web',
   context: path.join(__dirname, '../'),
   entry: {
-    project: path.resolve(__dirname, '../mysite/static/js/project'),
-    vendors: path.resolve(__dirname, '../mysite/static/js/vendors'),
+    project: path.resolve(__dirname, '../apps/static/js/project'),
+    vendors: path.resolve(__dirname, '../apps/static/js/vendors'),
   },
   output: {
     path: path.resolve(
       __dirname,
-      '../mysite/static/webpack_bundles/',
+      '../apps/static/webpack_bundles/',
     ),
     publicPath: '/static/webpack_bundles/',
     filename: 'js/[name]-[fullhash].js',
