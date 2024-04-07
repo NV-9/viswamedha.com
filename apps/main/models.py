@@ -23,8 +23,6 @@ class TimeStampMixin(Model):
 class User(AbstractBaseUser, TimeStampMixin):
     """
     Default custom user model for MySite.
-    If adding fields that need to be filled at user signup,
-    check forms.SignupForm and forms.SocialSignupForms accordingly.
     """
 
     id        = AutoField(primary_key = True)
