@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
 	Box,
 	grommet,
@@ -11,12 +11,13 @@ import {
 	Paragraph,
 	ResponsiveContext,
 	Text,
+	Layer,
 } from "grommet";
 import { deepMerge } from "grommet/utils";
-import { useCallback, useEffect } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import Typewriter from "./components/Typewriter";
+import { FaBars } from "@react-icons/all-files/fa/FaBars"; 
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import { ReactTyped } from "react-typed";
 
 const theme = deepMerge(grommet, {
@@ -31,7 +32,6 @@ const theme = deepMerge(grommet, {
 		},
 	},
 });
-
 
 const MyParticles = () => {
     const [init, setInit] = useState(false);
@@ -173,39 +173,78 @@ const MyParticles = () => {
 };
 
 const App = () => {
+    const [showMenu, setShowMenu] = useState(false);
+    const [logoIsHovered, setLogoIsHovered] = useState(false);
+
+    const memoizedParticles = useMemo(() => <MyParticles />, []);
+
     return (
         <Grommet theme={theme} full>
             <Page>
-				<PageContent 
-				style={{
-					zIndex: 1,
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					height: "100vh",
-				}}
-				>
-                    <MyParticles />
+                <Header pad="small" style={{  width: "100%" }}>
+                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ zIndex: 10 }}>
+                        <img
+                            src="https://viswamedha.com/static/main/assets/img/favicon.png"
+                            alt="Logo"
+                            style={{
+                                height: "80px",
+                                marginRight: "10px",
+                                opacity: logoIsHovered ? 1 : 0.8,
+                                transform: logoIsHovered ? "rotate(-45deg)" : "rotate(0deg)",
+                                transition: "opacity 0.4s ease, transform 0.4s ease",
+                            }}
+                            onMouseEnter={() => setLogoIsHovered(true)}
+                            onMouseLeave={() => setLogoIsHovered(false)}
+                        />
+                    </Box>
+                    <Box direction="row" align="center" justify="end" fill="horizontal" style={{ position: "absolute", top: "4%", right: "4%", width: "100%", zIndex: 10 }}>
+                        <FaBars color="white" size="24px" onClick={() => setShowMenu(true)} />
+                    </Box>
+                </Header>
+
+				<PageContent style={{ zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "absolute", minHeight: "100vh" }}>
+                    {memoizedParticles}
                     <Box align="center">
-						<Heading level={1} size="large" color="white" textAlign="center" margin={{ bottom: "small"}}><span className="color">V</span>iswamedha <span className="color">N</span>alabotu</Heading>
-						<Heading level={2} size="small" color="white" textAlign="center" margin={{ top: "none", bottom: "small" }}>I'm a <span className="color"><ReactTyped strings={["Developer", "Blogger", "Freelancer"]} typeSpeed={100} backSpeed={50} loop /></span></Heading>
-					</Box>
+						<Heading level={1} size="large" color="white" textAlign="center" style={{fontFamily: "Times New Roman, serif"}} margin={{ bottom: "small"}}><span className="color">V</span>iswamedha <span className="color">N</span>alabotu</Heading>
+						<Heading level={2} size="small" color="white" textAlign="center" style={{fontFamily: "Times New Roman, serif"}} margin={{ top: "none", bottom: "small" }}>I'm a <span className="color"><ReactTyped strings={["Developer", "Blogger", "Freelancer"]} typeSpeed={100} backSpeed={50} loop /></span></Heading>
+                    </Box>
                 </PageContent>
+                
+                {showMenu && (
+                    <Layer
+                        onEsc={() => setShowMenu(false)}
+                        onClickOutside={() => setShowMenu(false)}
+                    >
+                        <Box
+                            fill="vertical"
+                            align="center"
+                            justify="center"
+                            background="#020202"
+                            gap="medium"
+                            pad="large"
+                        >
+                            <FaTimes size="24px" onClick={() => setShowMenu(false)} />
+                            <Text size="large" color="white">Home</Text>
+                            <Text size="large" color="white">About</Text>
+                            <Text size="large" color="white">Blog</Text>
+                            <Text size="large" color="white">Portfolio</Text>
+                            <Text size="large" color="white">Contact</Text>
+                            <Text size="large" color="white">Privacy</Text>
+                        </Box>
+                    </Layer>
+                )}
+                
                 <style>
                     {`
                     canvas {
                         display: block;
-                        position: absolute;
-                        
+                        position: absolute; 
                         z-index: -1;
                     }
 					.color {
 						color: #c70039;
 					}
-					box {
-						font-family: Times New Roman;
-					}
+				
                     `}
                 </style>
             </Page>
@@ -214,4 +253,3 @@ const App = () => {
 };
 
 export default App;
-
