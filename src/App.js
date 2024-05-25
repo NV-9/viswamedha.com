@@ -181,8 +181,8 @@ const App = () => {
     return (
         <Grommet theme={theme} full>
             <Page>
-                <Header pad="small" style={{  width: "100%" }}>
-                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ zIndex: 10 }}>
+                <Header pad="small" style={{ width: "100%", position: "relative" }}>
+                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ marginLeft: "4%", zIndex: 10 }}>
                         <img
                             src="https://viswamedha.com/static/main/assets/img/favicon.png"
                             alt="Logo"
@@ -197,10 +197,11 @@ const App = () => {
                             onMouseLeave={() => setLogoIsHovered(false)}
                         />
                     </Box>
-                    <Box direction="row" align="center" justify="end" fill="horizontal" style={{ position: "absolute", top: "4%", right: "4%", width: "100%", zIndex: 10 }}>
+                    <Box direction="row" align="center" justify="end" fill="horizontal" style={{ marginRight: "4%", zIndex: 10 }}>
                         <FaBars color="white" size="24px" onClick={() => setShowMenu(true)} />
                     </Box>
                 </Header>
+
 
 				<PageContent style={{ zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "absolute", minHeight: "100vh" }}>
                     {memoizedParticles}
