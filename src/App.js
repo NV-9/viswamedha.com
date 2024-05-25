@@ -1,18 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-	Box,
-	grommet,
-	Grommet,
-	Header,
-	Heading,
-	Page,
-	PageContent,
-	PageHeader,
-	Paragraph,
-	ResponsiveContext,
-	Text,
-	Layer,
-} from "grommet";
+import { Box, grommet, Grommet, Header, Heading, Page, PageContent, Text, Layer } from "grommet";
 import { deepMerge } from "grommet/utils";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -177,8 +164,25 @@ const MyParticles = () => {
 const App = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [logoIsHovered, setLogoIsHovered] = useState(false);
+    const [menuAnimation, setMenuAnimation] = useState("");
 
     const memoizedParticles = useMemo(() => <MyParticles />, []);
+
+    useEffect(() => {
+        if (showMenu) {
+            document.body.style.overflow = 'hidden';
+            setMenuAnimation("slideDown");
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [showMenu]);
+
+    const handleMenuClose = () => {
+        setMenuAnimation("slideUp");
+        setTimeout(() => {
+            setShowMenu(false);
+        }, 500);
+    };
 
     return (
         <Grommet theme={theme} full>
@@ -254,8 +258,11 @@ const App = () => {
                 {/* Menu */}
                 {showMenu && (
                     <Layer
-                        onEsc={() => setShowMenu(false)}
-                        onClickOutside={() => setShowMenu(false)}
+                        onEsc={handleMenuClose}
+                        onClickOutside={handleMenuClose}
+                        full
+                        plain
+                        style={{ animation: `${menuAnimation} 0.5s ease-in-out` }}
                     >
                         <Box
                             fill="vertical"
@@ -265,7 +272,7 @@ const App = () => {
                             gap="medium"
                             pad="large"
                         >
-                            <FaTimes size="24px" onClick={() => setShowMenu(false)} />
+                            <FaTimes size="24px" onClick={handleMenuClose} />
                             <Text size="large" color="white">Home</Text>
                             <Text size="large" color="white">About</Text>
                             <Text size="large" color="white">Blog</Text>
@@ -275,20 +282,40 @@ const App = () => {
                         </Box>
                     </Layer>
                 )}
+
                 
                 <style>
                     {`
-                    canvas {
-                        display: block;
-                        position: absolute; 
-                        z-index: -1;
-                    }
-					.color {
-						color: #c70039;
-					}
-				
+                        @keyframes slideDown {
+                            from {
+                                transform: translateY(-100%);
+                            }
+                            to {
+                                transform: translateY(0);
+                            }
+                        }
+
+                        @keyframes slideUp {
+                            from {
+                                transform: translateY(0);
+                            }
+                            to {
+                                transform: translateY(-100%);
+                            }
+                        }
+
+                        canvas {
+                            display: block;
+                            position: absolute; 
+                            z-index: -1;
+                        }
+
+                        .color {
+                            color: #c70039;
+                        }
                     `}
                 </style>
+
             </Page>
         </Grommet>
     );
