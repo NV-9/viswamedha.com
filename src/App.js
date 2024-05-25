@@ -19,6 +19,8 @@ import { loadSlim } from "@tsparticles/slim";
 import { FaBars } from "@react-icons/all-files/fa/FaBars"; 
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import { ReactTyped } from "react-typed";
+import { Facebook, Instagram, Github, Linkedin, Send, Phone } from "grommet-icons";
+import { Anchor } from 'grommet';
 
 const theme = deepMerge(grommet, {
 	global: {
@@ -181,10 +183,12 @@ const App = () => {
     return (
         <Grommet theme={theme} full>
             <Page>
+
+                {/* Top */}
                 <Header pad="small" style={{ width: "100%", position: "relative" }}>
-                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ marginLeft: "4%", zIndex: 10 }}>
+                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ marginLeft: "2%", zIndex: 10 }}>
                         <img
-                            src="https://viswamedha.com/static/main/assets/img/favicon.png"
+                            src="/favicon.png"
                             alt="Logo"
                             style={{
                                 height: "80px",
@@ -202,7 +206,7 @@ const App = () => {
                     </Box>
                 </Header>
 
-
+                {/* Middle */}
 				<PageContent style={{ zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", position: "absolute", minHeight: "100vh" }}>
                     {memoizedParticles}
                     <Box align="center">
@@ -211,6 +215,43 @@ const App = () => {
                     </Box>
                 </PageContent>
                 
+                {/* Left */}
+                <Box
+                    direction="column"
+                    align="center"
+                    justify="center"
+                    style={{ position: "absolute", left: "4%", top: "50%", transform: "translateY(-50%)", zIndex: 10 }}
+                >
+                    <Anchor href="" target="_blank" style={{ marginBottom: "20px" }}>
+                        <Facebook color="#808080" size="24px" />
+                    </Anchor>
+                    <Anchor href="" target="_blank" style={{ marginBottom: "20px" }}>
+                        <Instagram color="#808080" size="24px" />
+                    </Anchor>
+                    <Anchor href="" target="_blank">
+                        <Linkedin color="#808080" size="24px" />
+                    </Anchor>
+                </Box>
+
+                {/* Right */} 
+                <Box
+                    direction="column"
+                    align="center"
+                    justify="center"
+                    style={{ position: "absolute", right: "4%", top: "50%", transform: "translateY(-50%)", zIndex: 10 }}
+                >
+                    <Anchor href="" target="_blank" style={{ marginBottom: "20px" }}>
+                        <Github color="#808080" size="24px" />
+                    </Anchor>
+                    <Anchor href="" target="_blank" style={{ marginBottom: "20px" }}>
+                        <Send color="#808080" size="24px" />
+                    </Anchor>
+                    <Anchor href="" target="_blank">
+                        <Phone color="#808080" size="24px" />
+                    </Anchor>
+                </Box>
+                
+                {/* Menu */}
                 {showMenu && (
                     <Layer
                         onEsc={() => setShowMenu(false)}
