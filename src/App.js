@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Box, grommet, Grommet, Header, Heading, Page, PageContent, Text, Layer } from "grommet";
-import { deepMerge } from "grommet/utils";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
 import { FaBars } from "@react-icons/all-files/fa/FaBars"; 
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
-import { ReactTyped } from "react-typed";
+import { Anchor, Box, grommet, Grommet, Header, Heading, Page, PageContent, Text, Layer } from "grommet";
+import { deepMerge } from "grommet/utils";
 import { Facebook, Instagram, Github, Linkedin, Send, Phone } from "grommet-icons";
-import { Anchor } from 'grommet';
+import React, { useState, useEffect, useMemo } from "react";
+import { ReactTyped } from "react-typed";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 const theme = deepMerge(grommet, {
 	global: {
@@ -164,14 +163,13 @@ const MyParticles = () => {
 const App = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [logoIsHovered, setLogoIsHovered] = useState(false);
-    const [menuAnimation, setMenuAnimation] = useState("");
+    const [menuAnimation, setMenuAnimation] = useState("slideDown");
 
     const memoizedParticles = useMemo(() => <MyParticles />, []);
 
     useEffect(() => {
         if (showMenu) {
             document.body.style.overflow = 'hidden';
-            setMenuAnimation("slideDown");
         } else {
             document.body.style.overflow = 'auto';
         }
@@ -179,9 +177,12 @@ const App = () => {
 
     const handleMenuClose = () => {
         setMenuAnimation("slideUp");
-        setTimeout(() => {
-            setShowMenu(false);
-        }, 500);
+        setShowMenu(false);
+    };
+    
+    const handleMenuOpen = () => {
+        setMenuAnimation("slideDown");
+        setShowMenu(true);
     };
 
     return (
@@ -190,7 +191,7 @@ const App = () => {
 
                 {/* Top */}
                 <Header pad="small" style={{ width: "100%", position: "relative" }}>
-                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ marginLeft: "2%", zIndex: 10 }}>
+                    <Box direction="row" align="center" justify="start" fill="horizontal" style={{ marginLeft: "2%", zIndex: 200 }}>
                         <img
                             src="/favicon.png"
                             alt="Logo"
@@ -205,8 +206,8 @@ const App = () => {
                             onMouseLeave={() => setLogoIsHovered(false)}
                         />
                     </Box>
-                    <Box direction="row" align="center" justify="end" fill="horizontal" style={{ marginRight: "4%", zIndex: 10 }}>
-                        <FaBars color="white" size="24px" onClick={() => setShowMenu(true)} />
+                    <Box direction="row" align="center" justify="end" fill="horizontal" style={{ marginRight: "4%", zIndex: 200 }}>
+                        { !showMenu ? <FaBars color="white" size="24px" onClick={handleMenuOpen} /> : <FaTimes color="white" size="24px" onClick={handleMenuClose} />}
                     </Box>
                 </Header>
 
@@ -272,18 +273,16 @@ const App = () => {
                             gap="medium"
                             pad="large"
                         >
-                            <FaTimes size="24px" onClick={handleMenuClose} />
-                            <Text size="large" color="white">Home</Text>
-                            <Text size="large" color="white">About</Text>
-                            <Text size="large" color="white">Blog</Text>
-                            <Text size="large" color="white">Portfolio</Text>
-                            <Text size="large" color="white">Contact</Text>
-                            <Text size="large" color="white">Privacy</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="HOME">HOME</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="ABOUT">ABOUT</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="BLOG">BLOG</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="PORTFOLIO">PORTFOLIO</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="CONTACT">CONTACT</Text>
+                            <Text size="30px" color="white" className="mylinks" data-text="PRIVACY">PRIVACY</Text>
                         </Box>
                     </Layer>
                 )}
-
-                
+     
                 <style>
                     {`
                         @keyframes slideDown {
@@ -312,6 +311,42 @@ const App = () => {
 
                         .color {
                             color: #c70039;
+                        }
+
+                        .mylinks {
+                            padding:10px;
+                            text-decoration: none;
+                            color: white;
+                            font-size: 30px;
+                            opacity: .7;
+                            transition: all .4s ease;
+                        }
+                        .mylinks:hover{
+                            opacity: 1;
+                        }
+                        .mylinks:before{
+                            content: "";
+                            position: absolute;
+                            top:50%;
+                            left: 50%;
+                            display: flex;
+                            justify-content: center;
+                            transform: translate(-50%,-50%);
+                            align-items: center;
+                            font-size: 5em;
+                            font-weight: 400;
+                            font-family: monoton;
+                            color:rgb(255, 255, 255,.1);
+                            z-index: 1;
+                            pointer-events: none;
+                            opacity: 0;
+                            letter-spacing: 100px;
+                            transition: all .4s ease;
+                        }
+                        .mylinks:hover::before{
+                            content: attr(data-text);
+                            opacity: 1;
+                            letter-spacing: 10px;
                         }
                     `}
                 </style>
