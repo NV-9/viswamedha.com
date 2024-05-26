@@ -85,13 +85,17 @@ THIRD_PARTY_APPS = [
     "webpack_loader",
     "django_hosts",
 ]
+THIRD_PARTY_APPS_FIRST = [
+    'jet.dashboard',
+    'jet', 
+]
 
 LOCAL_APPS = [
     "apps.main",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS_FIRST + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------

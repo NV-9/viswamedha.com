@@ -20,6 +20,8 @@ urlpatterns = [
         name="about",
     ),
     # Django Admin, use {% url 'admin:index' %}
+    path(r'jet/', include('jet.urls', 'jet')),  # Django JET URLS
+     path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path(settings.ADMIN_URL, admin.site.urls),
     # Your stuff: custom urls includes go here
     # ...

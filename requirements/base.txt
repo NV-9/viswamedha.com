@@ -25,3 +25,5 @@ django-cors-headers==4.3.1  # https://github.com/adamchainz/django-cors-headers
 # DRF-spectacular for api documentation
 drf-spectacular==0.27.2  # https://github.com/tfranzel/drf-spectacular
 django-webpack-loader==3.0.1  # https://github.com/django-webpack/django-webpack-loader
+# Django Jet Admin Panel
+django-jet-reboot==0.6.0 # https://github.com/assem-ch/django-jet-reboot
