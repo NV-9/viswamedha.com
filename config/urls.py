@@ -12,19 +12,16 @@ from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    # path("", include("apps.main.urls")),
+    path('jet/', include('jet.urls', 'jet')),  
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    path(settings.ADMIN_URL, admin.site.urls),
+    # Temporary templates
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
     ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(r'jet/', include('jet.urls', 'jet')),  # Django JET URLS
-     path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
-    path(settings.ADMIN_URL, admin.site.urls),
-    # Your stuff: custom urls includes go here
-    # ...
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
