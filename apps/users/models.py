@@ -1,9 +1,8 @@
 from typing import ClassVar
-import uuid
+from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db.models import AutoField, BooleanField, CharField, DateField, DateTimeField, EmailField, UUIDField, Model
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
@@ -26,7 +25,7 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
     """
 
     id        = AutoField(primary_key = True)
-    user_uuid = UUIDField(verbose_name = 'User UUID', default = uuid.uuid4, editable = False)
+    user_uuid = UUIDField(verbose_name = 'User UUID', default = uuid4, editable = False)
 
     # Required fields
     email_address  = EmailField(verbose_name = _('Email Address'), max_length = 255, unique = True)
