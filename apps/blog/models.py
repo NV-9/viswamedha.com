@@ -39,7 +39,7 @@ class Post(TimeStampMixin, Model):
     tags = ManyToManyField(Tag, related_name='posts', blank = True)
 
     def save(self, *args, **kwargs) -> None:
-        if self.slug is None:
+        if self.slug is None or self.slug == '':
             self.slug = slugify(self.heading)
         return super().save(*args, **kwargs)
 
