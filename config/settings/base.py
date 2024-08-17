@@ -2,13 +2,16 @@
 Django settings for viswamedha.com
 """
 
+from decouple import config
 from pathlib import Path
 
 
 # PROJECT PATHS
 # ------------------------------------------------------------------------------
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 APPS_DIR = BASE_DIR / "apps"
+
+DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
 
 
 # PACKAGE ROUTING
@@ -28,7 +31,9 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
 LOCAL_APPS = [
     'apps.users',
 ]
@@ -101,6 +106,15 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 # ------------------------------------------------------------------------------
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = 'media/'
 
+
+# REST FRAMEWORK
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

@@ -5,7 +5,6 @@ from .base import *
 
 # ENVIRONMENT SETTINGS
 # ------------------------------------------------------------------------------
-DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
 
 POSTGRES_USER = config('POSTGRES_USER')
 POSTGRES_NAME = config('POSTGRES_NAME')
