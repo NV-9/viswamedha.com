@@ -50,15 +50,6 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
 
     objects: ClassVar[UserManager] = UserManager()
 
-    def get_absolute_url(self) -> str:
-        """Get URL for user's detail view.
-
-        Returns:
-            str: URL for user detail.
-
-        """
-        return reverse("users:detail", kwargs={"pk": self.id})
-
     def has_perm(self, perm, obj=None): 
         return True
     def has_module_perms(self, app_label): 
@@ -66,6 +57,3 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
     
     def __str__(self):
         return self.email_address
-    def get_full_name(self):
-        return ' '.join([self.first_name, self.last_name])
-
