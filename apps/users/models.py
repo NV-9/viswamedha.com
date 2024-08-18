@@ -25,7 +25,7 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
     """
 
     id        = AutoField(primary_key = True)
-    user_uuid = UUIDField(verbose_name = 'User UUID', default = uuid4, editable = False)
+    user_uuid = UUIDField(verbose_name = _('User UUID'), default = uuid4, editable = False)
 
     # Required fields
     email_address  = EmailField(verbose_name = _('Email Address'), max_length = 255, unique = True)
