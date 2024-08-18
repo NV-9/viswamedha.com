@@ -22,7 +22,10 @@ ASGI_APPLICATION = 'config.asgi.application'
 
 # ALL APPLICATIONS
 # ------------------------------------------------------------------------------
-FIRST_APPS = []
+FIRST_APPS = [
+    'jet.dashboard',
+    'jet',
+]
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
