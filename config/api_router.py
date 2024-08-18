@@ -3,13 +3,19 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.routers import SimpleRouter
 
 from apps.blog.viewsets import PostViewSet, TagViewSet
+from apps.tutor.viewsets import StudentViewSet, CourseViewSet, LessonPlanViewSet, EventViewSet, LessonViewSet
 from apps.users.viewsets import UserViewSet
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
 
-router.register("users", UserViewSet)
-router.register("posts", PostViewSet)
-router.register("tags", TagViewSet)
+router.register("user", UserViewSet)
+router.register("post", PostViewSet)
+router.register("tag", TagViewSet)
+router.register("student", StudentViewSet)
+router.register("course", CourseViewSet)
+router.register("lessonplan", LessonPlanViewSet)
+router.register("event", EventViewSet)
+router.register("lesson", LessonViewSet)
 
 app_name = "api"
 urlpatterns = router.urls
