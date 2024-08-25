@@ -1,6 +1,6 @@
 import { Flex, Typography } from 'antd';
 import { ReactTyped } from "react-typed";
-import '../assets/css/home.css';
+import '../../assets/css/home.css';
 const { Title } = Typography;
 
 export default function Home() {
