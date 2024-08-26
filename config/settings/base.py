@@ -35,6 +35,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = [
+    'django_hosts',
     'rest_framework',
 ]
 LOCAL_APPS = [
@@ -49,6 +50,7 @@ INSTALLED_APPS = FIRST_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,10 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'config.urls.urls'
+ROOT_HOSTCONF = 'config.urls.hosts'
+DEFAULT_HOST = 'www'
 
 
 # TEMPLATES 
