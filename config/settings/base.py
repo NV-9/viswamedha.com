@@ -25,6 +25,7 @@ ASGI_APPLICATION = 'config.asgi.application'
 FIRST_APPS = [
     'jet.dashboard',
     'jet',
+    'apps.commands',
 ]
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -43,6 +44,7 @@ LOCAL_APPS = [
     'apps.blog',
     'apps.main',
     'apps.tutor',
+    
 ]
 INSTALLED_APPS = FIRST_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
