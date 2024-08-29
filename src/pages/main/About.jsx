@@ -9,7 +9,7 @@ export default function About() {
         <>
         <Row style={{ textAlign: 'center' }}>
             <Col span={24}>
-                <Title level={1} alignItems='center'>About Me</Title>
+                <Title level={1}>About Me</Title>
             </Col>
         </Row>
         <Row >
@@ -32,7 +32,7 @@ export default function About() {
                     />
                 }
                 fallback={backupImageData}
-            />
+                />
             </Col>
         </Row>
         </>
