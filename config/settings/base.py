@@ -38,6 +38,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'django_hosts',
     'rest_framework',
+    'corsheaders',
 ]
 LOCAL_APPS = [
     'apps.users',
@@ -53,6 +54,7 @@ INSTALLED_APPS = FIRST_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # ------------------------------------------------------------------------------
 MIDDLEWARE = [
     'django_hosts.middleware.HostsRequestMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

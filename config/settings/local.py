@@ -20,3 +20,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# CORS
+# ------------------------------------------------------------------------------
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://blog.localhost:8000",
+    "http://api.localhost:8000",
+    "http://blog.localhost",
+    "http://api.localhost",
+    "http://localhost",
+    "http://127.0.0.1"
+]
