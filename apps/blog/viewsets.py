@@ -7,7 +7,7 @@ from .serializers import PostSerializer, TagSerializer
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    lookup_field = 'post_uuid'
+    lookup_field = 'slug'
 
 
 class TagViewSet(viewsets.ModelViewSet):
