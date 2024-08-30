@@ -17,6 +17,7 @@ export default function Listing() {
                 if (!data) 
                     navigate("/");
                 setPosts(data);
+                document.title = "My Blog";
             })
             .catch((error) => {
                 console.error("Error:", error);
