@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Student, Course, LessonPlan, Event, Lesson
+from .models import Course, Event, Lesson, LessonPlan, Review, Student
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -12,6 +12,16 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['id', 'user']
         read_only_fields = ['id', 'user']
         depth = 2
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    """
+    Review serializer for viswamedha.com
+    """
+    class Meta:
+        model = Review
+        fields = ['id', 'initials', 'review']
+        read_only_fields = ['id']
 
 
 class CourseSerializer(serializers.ModelSerializer):

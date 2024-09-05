@@ -1,11 +1,15 @@
 from rest_framework import viewsets
 
-from .models import Student, Course, LessonPlan, Event, Lesson
-from .serializers import StudentSerializer, CourseSerializer, LessonPlanSerializer, EventSerializer, LessonSerializer
+from .models import Course, Event, Lesson, LessonPlan, Review, Student
+from .serializers import CourseSerializer, EventSerializer, LessonSerializer, LessonPlanSerializer, ReviewSerializer, StudentSerializer
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()

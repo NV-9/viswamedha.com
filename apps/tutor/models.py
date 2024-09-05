@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.exceptions import ValidationError
-from django.db.models import AutoField, BooleanField, CASCADE, CharField, DateTimeField, DurationField, ForeignKey, IntegerField, OneToOneField, ManyToManyField, Model, UUIDField
+from django.db.models import AutoField, BooleanField, CASCADE, CharField, DateTimeField, DurationField, ForeignKey, IntegerField, OneToOneField, ManyToManyField, Model, TextField, UUIDField
 from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
@@ -21,6 +21,20 @@ class Student(Model):
 
     def __str__(self):
         return self.user.full_name
+
+
+class Review(Model):
+
+    id       = AutoField(primary_key = True)
+    initials = CharField(verbose_name = _('Initials'), max_length = 5)
+    review   = TextField(verbose_name = _('Review'))
+
+    class Meta:
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
+
+    def __str__(self):
+        return "Review by " + self.initials
     
 
 class Course(Model):
