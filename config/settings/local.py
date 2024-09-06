@@ -29,6 +29,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://api.localhost:8000",
     "http://blog.localhost",
     "http://api.localhost",
+    "http://tutor.localhost",
     "http://localhost",
     "http://127.0.0.1"
 ]
