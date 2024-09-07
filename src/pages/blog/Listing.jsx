@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getRequest } from "../../api/requests";
+import { getRequest } from "../../utils/requests";
 import { Card, Col, Row, Typography } from 'antd';
 
 const { Title, Paragraph, Text } = Typography;

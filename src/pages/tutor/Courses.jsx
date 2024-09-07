@@ -1,8 +1,7 @@
-import { Typography, Row, Col, Card } from "antd";
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { getRequest } from "../../api/requests";
+import { Button, Card, Col, Row, Space, Typography } from "antd";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { getRequest } from "../../utils/requests";
 
 const { Title, Paragraph } = Typography;
 
@@ -29,24 +28,33 @@ export default function Courses() {
 
     return (
         <>
-            <Title level={1} style={{textAlign: 'center'}}>Courses</Title>
+            <Title level={1} style={{textAlign: 'center'}}>
+                Courses
+            </Title>
             <Paragraph style={{textAlign: 'center'}}>
                 Explore the various courses I offer and feel free to request other courses, only popular courses have been listed.
             </Paragraph>
-            <Row gutter={[16, 16]} justify="start">
-                {courses && courses.map(course => (
-                    <Col span={6} key={course.id}>
-                        <Card title={course.name}>
-                            <Paragraph  ellipsis={{ rows: 2, expandable: false, symbol: '...' }}>
-                                {course.desc}
-                            </Paragraph>
-                            <Paragraph>
-                                Cost per lesson per hour: £{course.cost}
-                            </Paragraph>
-                        </Card>
+            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                <Row>
+                    <Col span={16} offset={4} style={{textAlign: 'center'}}>
+                        <Button type="default" onClick={() => navigate("/")}>Back</Button>
                     </Col>
-                ))}
-            </Row>
+                </Row>
+                <Row gutter={[16, 16]} justify="start">
+                    {courses && courses.map(course => (
+                        <Col span={6} key={course.id}>
+                            <Card title={course.name}>
+                                <Paragraph  ellipsis={{ rows: 2, expandable: false, symbol: '...' }}>
+                                    {course.desc}
+                                </Paragraph>
+                                <Paragraph>
+                                    Cost per lesson per hour: £{course.cost}
+                                </Paragraph>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </Space>
         </>
     )
 }

@@ -1,8 +1,8 @@
-import { Typography, Row, Col } from "antd";
+import { Button, Typography, Row, Col } from "antd";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getRequest } from "../../api/requests";
+import { getRequest } from "../../utils/requests";
 
 const { Title, Paragraph } = Typography;
 
@@ -40,6 +40,11 @@ export default function Tutoring() {
                             to help you unlock your full potential. I offer personalized tutoring sessions tailored to your needs. Whether you need help with homework, test 
                             preparation, or understanding complex concepts, I'm here to help you succeed. I look forward to working with you and helping you achieve your academic goals.
                     </Paragraph>
+                </Col>
+            </Row>
+            <Row>
+                <Col span={16} offset={4}>
+                    <Button type="primary" onClick={() => navigate("/courses")}>View Courses</Button>
                 </Col>
             </Row>
             { reviews && (

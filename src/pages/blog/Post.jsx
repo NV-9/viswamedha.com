@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import {getRequest} from "../../api/requests";  
+import {getRequest} from "../../utils/requests"; 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Typography } from 'antd';
