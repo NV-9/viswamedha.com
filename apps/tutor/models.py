@@ -24,6 +24,9 @@ class Student(Model):
 
 
 class Review(Model):
+    """
+    Review model for viswamedha.com
+    """
 
     id       = AutoField(primary_key = True)
     initials = CharField(verbose_name = _('Initials'), max_length = 5)
