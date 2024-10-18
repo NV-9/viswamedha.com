@@ -1,23 +1,20 @@
+"""
+Django settings for viswamedha.com
+"""
+
+from decouple import config, Csv
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# PATHS
 BASE_DIR = Path(__file__).resolve().parent.parent
+APPS_DIR = BASE_DIR / "apps"
 
+# MODES
+DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
+SECRET_KEY = config("DJANGO_SECRET_KEY")
+ALLOWED_HOSTS = list(config("DJANGO_ALLOWED_HOSTS", cast=Csv()))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*h$$^9kg0z-ji(u23117145xz#vqxjch*c)x!f2tx8=_s0d)=o'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
+# APPS
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,22 +23,19 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
 THIRD_APPS = [
 
 ]
-
 CUSTOM_APPS = [
-
+    'apps.users'
 ]
-
 FIRST_APPS = [
     'jet.dashboard',
     'jet',
 ]
-
 INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
 
+# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,8 +46,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# ROUTING
 ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
 
+# TEMPLATES 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,23 +68,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# DATABASE
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
+# AUTHENTICATION
+AUTH_USER_MODEL = "users.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -102,26 +94,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
+# INTERNATIONALIZATION
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# STATIC & MEDIA FILES
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+MEDIA_URL = 'media/'
