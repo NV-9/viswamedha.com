@@ -24,10 +24,11 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_APPS = [
-
+    'rest_framework',
 ]
 CUSTOM_APPS = [
-    'apps.users'
+    'apps.users',
+    'apps.blog'
 ]
 FIRST_APPS = [
     'jet.dashboard',
@@ -47,7 +48,7 @@ MIDDLEWARE = [
 ]
 
 # ROUTING
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'config.urls.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
