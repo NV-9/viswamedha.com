@@ -28,7 +28,8 @@ THIRD_APPS = [
 ]
 CUSTOM_APPS = [
     'apps.users',
-    'apps.blog'
+    'apps.blog',
+    'apps.main',
 ]
 FIRST_APPS = [
     'jet.dashboard',
