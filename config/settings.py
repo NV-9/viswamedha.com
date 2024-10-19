@@ -26,6 +26,7 @@ DEFAULT_APPS = [
 ]
 THIRD_APPS = [
     'rest_framework',
+    'corsheaders',
 ]
 CUSTOM_APPS = [
     'apps.users',
@@ -40,6 +41,7 @@ INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
 
 # MIDDLEWARE
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -106,3 +108,27 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny', 
+    ]
+}
+
+
+# CORS
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = [
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'http://localhost',
+        'http://127.0.0.1',
+    ]
+    CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+    CORS_ALLOW_CREDENTIALS = True
+    CSRF_COOKIE_SECURE = False
