@@ -8,6 +8,7 @@ from pathlib import Path
 # PATHS
 BASE_DIR = Path(__file__).resolve().parent.parent
 APPS_DIR = BASE_DIR / "apps"
+BUILD_DIR = BASE_DIR / "build"
 
 # MODES
 DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
