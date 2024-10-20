@@ -2,5 +2,7 @@
 
 export const ENDPOINTS = {
     LOGIN: () => 'login/',
-    LOGOUT: () => 'logout/'
+    LOGOUT: () => 'logout/',
+    SIGNUP: () => 'signup/',
+    SESSION: () => 'session/'
 }

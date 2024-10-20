@@ -1,6 +1,6 @@
-import { Alert, FormControl, Input, InputLabel, Container, Button, Box, Typography, IconButton, Collapse} from '@mui/material';
+import { Alert, Box, Button, Collapse, Container, FormControl, IconButton, Input, InputLabel, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../utils/Api';
@@ -12,6 +12,15 @@ export default function Login() {
     const [errorShown, setErrorShown] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        ApiRouter.get(ENDPOINTS.SESSION())
+        .then(data => {
+            if (data.isAuthenticated) {
+                navigate('/profile/');
+            }
+        });
+    }, []);
+
     const loginRequest = () => {
         const userLoginData = {
             username: username,
@@ -22,7 +31,6 @@ export default function Login() {
             if (data.success == true) {
                 navigate('/profile/');
             } else {
-                setUsername('');
                 setPassword('');
                 setErrorShown(true);
             }
@@ -30,35 +38,19 @@ export default function Login() {
     }
 
     return (
-        <Container 
-            maxWidth="xs" 
-            sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}
-        >
-            <Box 
-                component="form" 
-                sx={{ width: '100%', padding: 4, boxShadow: 3, borderRadius: 2 }}
-            >
+        <Container maxWidth="xs" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+            <Box component="form" sx={{ width: '100%', padding: 4, boxShadow: 3, borderRadius: 2 }}>
                 <Typography variant="h5" textAlign="center" gutterBottom>
                     Login
                 </Typography>
                 <Collapse in={errorShown}>
-                <Alert
-                variant="outlined" severity="warning"
-                action={
-                    <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                        setErrorShown(false);
-                    }}
-                    >
-                    <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                }
-                sx={{ mb: 2 }}
-                >
-                Incorrect username or password!
+                <Alert variant="outlined" severity="warning" sx={{ mb: 2 }}
+                    action={
+                        <IconButton aria-label="close" color="inherit" size="small" onClick={() => setErrorShown(false)}>
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }>
+                    Incorrect username or password!
                 </Alert>
             </Collapse>
                 <FormControl fullWidth sx={{ mb: 3 }}>
@@ -72,7 +64,7 @@ export default function Login() {
                 <Button variant="contained" color="primary" fullWidth sx={{ mb: 2 }} onClick={loginRequest} disabled={!username || !password}>
                     Login
                 </Button>
-                <Button variant="outlined" color="secondary" fullWidth>
+                <Button variant="outlined" color="secondary" fullWidth onClick={() => navigate('/signup/')}>
                     Sign Up
                 </Button>
             </Box>
