@@ -17,22 +17,22 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
 					{['Home', 'About'].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
-						<ListItemIcon>
-							<HomeIcon />
-						</ListItemIcon>
-						<ListItemText primary={text} />
+							<ListItemIcon>
+								<HomeIcon />
+							</ListItemIcon>
+							<ListItemText primary={text} />
 						</ListItemButton>
 					</ListItem>
-					))}
+					))}	
 				</List>
 				<Divider />
 				<List>
 					{['Login', 'Register'].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
-						<ListItemIcon>
-							<HomeIcon />
-						</ListItemIcon>
+							<ListItemIcon>
+								<HomeIcon />
+							</ListItemIcon>
 						<ListItemText primary={text} />
 						</ListItemButton>
 					</ListItem>
