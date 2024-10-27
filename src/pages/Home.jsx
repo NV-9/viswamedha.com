@@ -7,11 +7,19 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { ReactTyped } from 'react-typed';
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect } from 'react';
+import { ENDPOINTS } from '../utils/Endpoints';
+import { ApiRouter } from '../utils/Api';
+
 
 export default function Home({ setDrawerOpen }) {
     const [socialLinks, setSocialLinks] = useState({});
 
-
+    useEffect(() => {
+        ApiRouter.get(ENDPOINTS.SOCIALS())
+        .then(setSocialLinks);
+    }, []);
+    
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative' }}>
             <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
