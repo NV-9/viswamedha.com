@@ -1,20 +1,18 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-const Home = lazy(() => import('../pages/Home'));
-const About = lazy(() => import('../pages/About'));
-const Login = lazy(() => import('../pages/Login'));
-const Signup = lazy(() => import('../pages/Signup'));
-const Profile = lazy(() => import('../pages/Profile'));
+import { mapping } from './Mapping';
 
 export default function Routing({ setDrawerOpen }) {
     return (
-        <Routes>
-            <Route path='/' element={<Home setDrawerOpen={setDrawerOpen}/>} />
-            <Route path='/about/' element={<About setDrawerOpen={setDrawerOpen}/>} />
-            <Route path='/login/' element={<Login setDrawerOpen={setDrawerOpen}/>} />
-            <Route path='/signup/' element={<Signup setDrawerOpen={setDrawerOpen}/>} />
-            <Route path='/profile/' element={<Profile setDrawerOpen={setDrawerOpen}/>} />
-        </Routes>
-    )
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+                {Object.keys(mapping).map((key) => {
+                    const Component = lazy(() => Promise.resolve({ default: mapping[key].component }));
+                    return (
+                        <Route key={key} path={mapping[key].path} element={<Component setDrawerOpen={setDrawerOpen} />}/>
+                    );
+                })}
+            </Routes>
+        </Suspense>
+    );
 }

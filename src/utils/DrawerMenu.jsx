@@ -1,44 +1,33 @@
-import { Drawer } from '@mui/material';
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
+import { Drawer, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { mapping } from './Mapping';
 
 export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
-    const toggleDrawer = (open) => (event) => {
-		if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-			return;
-		}
-		setDrawerOpen(open);
-	}
-            
+	const navigate = useNavigate();
+    const toggleDrawer = (open) => () => {
+        setDrawerOpen(open); 	
+    };
+
     return (
-        <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>		
-			<Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-				<List>
-					{['Home', 'About'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<HomeIcon />
-							</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItemButton>
-					</ListItem>
-					))}	
+        <Drawer open={Boolean(drawerOpen)} onClose={toggleDrawer(false)}>
+            <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+                <List>
+					{Object.keys(mapping).map((key) => {
+						const Icon = mapping[key].icon;
+						return (
+							<ListItem disablePadding key={key}>
+								<ListItemButton onClick={() => navigate(mapping[key].path)}>
+									<ListItemIcon>
+										<Icon />
+									</ListItemIcon>
+									<ListItemText primary={key} />
+								</ListItemButton>
+							</ListItem>
+						)
+					})}
 				</List>
-				<Divider />
-				<List>
-					{['Login', 'Register'].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>
-								<HomeIcon />
-							</ListItemIcon>
-						<ListItemText primary={text} />
-						</ListItemButton>
-					</ListItem>
-					))}
-				</List>
-			</Box>
-		</Drawer>
-	);
+                <Divider />
+            </Box>
+        </Drawer>
+    );
 }
