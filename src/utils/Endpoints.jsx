@@ -6,4 +6,5 @@ export const ENDPOINTS = {
     SIGNUP: () => 'signup/',
     SESSION: () => 'session/',
     SOCIALS: () => 'socials/',
+    CONTACT: () => 'contact-message/',
 }
