@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../utils/Api';
 import { ENDPOINTS } from '../utils/Endpoints';
+import { validateEmail, validatePassword } from '../utils/Validation';
 
 export default function Signup() {
     const [username, setUsername] = useState('');
@@ -20,16 +21,6 @@ export default function Signup() {
     const [errorShown, setErrorShown] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
-
-    const validateEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    };
-
-    const validatePassword = (password) => {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        return regex.test(password);
-    };
 
     useEffect(() => {
         ApiRouter.get(ENDPOINTS.SESSION())
