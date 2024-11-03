@@ -1,10 +1,16 @@
 import { Box, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
-export default function Privacy() {
+export default function Privacy({setDrawerOpen}) {
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative', color: 'white' }}>
-            <Typography variant="h1">Privacy Policy</Typography>
+             <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
+                <MenuIcon />
+            </IconButton>
+            
+            <Typography variant="h1" sx={{ alignSelf: 'center', textAlign: 'center', width: '100%', mt: 2 }}>Privacy Policy</Typography>
             <Typography variant="body1" gutterBottom>Last updated: August 30, 2024</Typography>
             <Typography variant="body1" gutterBottom>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</Typography>
             <Typography variant="body1" gutterBottom>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</Typography>
