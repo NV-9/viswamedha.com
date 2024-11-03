@@ -36,3 +36,21 @@ class Reference(Model):
     
     def __str__(self):
         return self.name
+
+class ContactMessage(Model):
+    """
+    ContactMessage model for viswamedha.com
+    """
+
+    id      = AutoField(primary_key = True)
+    name    = CharField(verbose_name = _('Name'), max_length = 64)
+    email   = CharField(verbose_name = _('Email'), max_length = 64)
+    subject = CharField(verbose_name = _('Subject'), max_length = 64)
+    message = CharField(verbose_name = _('Message'), max_length = 1024)
+
+    class Meta:
+        verbose_name = 'Contact Message'
+        verbose_name_plural = 'Contact Messages'
+    
+    def __str__(self):
+        return self.name
