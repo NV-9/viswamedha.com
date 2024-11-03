@@ -8,7 +8,7 @@ import About from '../pages/About';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Profile from '../pages/Profile';
-
+import Privacy from '../pages/Privacy';
 
 export const mapping = {
     Home: {
@@ -35,5 +35,10 @@ export const mapping = {
         component: Profile,
         path: '/profile/',
         icon: AccountCircleIcon,
-    }
+    },
+    Privacy: {
+        component: Privacy,
+        path: '/privacy/',
+        icon: AccountCircleIcon,
+    },
 };
