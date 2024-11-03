@@ -11,9 +11,16 @@ import { useEffect } from 'react';
 import { ENDPOINTS } from '../utils/Endpoints';
 import { ApiRouter } from '../utils/Api';
 
+const mapping = {
+    'linkedin': LinkedInIcon,
+    'facebook': FacebookIcon,
+    'instagram': InstagramIcon,
+    'github': GitHubIcon,
+    'google': MailOutlineIcon
+}
 
 export default function Home({ setDrawerOpen }) {
-    const [socialLinks, setSocialLinks] = useState({});
+    const [socialLinks, setSocialLinks] = useState(null);
 
     useEffect(() => {
         ApiRouter.get(ENDPOINTS.SOCIALS())
@@ -34,31 +41,14 @@ export default function Home({ setDrawerOpen }) {
                 </Typography>
             </Grid>
             <Grid container direction="row" spacing={2} alignItems="center" sx={{ mt: 2 }}>
-                <Grid item="true">
-                    <IconButton sx={{ color: '#37EBF3' }} href={socialLinks.facebook}>
-                        <FacebookIcon />
-                    </IconButton>
-                </Grid>
-                <Grid item="true">
-                    <IconButton sx={{ color: '#37EBF3' }} href={socialLinks.linkedin}>
-                        <LinkedInIcon />
-                    </IconButton>
-                </Grid>
-                <Grid item="true">
-                    <IconButton sx={{ color: '#37EBF3' }} href={socialLinks.instagram}>
-                        <InstagramIcon />
-                    </IconButton>
-                </Grid>
-                <Grid item="true">
-                    <IconButton sx={{ color: '#37EBF3' }} href={socialLinks.github}>
-                        <GitHubIcon />
-                    </IconButton>
-                </Grid>
-                <Grid item="true">
-                    <IconButton sx={{ color: '#37EBF3' }} href={socialLinks.google}>
-                        <MailOutlineIcon />
-                    </IconButton>
-                </Grid>
+                {socialLinks && Object.keys(socialLinks).map((key) => {
+                    const Icon = mapping[key];
+                    return (
+                        <IconButton key={key} sx={{color: '#37EBF3' }} href={socialLinks[key]} target="_blank">
+                            {Icon && <Icon />} 
+                        </IconButton>
+                    );
+                })}
             </Grid>
         </Box>
     );
