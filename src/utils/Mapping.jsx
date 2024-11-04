@@ -3,6 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ClassIcon from '@mui/icons-material/Class';
 
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -11,6 +12,7 @@ import Signup from '../pages/Signup';
 import Profile from '../pages/Profile';
 import Privacy from '../pages/Privacy';
 import Contact from '../pages/Contact';
+import Tutor from '../pages/Tutor';
 
 export const mapping = {
     Home: {
@@ -61,5 +63,12 @@ export const mapping = {
         icon: AccountCircleIcon,
         subdomain: 'auth',
         order: -1,
+    },
+    Tutor: {
+        component: Tutor,
+        path: '/',
+        icon: ClassIcon,
+        subdomain: 'tutor',
+        order: 8,
     },
 };
