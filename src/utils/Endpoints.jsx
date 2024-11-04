@@ -7,4 +7,5 @@ export const ENDPOINTS = {
     SESSION: () => 'session/',
     SOCIALS: () => 'socials/',
     CONTACT: () => 'contact-message/',
+    REVIEWS: () => 'review/',
 }
