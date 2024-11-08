@@ -10,6 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@aldabil/react-scheduler": "^2.9.5",
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
         "@mui/icons-material": "^6.1.4",
@@ -20,6 +21,7 @@
         "react-router-dom": "^6.27.0",
         "react-smoke": "^1.1.0",
         "react-typed": "^2.0.12",
+        "rrule": "^2.8.1",
         "three": "^0.169.0",
         "universal-cookie": "^7.2.1"
     },
