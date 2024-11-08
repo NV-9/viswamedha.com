@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from rest_framework.routers import SimpleRouter
+from django.urls import path, include
 
 from apps.blog.viewsets import PostViewSet, TagViewSet
 from apps.main.viewsets import ContactMessageViewSet, PhotoViewSet, ReferenceViewSet
@@ -18,4 +19,4 @@ router.register("reference", ReferenceViewSet)
 router.register("review", ReviewViewSet)
 
 app_name = "api"
-urlpatterns = router.urls 
+urlpatterns = router.urls + [path('', include('apps.users.urls'))]
