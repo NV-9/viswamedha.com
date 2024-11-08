@@ -4,6 +4,7 @@ from rest_framework.routers import SimpleRouter
 
 from apps.blog.viewsets import PostViewSet, TagViewSet
 from apps.main.viewsets import ContactMessageViewSet, PhotoViewSet, ReferenceViewSet
+from apps.tutor.viewsets import ReviewViewSet
 from apps.users.viewsets import UserViewSet
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
@@ -14,6 +15,7 @@ router.register("post", PostViewSet)
 router.register("tag", TagViewSet)
 router.register("photo", PhotoViewSet)
 router.register("reference", ReferenceViewSet)
+router.register("review", ReviewViewSet)
 
 app_name = "api"
 urlpatterns = router.urls 
