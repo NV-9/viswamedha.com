@@ -29,8 +29,7 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
                         <List>
                             {sortedItems[domain].map((key) => {
                                 const Icon = mapping[key].icon;
-                                const domainPrefix = subdomain ? `${domain}.` : '';
-                                console.log(domainPrefix, window.location.protocol, rootDomain, mapping[key].path);
+                                const domainPrefix = (domain != 'null') ? `${domain}.` : '';
                                 const path = domain === subdomain ? mapping[key].path : `${window.location.protocol}//${domainPrefix}${rootDomain}${mapping[key].path}`;
                                 return (
                                     <ListItem disablePadding key={key}>
