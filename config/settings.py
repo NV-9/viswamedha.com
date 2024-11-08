@@ -27,6 +27,7 @@ DEFAULT_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'corsheaders',
+    'django_hosts',
 ]
 CUSTOM_APPS = [
     'apps.users',
@@ -42,6 +43,7 @@ INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
 
 # MIDDLEWARE
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -50,12 +52,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 # ROUTING
 ROOT_URLCONF = 'config.urls.urls'
+ROOT_HOSTCONF = 'config.urls.hosts'
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
+DEFAULT_HOST = 'www'
 
 # TEMPLATES 
 TEMPLATES = [
