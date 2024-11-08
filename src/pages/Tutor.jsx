@@ -27,8 +27,8 @@ export default function Tutoring({ setDrawerOpen }) {
             </Typography>
 
             <Grid container justifyContent="center">
-                <Grid item xs={12} md={8}>
-                    <Typography variant="body1" align="justify" paragraph>
+                <Grid item="true" xs={12} md={8}>
+                    <Typography variant="body1" align="justify">
                         Hey there, welcome to my tutoring page. I'm a tutor with over <Box component="span" sx={{ fontFamily: 'monospace', fontWeight: 'bold' }}>4</Box> years of experience 
                         in teaching students from various backgrounds. I specialize in teaching Mathematics, Physics, and Computer Science for various exam boards, with 
                         some additional courses, listed in the courses page. I am currently undertaking a Bachelor's degree in Artificial Intelligence and Computer Science.
@@ -41,7 +41,7 @@ export default function Tutoring({ setDrawerOpen }) {
             </Grid>
 
             <Grid container justifyContent="center" sx={{ mt: 2 }}>
-                <Grid item>
+                <Grid item="true">
                     <Button variant="contained" color="primary" onClick={() => navigate("/courses")}>
                         View Courses
                     </Button>
@@ -51,7 +51,7 @@ export default function Tutoring({ setDrawerOpen }) {
             {reviews && (
                 <>
                     <Grid container justifyContent="center" sx={{ mt: 4 }}>
-                        <Grid item xs={12} md={8}>
+                        <Grid item="true" xs={12} md={8}>
                             <Typography variant="h4" gutterBottom>
                                 Reviews:
                             </Typography>
@@ -60,7 +60,7 @@ export default function Tutoring({ setDrawerOpen }) {
 
                     {reviews.map(review => (
                         <Grid container key={review.initials} justifyContent="center" sx={{ mb: 3 }}>
-                            <Grid item xs={12} md={8}>
+                            <Grid item="true" xs={12} md={8}>
                                 <Typography variant="h5" gutterBottom>
                                     {review.initials}
                                 </Typography>
