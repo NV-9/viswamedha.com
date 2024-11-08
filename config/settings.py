@@ -32,6 +32,7 @@ CUSTOM_APPS = [
     'apps.users',
     'apps.blog',
     'apps.main',
+    'apps.tutor',
 ]
 FIRST_APPS = [
     'jet.dashboard',
@@ -137,6 +138,9 @@ if DEBUG:
         'http://127.0.0.1:5173',
         'http://localhost',
         'http://127.0.0.1',
+    ]
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"https?:\/\/([a-z0-9]+[.])*localhost(:5173)?"
     ]
     CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
     CORS_ALLOW_CREDENTIALS = True
