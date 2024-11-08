@@ -4,6 +4,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ClassIcon from '@mui/icons-material/Class';
+import SchoolIcon from '@mui/icons-material/School';
 
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -13,6 +14,8 @@ import Profile from '../pages/Profile';
 import Privacy from '../pages/Privacy';
 import Contact from '../pages/Contact';
 import Tutor from '../pages/Tutor';
+import Courses from '../pages/Courses';
+import LessonCalendar from '../pages/LessonCalendar';
 
 export const mapping = {
     Home: {
@@ -70,5 +73,19 @@ export const mapping = {
         icon: ClassIcon,
         subdomain: 'tutor',
         order: 8,
+    },
+    Courses: {
+        component: Courses,
+        path: '/courses/',
+        icon: SchoolIcon,
+        subdomain: 'tutor',
+        order: 9,
+    },
+    LessonCalendar: {
+        component: LessonCalendar,
+        path: '/calendar/',
+        icon: SchoolIcon,
+        subdomain: 'tutor',
+        order: 10,
     },
 };
