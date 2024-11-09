@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsRequestMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,6 +115,9 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
+STATIC_ROOT = BUILD_DIR / 'static'
+MEDIA_ROOT = BUILD_DIR / 'media'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
