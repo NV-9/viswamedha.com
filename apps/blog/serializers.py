@@ -11,6 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['id', 'post_uuid', 'title', 'heading', 'subheading', 'content', 'image', 'slug', 'meta_description', 'published', 'publish_date', 'tags']
         read_only_fields = ['id', 'post_uuid', 'slug']
+        depth = 2
 
 
 class TagSerializer(serializers.ModelSerializer):
