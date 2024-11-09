@@ -5,6 +5,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ClassIcon from '@mui/icons-material/Class';
 import SchoolIcon from '@mui/icons-material/School';
+import BookIcon from '@mui/icons-material/Book';
 
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -16,6 +17,8 @@ import Contact from '../pages/Contact';
 import Tutor from '../pages/Tutor';
 import Courses from '../pages/Courses';
 import LessonCalendar from '../pages/LessonCalendar';
+import Blog from '../pages/Blog';
+import Post from '../pages/Post';
 
 export const mapping = {
     Home: {
@@ -88,4 +91,18 @@ export const mapping = {
         subdomain: 'tutor',
         order: 10,
     },
+    Blog: {
+        component: Blog,
+        path: '/',
+        icon: BookIcon,
+        subdomain: 'blog',
+        order: 11,
+    },
+    Post: {
+        component: Post,
+        path: '/post/:slug/',
+        icon: BookIcon,
+        subdomain: 'blog',
+        order: -1,
+    }
 };
