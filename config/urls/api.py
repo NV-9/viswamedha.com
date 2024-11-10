@@ -7,6 +7,7 @@ from apps.blog.viewsets import PostViewSet, TagViewSet
 from apps.main.viewsets import ContactMessageViewSet, PhotoViewSet, ReferenceViewSet
 from apps.tutor.viewsets import ReviewViewSet, SubjectViewSet, LevelViewSet, StudentViewSet, CourseViewSet, LessonViewSet, LessonPlanViewSet, EventViewSet
 from apps.users.viewsets import UserViewSet
+from apps.users.urls import urlpatterns as user_api_urlpatterns
 from config.urls.static import urlpatterns as static_urlpatterns
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
@@ -28,4 +29,4 @@ router.register("event", EventViewSet)
 
 
 app_name = "api"
-urlpatterns =  [path('', include('apps.users.urls'))] + router.urls + static_urlpatterns
+urlpatterns = user_api_urlpatterns + router.urls + static_urlpatterns
