@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from django.db.models import Model, AutoField, ImageField, CharField, UUIDField
+from django.db.models import Model, AutoField, ImageField, CharField, UUIDField, URLField
 from django.utils.translation import gettext_lazy as _
 
 
@@ -26,9 +26,9 @@ class Reference(Model):
     """
             
     id    = AutoField(primary_key = True)
-    path  = UUIDField(verbose_name = _('Reference UUID'), default = uuid4, editable = False)
     name  = CharField(verbose_name = _('Name'), max_length = 64, unique = True)
-    value = CharField(verbose_name = _('Value'), max_length = 1024)
+    value = CharField(verbose_name = _('Value'), max_length = 1024, blank = True, null = True)
+    url   = URLField(verbose_name = _('URL'), max_length = 1024, blank = True, null = True)
 
     class Meta:
         verbose_name = 'Reference'
