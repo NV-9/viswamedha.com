@@ -16,3 +16,4 @@ class PhotoViewSet(ModelViewSet):
 class ReferenceViewSet(ModelViewSet):
     queryset = Reference.objects.all()
     serializer_class = ReferenceSerializer
+    lookup_field = 'name'
