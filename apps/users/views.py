@@ -1,11 +1,12 @@
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
 from django.conf import settings
-import json
 
 from apps.users.models import User
+
+import json
 
 @require_POST
 def login_view(request):
@@ -61,9 +62,8 @@ def signup_view(request):
     return JsonResponse({'detail': 'User account created successfully.', 'success': True})
 
 
-@ensure_csrf_cookie
 def session_view(request):
-    return JsonResponse({'isAuthenticated': request.user.is_authenticated})
+    return JsonResponse({'isAuthenticated': request.user.is_authenticated, 'isStaff': request.user.is_staff})
 
 def socials_view(request):
     return JsonResponse(settings.SOCIAL_ACCOUNT_LINKS)
