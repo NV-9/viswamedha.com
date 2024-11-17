@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.utils._os import safe_join
+from django.views.static import serve as static_serve
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 import posixpath
 from pathlib import Path
 
-from django.utils._os import safe_join
-from django.views.static import serve as static_serve
-
+@ensure_csrf_cookie
 def serve_react(request, path, document_root=None):
     path = posixpath.normpath(path).lstrip("/")
     fullpath = Path(safe_join(document_root, path))
