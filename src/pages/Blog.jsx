@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid2 as Grid, Typography, IconButton, Divider, Button } from '@mui/material';
+import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { ENDPOINTS } from '../utils/Endpoints';
 import { ApiRouter } from '../utils/Api';
+import { mapping } from '../utils/Mapping';
+import { formatDate } from '../utils/Helpers';
 
 export default function Blog({ setDrawerOpen }) {
     const navigate = useNavigate();
@@ -18,11 +20,6 @@ export default function Blog({ setDrawerOpen }) {
         ApiRouter.get(ENDPOINTS.TAGS())
             .then(setTags);
     }, []);
-
-    const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Intl.DateTimeFormat('en-US', options).format(new Date(dateString));
-    };
 
     const handleTagClick = (name) => {
         setSelectedTag(name === selectedTag ? null : name);
@@ -65,10 +62,10 @@ export default function Blog({ setDrawerOpen }) {
                                 <Typography variant="body1" sx={{ mb: 1 }}>
                                     {post.content.length > 100 ? `${post.content.substring(0, 100)}...` : post.content}
                                 </Typography>
-                                <Typography variant="body1" sx={{ mb: 1 }}>
-                                    Tags: {post.tags.map((tag) => tag.name).join(", ")}
-                                </Typography>
-                                <Button onClick={() => navigate(ENDPOINTS.POST(post.slug))} sx={{ color: '#fdf800', display: 'flex', alignItems: 'center' }} endIcon={<ArrowForwardIcon sx={{ color: '#fdf800' }} />}>
+                                {post.tags.map((tag) => 
+                                    <Chip key={tag.name} label={tag.name} variant="outlined" sx={{color: "white", marginLeft: "10px"}}/>
+                                )}
+                                <Button onClick={() => navigate(mapping['Post'].getPath(post.slug))} sx={{ color: '#fdf800', display: 'flex', alignItems: 'center' }} endIcon={<ArrowForwardIcon sx={{ color: '#fdf800' }} />}>
                                     Read more
                                 </Button>
                             </Grid>

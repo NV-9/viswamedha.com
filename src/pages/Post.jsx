@@ -5,6 +5,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { ENDPOINTS } from '../utils/Endpoints';
 import { ApiRouter } from '../utils/Api';
+import { formatDate } from '../utils/Helpers';
+import { mapping } from '../utils/Mapping';
 
 export default function Blog({ setDrawerOpen }) {
     const { slug } = useParams();
@@ -17,16 +19,6 @@ export default function Blog({ setDrawerOpen }) {
             else setPost(data);
         })
     }, []);
-
-    const formatDate = (dateString) => {
-        try {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Intl.DateTimeFormat('en-US', options).format(new Date(dateString));
-        }
-        catch (error) {
-            return '';
-        }
-    };
 
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'left', color: 'white', p: 3, px: 10 }}>
@@ -50,7 +42,7 @@ export default function Blog({ setDrawerOpen }) {
                 <Button variant="outlined" sx={{ color: 'white', mb: 1, mr: 1 }} color="white">
                     {formatDate(post.publish_date)}
                 </Button>
-                <Button variant="outlined" sx={{ color: 'white', mb: 1 }} color="white" onClick={() => navigate('/')}>
+                <Button variant="outlined" sx={{ color: 'white', mb: 1 }} color="white" onClick={() => navigate(mapping['Blog'].getPath())}>
                     Back
                 </Button>
             </Typography>
