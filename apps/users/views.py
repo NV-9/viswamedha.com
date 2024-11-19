@@ -29,9 +29,9 @@ def login_view(request):
 
 def logout_view(request):
     if not request.user.is_authenticated:
-        return JsonResponse({'detail': 'You\'re not logged in.'})
+        return JsonResponse({'detail': 'You\'re not logged in.', 'success': False})
     logout(request)
-    return JsonResponse({'detail': 'Successfully logged out.'})
+    return JsonResponse({'detail': 'Successfully logged out.', 'success': True})
 
 
 @require_POST
