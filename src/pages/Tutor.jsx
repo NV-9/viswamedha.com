@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { ApiRouter } from '../utils/Api';
 
 export default function Tutoring({ setDrawerOpen }) {
@@ -12,7 +12,7 @@ export default function Tutoring({ setDrawerOpen }) {
     const [reviews, setReviews] = useState(null);
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.REVIEWS())
+        ApiRouter.get(API_ENDPOINTS.REVIEWS())
         .then(setReviews);
     }, []);
 

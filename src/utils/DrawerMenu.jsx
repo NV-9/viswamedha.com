@@ -1,22 +1,44 @@
 import { Drawer, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { mapping } from './Mapping';
-import { getSubDomain, getRootDomain } from './Domain';
+import { useEffect, useState } from 'react';
+
+import { ApiRouter } from './Api';
+import { API_ENDPOINTS, mapping } from './Mapping';
+import { log } from 'three/webgpu';
 
 export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
-    const subdomain = getSubDomain();
-    const rootDomain = getRootDomain();
     const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [admin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        ApiRouter.get(API_ENDPOINTS.SESSION())
+            .then(data => {
+                if (!data.detail) {
+                    setLoggedIn(data.isAuthenticated);
+                    setAdmin(data.isStaff);
+                }
+            });
+
+        console.log(sortedItems);
+    }, []);
+
 
     const sortedItems = Object.keys(mapping)
 		.filter(key => mapping[key].order >= 0)
         .sort((a, b) => mapping[a].order - mapping[b].order) 
         .reduce((acc, key) => {
-            const itemSubDomain = mapping[key].subdomain;
-            if (!acc[itemSubDomain]) {
-                acc[itemSubDomain] = [];
+            const group = mapping[key].grouping;
+            if (!acc[group]) {
+                acc[group] = [];
             }
-            acc[itemSubDomain].push(key);
+            if (mapping[key].loggedIn.require) {
+                if (mapping[key].loggedIn.state == loggedIn) {
+                    acc[group].push(key);
+                }
+            } else {
+                acc[group].push(key);
+            }
             return acc;
         }, {});
 
@@ -29,11 +51,10 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
                         <List>
                             {sortedItems[domain].map((key) => {
                                 const Icon = mapping[key].icon;
-                                const domainPrefix = (domain != 'null') ? `${domain}.` : '';
-                                const path = domain === subdomain ? mapping[key].path : `${window.location.protocol}//${domainPrefix}${rootDomain}${mapping[key].path}`;
+                                const path = mapping[key].path;
                                 return (
                                     <ListItem disablePadding key={key}>
-                                        <ListItemButton onClick={() => {window.location.href = path}}>
+                                        <ListItemButton onClick={() => {navigate(path)}}>
                                             <ListItemIcon>
                                                 <Icon />
                                             </ListItemIcon>

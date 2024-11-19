@@ -1,12 +1,12 @@
 import Cookies from "universal-cookie";
 
-export const SITE_URL = import.meta.env.VITE_SITE_URL;
+export const API_URL = import.meta.env.VITE_API_URL;
 
 export class ApiRouter {
     static request(method, path, data = {}) {
         const cookies = new Cookies();
         const token = cookies.get('csrftoken');
-        const options = {
+        var options = {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export class ApiRouter {
         if (method !== 'GET' && method !== 'HEAD') {
             options.body = JSON.stringify(data);
         }
-        path = SITE_URL + path;
+        path = API_URL + path;
         return new Promise((resolve, reject) => {
             fetch(path, options).then(result => result.json())
             .then(resolve)

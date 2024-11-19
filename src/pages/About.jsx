@@ -11,7 +11,7 @@ export default function About({ setDrawerOpen }) {
             <Typography variant="h2" sx={{ color: 'white', mb: 4, textAlign: 'center', width: '100%', display: 'flex', justifyContent: 'center'}}>
                 About
             </Typography>
-            <Grid container spacing={8} alignItems="center" justifyContent="center" sx={{ padding: '20px', flexDirection: { xs: 'column', sm: 'row' }}}>
+            <Grid container spacing={12} alignItems="center" justifyContent="center" sx={{ padding: '20px', flexDirection: { xs: 'column', sm: 'row' }}}>
                 <Grid item="true" xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center', order: { xs: 1, sm: 0 }}} >
                     <Box component="img" src={profileImage} alt="Profile" sx={{ borderRadius: '20px', boxShadow: 3, width: { xs: '80%', sm: '100%' }, maxWidth: { xs: '300px', sm: '500px' }, height: 'auto' }}/>
                 </Grid>

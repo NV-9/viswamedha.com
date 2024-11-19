@@ -3,7 +3,7 @@ import { Box, Grid2 as Grid, Typography, IconButton, Divider, Button } from '@mu
 import { useParams } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { ApiRouter } from '../utils/Api';
 import { formatDate } from '../utils/Helpers';
 import { mapping } from '../utils/Mapping';
@@ -13,7 +13,7 @@ export default function Blog({ setDrawerOpen }) {
     const navigate = useNavigate();
     const [post, setPost] = useState([]);
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.POST(slug))
+        ApiRouter.get(API_ENDPOINTS.POST(slug))
         .then(data => {
             if (data.detail) navigate('/')
             else setPost(data);

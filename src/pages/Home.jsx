@@ -8,7 +8,7 @@ import { ReactTyped } from 'react-typed';
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect } from 'react';
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { ApiRouter } from '../utils/Api';
 
 const mapping = {
@@ -23,7 +23,7 @@ export default function Home({ setDrawerOpen }) {
     const [socialLinks, setSocialLinks] = useState(null);
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.SOCIALS())
+        ApiRouter.get(API_ENDPOINTS.SOCIALS())
         .then(setSocialLinks);
     }, []);
     

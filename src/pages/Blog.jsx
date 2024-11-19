@@ -3,7 +3,7 @@ import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button } fro
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { ApiRouter } from '../utils/Api';
 import { mapping } from '../utils/Mapping';
 import { formatDate } from '../utils/Helpers';
@@ -15,9 +15,9 @@ export default function Blog({ setDrawerOpen }) {
     const [selectedTag, setSelectedTag] = useState(null);
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.POSTS())
+        ApiRouter.get(API_ENDPOINTS.POSTS())
             .then(setPosts);
-        ApiRouter.get(ENDPOINTS.TAGS())
+        ApiRouter.get(API_ENDPOINTS.TAGS())
             .then(setTags);
     }, []);
 

@@ -3,7 +3,7 @@ import { Box, Button, Collapse, Container, FormControl, Input, InputLabel, Typog
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { ApiRouter } from '../utils/Api'; 
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { validateEmail } from '../utils/Validation';
 
 export default function Contact({ setDrawerOpen }) {
@@ -32,7 +32,7 @@ export default function Contact({ setDrawerOpen }) {
             message: message 
         };
         
-        ApiRouter.post(ENDPOINTS.CONTACT(), contactData)
+        ApiRouter.post(API_ENDPOINTS.CONTACT(), contactData)
             .then(response => {
                 if (response.email) {
                     setSuccessShown(true);

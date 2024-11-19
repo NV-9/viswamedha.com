@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../utils/Api';
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 import { validateEmail, validatePassword } from '../utils/Validation';
 
 export default function Signup() {
@@ -23,7 +23,7 @@ export default function Signup() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.SESSION())
+        ApiRouter.get(API_ENDPOINTS.SESSION())
         .then(data => {
             if (data.isAuthenticated) {
                 navigate('/profile/');
@@ -61,7 +61,7 @@ export default function Signup() {
             password: password,
             confirm_password: confirmPassword
         }
-        ApiRouter.post(ENDPOINTS.SIGNUP(), userSignupData)
+        ApiRouter.post(API_ENDPOINTS.SIGNUP(), userSignupData)
         .then(data => {
             if (data.success == true) {
                 navigate('/profile/');

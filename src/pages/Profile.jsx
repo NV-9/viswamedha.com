@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import { ApiRouter } from "../utils/Api";
-import { ENDPOINTS } from "../utils/Endpoints";
+import { API_ENDPOINTS } from "../utils/Mapping";
 
 export default function Profile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.SESSION())
+        ApiRouter.get(API_ENDPOINTS.SESSION())
         .then(data => {
             if (!data.isAuthenticated) {
                 navigate('/login/');
@@ -18,7 +18,7 @@ export default function Profile() {
     }, []);
 
     const logout = () => {
-        ApiRouter.get(ENDPOINTS.LOGOUT())
+        ApiRouter.get(API_ENDPOINTS.LOGOUT())
         .then(_ => {
             navigate('/');
         })

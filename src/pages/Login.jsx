@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../utils/Api';
-import { ENDPOINTS } from '../utils/Endpoints';
+import { API_ENDPOINTS } from '../utils/Mapping';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -13,7 +13,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ApiRouter.get(ENDPOINTS.SESSION())
+        ApiRouter.get(API_ENDPOINTS.SESSION())
         .then(data => {
             if (data.isAuthenticated) {
                 navigate('/profile/');
@@ -26,7 +26,7 @@ export default function Login() {
             username: username,
             password: password,
         }
-        ApiRouter.post(ENDPOINTS.LOGIN(), userLoginData)
+        ApiRouter.post(API_ENDPOINTS.LOGIN(), userLoginData)
         .then(data => {
             if (data.success == true) {
                 navigate('/profile/');
