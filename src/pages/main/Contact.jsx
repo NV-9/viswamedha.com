@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Box, Button, Collapse, Container, FormControl, Input, InputLabel, Typography, Alert, IconButton, Card, Grid2 as Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { ApiRouter } from '../utils/Api'; 
-import { API_ENDPOINTS } from '../utils/Mapping';
-import { validateEmail } from '../utils/Validation';
+import { ApiRouter } from '../../utils/Api'; 
+import { API_ENDPOINTS } from '../../utils/Mapping';
+import { validateEmail } from '../../utils/Validation';
 
 export default function Contact({ setDrawerOpen }) {
     const [name, setName] = useState('');

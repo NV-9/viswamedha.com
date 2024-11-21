@@ -4,8 +4,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-import { API_ENDPOINTS } from '../utils/Mapping';
-import { ApiRouter } from '../utils/Api';
+import { API_ENDPOINTS } from '../../utils/Mapping';
+import { ApiRouter } from '../../utils/Api';
 
 export default function Tutoring({ setDrawerOpen }) {
     const navigate = useNavigate();

@@ -8,8 +8,8 @@ import { ReactTyped } from 'react-typed';
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect } from 'react';
-import { API_ENDPOINTS } from '../utils/Mapping';
-import { ApiRouter } from '../utils/Api';
+import { API_ENDPOINTS } from '../../utils/Mapping';
+import { ApiRouter } from '../../utils/Api';
 
 const mapping = {
     'linkedin': LinkedInIcon,

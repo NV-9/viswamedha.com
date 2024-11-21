@@ -3,8 +3,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRouter } from '../utils/Api';
-import { API_ENDPOINTS } from '../utils/Mapping';
+import { ApiRouter } from '../../utils/Api';
+import { API_ENDPOINTS } from '../../utils/Mapping';
 
 export default function Login() {
     const [username, setUsername] = useState('');

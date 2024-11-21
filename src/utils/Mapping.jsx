@@ -7,20 +7,22 @@ import ClassIcon from '@mui/icons-material/Class';
 import SchoolIcon from '@mui/icons-material/School';
 import BookIcon from '@mui/icons-material/Book';
 
-import Home from '../pages/Home';
-import About from '../pages/About';
-import Login from '../pages/Login';
-import Logout from '../pages/Logout';
-import Signup from '../pages/Signup';
-import Profile from '../pages/Profile';
-import Privacy from '../pages/Privacy';
-import Contact from '../pages/Contact';
-import Tutor from '../pages/Tutor';
-import Courses from '../pages/Courses';
-import LessonCalendar from '../pages/LessonCalendar';
-import Blog from '../pages/Blog';
-import Post from '../pages/Post';
-import Reference from '../pages/Reference';
+import Home from '../pages/main/Home';
+import About from '../pages/main/About';
+import Contact from '../pages/main/Contact';
+import Privacy from '../pages/main/Privacy';
+import Login from '../pages/auth/Login';
+import Signup from '../pages/auth/Signup';
+import Logout from '../pages/auth/Logout';
+import Profile from '../pages/auth/Profile';
+import Tutor from '../pages/tutor/Tutor';
+import Courses from '../pages/tutor/Courses';
+import LessonCalendar from '../pages/tutor/LessonCalendar';
+import Blog from '../pages/blog/Blog';
+import Post from '../pages/blog/Post';
+import Reference from '../pages/main/Reference';
+import Students from '../pages/tutor/Students';
+
 
 export const mapping = {
     Home: {
@@ -28,7 +30,7 @@ export const mapping = {
         path: '/',
         icon: HomeIcon,
         order: 0,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'main',
         visibility: 'show',
@@ -38,7 +40,7 @@ export const mapping = {
         path: '/about/',
         icon: InfoIcon,
         order: 1,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'main',
         visibility: 'show',
@@ -48,7 +50,7 @@ export const mapping = {
         path: '/contact/',
         icon: ContactSupportIcon,
         order: 3,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'main',
         visibility: 'show',
@@ -58,7 +60,7 @@ export const mapping = {
         path: '/privacy/',
         icon: AccountCircleIcon,
         order: 4,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'main',
         visibility: 'show',
@@ -68,7 +70,7 @@ export const mapping = {
         path: '/login/',
         icon: LoginIcon,
         order: 0,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: true},
         grouping: 'auth',
         visibility: 'show',
@@ -78,7 +80,7 @@ export const mapping = {
         path: '/signup/',
         icon: LoginIcon,
         order: 1,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: true},
         grouping: 'auth',
         visibility: 'show',
@@ -88,7 +90,7 @@ export const mapping = {
         path: '/logout/',
         icon: LoginIcon,
         order: 2,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: true, require: true},
         grouping: 'auth',
         visibility: 'show',
@@ -98,7 +100,7 @@ export const mapping = {
         path: '/profile/',
         icon: AccountCircleIcon,
         order: 2,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: true, require: true},
         grouping: 'auth',
         visibility: 'show',
@@ -108,7 +110,7 @@ export const mapping = {
         path: '/tutor/',
         icon: ClassIcon,
         order: 8,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'tutor',
         visibility: 'show',
@@ -118,7 +120,7 @@ export const mapping = {
         path: '/courses/',
         icon: SchoolIcon,
         order: 9,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'tutor',
         visibility: 'show',
@@ -128,7 +130,7 @@ export const mapping = {
         path: '/calendar/',
         icon: SchoolIcon,
         order: 10,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'tutor',
         visibility: 'show',
@@ -138,7 +140,7 @@ export const mapping = {
         path: '/blog/',
         icon: BookIcon,
         order: 2,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         getPath: () => '/blog/',
         grouping: 'blog',
@@ -149,7 +151,7 @@ export const mapping = {
         path: '/post/:slug/',
         icon: BookIcon,
         order: -1,
-        admin: false,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         getPath: (slug) => `/post/${slug}/`,
         grouping: 'main',
@@ -159,8 +161,8 @@ export const mapping = {
         component: Reference,
         path: '/reference/',
         icon: BookIcon,
-        order: -1,
-        admin: false,
+        order: 10,
+        admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         grouping: 'main',
         visibility: 'show',
@@ -170,9 +172,19 @@ export const mapping = {
         path: '/reference/:key/',
         icon: BookIcon,
         order: -1,
-        admin: true,
+        admin: {state: true, require: true},
         loggedIn: {state: true, require: true},
         grouping: 'main',
+        visibility: 'show',
+    },
+    Students: {
+        component: Students,
+        path: '/students/',
+        icon: BookIcon,
+        order: 12,
+        admin: {state: true, require: true},
+        loggedIn: {state: true, require: true},
+        grouping: 'tutor',
         visibility: 'show',
     },
 };

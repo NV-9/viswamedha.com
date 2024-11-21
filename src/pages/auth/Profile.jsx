@@ -2,8 +2,8 @@ import { Container, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import { ApiRouter } from "../utils/Api";
-import { API_ENDPOINTS } from "../utils/Mapping";
+import { ApiRouter } from "../../utils/Api";
+import { API_ENDPOINTS } from "../../utils/Mapping";
 
 export default function Profile() {
     const navigate = useNavigate();

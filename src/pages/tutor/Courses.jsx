@@ -7,8 +7,8 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 
-import { API_ENDPOINTS } from '../utils/Mapping';
-import { ApiRouter } from '../utils/Api';
+import { API_ENDPOINTS } from '../../utils/Mapping';
+import { ApiRouter } from '../../utils/Api';
 
 
 export default function Courses({ setDrawerOpen }) {

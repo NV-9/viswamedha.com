@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import { ApiRouter } from './Api';
 import { API_ENDPOINTS, mapping } from './Mapping';
-import { log } from 'three/webgpu';
 
 export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
     const navigate = useNavigate();
@@ -34,7 +33,13 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
             }
             if (mapping[key].loggedIn.require) {
                 if (mapping[key].loggedIn.state == loggedIn) {
-                    acc[group].push(key);
+                    if (mapping[key].admin.require) {
+                        if (mapping[key].admin.state == admin) {
+                            acc[group].push(key);
+                        }
+                    } else {
+                        acc[group].push(key);
+                    }
                 }
             } else {
                 acc[group].push(key);
