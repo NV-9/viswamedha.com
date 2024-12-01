@@ -27,7 +27,6 @@ DEFAULT_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'corsheaders',
-    'django_hosts',
 ]
 CUSTOM_APPS = [
     'apps.users',
@@ -43,7 +42,6 @@ INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
 
 # MIDDLEWARE
 MIDDLEWARE = [
-    'django_hosts.middleware.HostsRequestMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -53,15 +51,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 # ROUTING
-ROOT_URLCONF = 'config.urls.urls'
-ROOT_HOSTCONF = 'config.urls.hosts'
+ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
-DEFAULT_HOST = 'www'
 
 # TEMPLATES 
 TEMPLATES = [
@@ -141,16 +136,8 @@ SOCIAL_ACCOUNT_LINKS = {
 
 
 # CORS
-if DEBUG:
-    CORS_ALLOWED_ORIGINS = [
-        'http://localhost:5173',
-        'http://127.0.0.1:5173',
-        'http://localhost',
-        'http://127.0.0.1',
-    ]
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"https?:\/\/([a-z0-9]+[.])*localhost(:5173)?"
-    ]
-    CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
-    CORS_ALLOW_CREDENTIALS = True
-    CSRF_COOKIE_SECURE = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost',
+    'http://localhost:5173',
+]
