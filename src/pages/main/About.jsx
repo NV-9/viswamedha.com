@@ -1,8 +1,18 @@
 import { Box, Typography, Button, IconButton, Grid2 as Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useState, useEffect } from 'react';
+import { ApiRouter } from '../../utils/Api';
+import { API_ENDPOINTS } from '../../utils/Mapping';
 import profileImage from '/img/About.png';
 
 export default function About({ setDrawerOpen }) {
+    const [socialLinks, setSocialLinks] = useState(null);
+
+    useEffect(() => {
+        ApiRouter.get(API_ENDPOINTS.SOCIALS())
+        .then(setSocialLinks);
+    }, []);
+
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative' }}>
            <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
@@ -22,7 +32,7 @@ export default function About({ setDrawerOpen }) {
                     <Typography variant="body1" sx={{ color: 'white', mb: 3 }}>
                         I have experience in Full Stack, Ethical Hacking, Machine Learning, Software Engineering & Web Development.
                     </Typography>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" href={socialLinks ? socialLinks.cv : ''} sx={{ color: 'white', mb: 2 }}>
                         Download CV
                     </Button>
                 </Grid>
