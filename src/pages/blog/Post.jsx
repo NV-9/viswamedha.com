@@ -32,20 +32,25 @@ export default function Blog({ setDrawerOpen }) {
                 <Typography variant="h4" align="center" sx={{ mt: 2 }} gutterBottom>
                     {post.subheading}
                 </Typography>
+                <Grid item="true" xs={12}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', overflow: 'hidden', borderRadius: 1, mb: 2,}}>
+                        <Box component="img" src={post.image} alt={post.title} sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1 }}/>
+                    </Box>
+                </Grid>
                 {post.content.split('\n').map((paragraph, index) => (
                     <Typography variant="body1" key={index} sx={{ mb: 2 }}>
                         {paragraph}
                     </Typography>
                 ))}
+                <Typography variant="body1" key={"s"} sx={{ mb: 2 }}>
+                    <Button variant="outlined" sx={{ color: 'white', mb: 1, mr: 1 }} color="white">
+                        {formatDate(post.publish_date)}
+                    </Button>
+                    <Button variant="outlined" sx={{ color: 'white', mb: 1 }} color="white" onClick={() => navigate(mapping['Blog'].getPath())}>
+                        Back
+                    </Button>
+                </Typography>
             </>)}
-            <Typography variant="body1" key={"s"} sx={{ mb: 2 }}>
-                <Button variant="outlined" sx={{ color: 'white', mb: 1, mr: 1 }} color="white">
-                    {formatDate(post.publish_date)}
-                </Button>
-                <Button variant="outlined" sx={{ color: 'white', mb: 1 }} color="white" onClick={() => navigate(mapping['Blog'].getPath())}>
-                    Back
-                </Button>
-            </Typography>
         </Box>
     );
 }

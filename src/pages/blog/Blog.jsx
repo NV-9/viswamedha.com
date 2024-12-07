@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button } from '@mui/material';
+import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button, Select, MenuItem } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
@@ -13,20 +13,23 @@ export default function Blog({ setDrawerOpen }) {
     const [posts, setPosts] = useState([]);
     const [tags, setTags] = useState([]);
     const [selectedTag, setSelectedTag] = useState(null);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
     useEffect(() => {
-        ApiRouter.get(API_ENDPOINTS.POSTS())
-            .then(setPosts);
-        ApiRouter.get(API_ENDPOINTS.TAGS())
-            .then(setTags);
+        ApiRouter.get(API_ENDPOINTS.POSTS()).then(setPosts);
+        ApiRouter.get(API_ENDPOINTS.TAGS()).then((data) => data.sort((a, b) => a.name.localeCompare(b.name))).then(setTags);
+
+        const handleResize = () => setIsSmallScreen(window.innerWidth <= 600);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handleTagClick = (name) => {
-        setSelectedTag(name === selectedTag ? null : name);
-    };
+    const handleTagChange = (event) => setSelectedTag(event.target.value || null);
+    const handleTagClick = (name) => setSelectedTag(name === selectedTag ? null : name);
 
-    const filteredPosts = (selectedTag 
-        ? posts.filter(post => post.tags.some(tag => tag.name === selectedTag)) 
+    const filteredPosts = (selectedTag
+        ? posts.filter(post => post.tags.some(tag => tag.name === selectedTag))
         : posts
     ).sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
 
@@ -41,18 +44,31 @@ export default function Blog({ setDrawerOpen }) {
             <Typography variant="body1" align="center" sx={{ mb: 4 }}>
                 This is a collection of random pieces of information, stories, and experiences I have encountered/experienced.
             </Typography>
-            <Typography variant="body1" align="center" sx={{ mb: 4 }}>
-                {tags.map((tag, index) => (
-                    <Button key={index} variant={tag.name === selectedTag ? "contained" : "outlined"} sx={{ color: 'white', ml: 2, mb: 2 }} color="white" onClick={() => handleTagClick(tag.name)}>
-                        {tag.name}
-                    </Button>    
-                ))}
-            </Typography>           
-            <Grid container direction="column" alignItems="left" spacing={4} sx={{ width: '100%',  maxWidth: {xs: '100%',sm: '95%', md: '90%', lg: '85%', xl: '80%'}}}>
+            {isSmallScreen ? (
+                <Select value={selectedTag || ''} onChange={handleTagChange} displayEmpty fullWidth sx={{ mb: 4, color: 'white', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 1 }}>
+                    <MenuItem key="All Tags" value="">
+                        <em>All Tags</em>
+                    </MenuItem>
+                    {tags.map((tag) => (
+                        <MenuItem key={tag.name} value={tag.name}>
+                            {tag.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            ) : (
+                <Box sx={{ mb: 4, width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    {tags.map((tag) => (
+                        <Button key={tag.name} variant={tag.name === selectedTag ? 'contained' : 'outlined'} sx={{ color: 'white', ml: 2, mb: 2 }} onClick={() => handleTagClick(tag.name)}>
+                            {tag.name}
+                        </Button>
+                    ))}
+                </Box>
+            )}
+            <Grid container direction="column" spacing={4} sx={{ width: '100%', maxWidth: { xs: '100%', sm: '95%', md: '90%', lg: '85%', xl: '80%' } }}>
                 {filteredPosts.map((post, index) => (
                     <React.Fragment key={index}>
-                        <Grid container spacing={2} display="flex" position="relative">
-                            <Grid item="true" xs={12} md="auto" sx={{ flex: 1 }}>
+                        <Grid container direction="column" spacing={2} sx={{ position: 'relative' }}>
+                            <Grid item="true" xs={12}>
                                 <Button variant="outlined" sx={{ color: 'white', mb: 1 }} color="white">
                                     {formatDate(post.publish_date)}
                                 </Button>
@@ -62,16 +78,18 @@ export default function Blog({ setDrawerOpen }) {
                                 <Typography variant="body1" sx={{ mb: 1 }}>
                                     {post.content.length > 100 ? `${post.content.substring(0, 100)}...` : post.content}
                                 </Typography>
-                                {post.tags.map((tag) => 
-                                    <Chip key={tag.name} label={tag.name} variant="outlined" sx={{color: "white", marginLeft: "10px"}}/>
-                                )}
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
+                                    {post.tags.map((tag) => (
+                                        <Chip key={tag.name} label={tag.name} variant="outlined" sx={{ color: 'white' }} />
+                                    ))}
+                                </Box>
                                 <Button onClick={() => navigate(mapping['Post'].getPath(post.slug))} sx={{ color: '#fdf800', display: 'flex', alignItems: 'center' }} endIcon={<ArrowForwardIcon sx={{ color: '#fdf800' }} />}>
                                     Read more
                                 </Button>
                             </Grid>
-                            <Grid item="true" xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 2, md: 0 } }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '200px', position: 'relative', overflow: 'hidden', borderRadius: 1 }}>
-                                    <Box component="img" src={post.image} alt={post.title} sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1 }} />
+                            <Grid item="true" xs={12}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '200px', overflow: 'hidden', borderRadius: 1,}}>
+                                    <Box component="img" src={post.image} alt={post.title} sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1 }}/>
                                 </Box>
                             </Grid>
                         </Grid>
