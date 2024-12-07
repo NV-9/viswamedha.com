@@ -1,14 +1,9 @@
-import { 
-    Typography, Box, Grid2 as Grid, IconButton, Card, CardContent, CardActions, 
-    FormControl, InputLabel, Select, MenuItem 
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, MenuItem, Select, Typography} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 
 export default function Courses({ setDrawerOpen }) {
@@ -18,34 +13,20 @@ export default function Courses({ setDrawerOpen }) {
     const [levels, setLevels] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState('');
     const [selectedLevel, setSelectedLevel] = useState('');
-
     const [filteredCourses, setFilteredCourses] = useState([]);
 
     useEffect(() => {
-        ApiRouter.get(API_ENDPOINTS.COURSES())
-            .then(setCourses)
-            .catch((err) => console.error('Error fetching courses:', err));
-
-        ApiRouter.get(API_ENDPOINTS.SUBJECTS())
-            .then(setSubjects)
-            .catch((err) => console.error('Error fetching subjects:', err));
-
-        ApiRouter.get(API_ENDPOINTS.LEVELS())
-            .then(setLevels)
-            .catch((err) => console.error('Error fetching levels:', err));
+        ApiRouter.get(API_ENDPOINTS.COURSES()).then(setCourses);
+        ApiRouter.get(API_ENDPOINTS.SUBJECTS()).then(setSubjects);
+        ApiRouter.get(API_ENDPOINTS.LEVELS()).then(setLevels);
     }, []);
 
     useEffect(() => {
         let filtered = courses;
-
-        if (selectedSubject) {
+        if (selectedSubject) 
             filtered = filtered.filter(course => course.subject === selectedSubject);
-        }
-
-        if (selectedLevel) {
+        if (selectedLevel) 
             filtered = filtered.filter(course => course.level === selectedLevel);
-        }
-
         setFilteredCourses(filtered);
     }, [courses, selectedSubject, selectedLevel]);
 
@@ -54,11 +35,16 @@ export default function Courses({ setDrawerOpen }) {
             <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
-
             <Typography variant="h2" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>
                 View Courses
             </Typography>
-
+            <Grid container justifyContent="center">
+                <Grid item="true" xs={12} md={8}>
+                    <Typography variant="body1" align="justify">
+                        Here are a list of courses I offer! If you have any questions or would like to request a different course that isn't specified here, please feel free to contact me. 
+                    </Typography>
+                </Grid>
+            </Grid>
             <Box sx={{ display: 'flex', gap: 3, mt: 3, mb: 4, width: '100%', maxWidth: '800px', justifyContent: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
                 <FormControl fullWidth sx={{ color: 'white', '& .MuiInputLabel-root': { color: 'white' }, '& .MuiOutlinedInput-root': { color: 'white', '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' }, '&.Mui-focused fieldset': { borderColor: 'white' }} }}>
                     <InputLabel>Subject</InputLabel>
@@ -71,7 +57,6 @@ export default function Courses({ setDrawerOpen }) {
                         ))}
                     </Select>
                 </FormControl>
-
                 <FormControl fullWidth sx={{ color: 'white', '& .MuiInputLabel-root': { color: 'white' }, '& .MuiOutlinedInput-root': { color: 'white', '& fieldset': { borderColor: 'white' }, '&:hover fieldset': { borderColor: 'white' }, '&.Mui-focused fieldset': { borderColor: 'white' } } }}>
                     <InputLabel>Level</InputLabel>
                     <Select value={selectedLevel} onChange={(e) => setSelectedLevel(e.target.value)} label="Level">
@@ -84,7 +69,6 @@ export default function Courses({ setDrawerOpen }) {
                     </Select>
                 </FormControl>
             </Box>
-
             <Grid container spacing={4}>
                 {filteredCourses.map((course, index) => (
                     <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -99,7 +83,7 @@ export default function Courses({ setDrawerOpen }) {
                             </CardContent>
                             <CardActions sx={{ justifyContent: 'space-between', p: 2 }}>
                                 <Chip label={`£${course.cost}`} sx={{ mb: 1, color: 'white', borderColor: 'white' }} color='white' variant='outlined'/>
-                                <Button size="small" color="primary" onClick={() => navigate(`/course/${course.id}`)}>View More</Button>
+                                <Button size="small" color="primary" onClick={() => navigate(mapping['Course'].getPath(course.id))}>Details</Button>
                             </CardActions>
                         </Card>
                     </Grid>

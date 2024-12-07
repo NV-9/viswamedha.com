@@ -1,12 +1,9 @@
-import { Typography, Box, Grid2 as Grid, IconButton, Card, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Button, Card, CardActions, CardContent, Chip, Grid2 as Grid, IconButton, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 
 export default function Course({ setDrawerOpen }) {
@@ -27,9 +24,6 @@ export default function Course({ setDrawerOpen }) {
             <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
-
-           
-
             {course && (
                 <>
                     <Typography variant="h2" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>
@@ -60,16 +54,13 @@ export default function Course({ setDrawerOpen }) {
                                 </CardContent>
                                 <CardActions sx={{ justifyContent: 'space-between', p: 2 }}>
                                     <Chip label={`£${course.cost}`} sx={{ mb: 1, color: 'white', borderColor: 'white' }} color='white' variant='outlined'/>
-                                    <Button size="small" color="primary" onClick={() => navigate(`/courses/`)}>Back</Button>
+                                    <Button size="small" color="primary" onClick={() => navigate(mapping['Courses'].getPath())}>Back</Button>
                                 </CardActions>
                             </Card>
                         </Grid>
-        
                     </Grid>
                 </>
-            )}
-
-            
+            )}  
         </Box>
     );
 }
