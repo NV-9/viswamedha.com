@@ -35,10 +35,12 @@ CUSTOM_APPS = [
     'apps.blog',
     'apps.main',
     'apps.tutor',
+    'apps.chat',
 ]
 FIRST_APPS = [
     'jet.dashboard',
     'jet',
+    'daphne',
 ]
 INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
 
@@ -128,6 +130,16 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
+}
+
+# CHANNELS
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }
 
 # SOCIAL ACCOUNT LINKS
