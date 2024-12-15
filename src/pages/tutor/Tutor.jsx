@@ -48,7 +48,7 @@ export default function Tutoring({ setDrawerOpen }) {
                 </Grid>
             </Grid>
 
-            {reviews && (
+            {reviews && reviews.length > 0 && (
                 <>
                     <Grid container justifyContent="center" sx={{ mt: 4 }}>
                         <Grid item="true" xs={12} md={8}>
