@@ -35,6 +35,7 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'student_uuid'
 
 class CourseViewSet(viewsets.ModelViewSet):
     """
@@ -51,6 +52,7 @@ class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filterset_fields = ['lesson_plan', 'lesson_plan__student__student_uuid']
 
 class LessonPlanViewSet(viewsets.ModelViewSet):
     """
@@ -59,6 +61,7 @@ class LessonPlanViewSet(viewsets.ModelViewSet):
     queryset = LessonPlan.objects.all()
     serializer_class = LessonPlanSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'lesson_plan_uuid'
 
 class EventViewSet(viewsets.ModelViewSet):
     """
