@@ -44,27 +44,28 @@ export default function Blog({ setDrawerOpen }) {
             <Typography variant="body1" align="center" sx={{ mb: 4 }}>
                 This is a collection of random pieces of information, stories, and experiences I have encountered/experienced.
             </Typography>
-            {isSmallScreen ? (
-                <Select value={selectedTag || ''} onChange={handleTagChange} displayEmpty fullWidth sx={{ mb: 4, color: 'white', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 1 }}>
-                    <MenuItem key="All Tags" value="">
-                        <em>All Tags</em>
-                    </MenuItem>
-                    {tags.map((tag) => (
-                        <MenuItem key={tag.name} value={tag.name}>
-                            {tag.name}
+            
+            <Grid container direction="column" spacing={4} sx={{ width: '100%', maxWidth: { xs: '100%', sm: '95%', md: '90%', lg: '85%', xl: '80%' }}}>
+                {isSmallScreen ? (
+                    <Select value={selectedTag || ''} onChange={handleTagChange} displayEmpty fullWidth sx={{ mb: 4, color: 'white', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 1 }}>
+                        <MenuItem key="All Tags" value="">
+                            <em>All Tags</em>
                         </MenuItem>
-                    ))}
-                </Select>
-            ) : (
-                <Box sx={{ mb: 4, width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {tags.map((tag) => (
-                        <Button key={tag.name} variant={tag.name === selectedTag ? 'contained' : 'outlined'} sx={{ color: 'white', ml: 2, mb: 2 }} onClick={() => handleTagClick(tag.name)}>
-                            {tag.name}
-                        </Button>
-                    ))}
-                </Box>
-            )}
-            <Grid container direction="column" spacing={4} sx={{ width: '100%', maxWidth: { xs: '100%', sm: '95%', md: '90%', lg: '85%', xl: '80%' } }}>
+                        {tags.map((tag) => (
+                            <MenuItem key={tag.name} value={tag.name}>
+                                {tag.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                ) : (
+                    <Box sx={{ mb: 4, width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                        {tags.map((tag) => (
+                            <Button key={tag.name} variant={tag.name === selectedTag ? 'contained' : 'outlined'} sx={{ color: 'white', ml: 2, mb: 2 }} onClick={() => handleTagClick(tag.name)}>
+                                {tag.name}
+                            </Button>
+                        ))}
+                    </Box>
+                )}
                 {filteredPosts.map((post, index) => (
                     <React.Fragment key={index}>
                         <Grid container direction="column" spacing={2} sx={{ position: 'relative' }}>
@@ -98,6 +99,12 @@ export default function Blog({ setDrawerOpen }) {
                         )}
                     </React.Fragment>
                 ))}
+            </Grid>
+            <Grid container direction="column" spacing={4} sx={{ width: '100%', maxWidth: { xs: '100%', sm: '95%', md: '90%', lg: '85%', xl: '80%' } }}>
+                <Divider sx={{ width: '100%', backgroundColor: 'rgba(248, 253, 0, 1.00)', mt: 2, mb: 2 }} />
+                <Typography variant="body2" align="center" sx={{ mt: 2, color: 'rgba(255, 255, 255, 0.6)' }}>
+                    © {new Date().getFullYear()} Viswamedha Nalabotu
+                </Typography>
             </Grid>
         </Box>
     );
