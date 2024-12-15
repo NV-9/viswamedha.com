@@ -13,6 +13,7 @@ class Student(Model):
 
     id   = AutoField(primary_key = True)
     user = OneToOneField(User, verbose_name = _('User'),related_name = 'student', on_delete = CASCADE)
+    student_uuid = UUIDField(verbose_name = _('Student UUID'), default = uuid4, editable = False)
 
     class Meta:
         verbose_name = 'Student'
@@ -75,6 +76,7 @@ class Course(Model):
     """
 
     id          = AutoField(primary_key = True)
+    course_uuid = UUIDField(verbose_name = _('Course UUID'), default = uuid4, editable = False)
     subject     = ForeignKey(Subject, verbose_name = _('Subject'), on_delete = CASCADE)
     level       = ForeignKey(Level, verbose_name = _('Level'), on_delete = CASCADE)
     description = TextField(verbose_name = _('Description'))
@@ -97,7 +99,8 @@ class LessonPlan(Model):
     """
 
     id      = AutoField(primary_key = True)
-    course  = OneToOneField(Course, verbose_name = _('Course'), related_name = 'lesson_plan', on_delete = CASCADE)
+    lesson_plan_uuid = UUIDField(verbose_name = _('Lesson Plan UUID'), default = uuid4, editable = False)
+    course  = ForeignKey(Course, verbose_name = _('Course'), related_name = 'lesson_plan', on_delete = CASCADE)
     student = ManyToManyField(Student, verbose_name = _('Student'), related_name = 'lesson_plan')
     cost    = IntegerField(verbose_name = _('Cost/hr'))
 
@@ -163,7 +166,6 @@ class Lesson(Event):
     lesson_uuid = UUIDField(verbose_name = _('Lesson UUID'), default = uuid4, editable = False)
     event       = OneToOneField(Event, parent_link = True, on_delete = CASCADE)
     lesson_plan = ForeignKey(LessonPlan, verbose_name = _('Lesson Plan'), related_name = 'lesson', on_delete = CASCADE)
-    student     = OneToOneField(Student, verbose_name = _('Student'), related_name = 'lesson', on_delete = CASCADE)
     
     cost = IntegerField(verbose_name = _('Cost'))
     paid = BooleanField(verbose_name = _('Paid'), default = False)
@@ -173,7 +175,7 @@ class Lesson(Event):
         verbose_name_plural = 'Lessons'
 
     def __str__(self):
-        return f"{self.id} | {self.lesson_plan.course.name} | {self.student.user.full_name}"
+        return f"{self.id} | {self.lesson_plan}"
 
     def next_week_lesson(self) -> 'Lesson':
         """
