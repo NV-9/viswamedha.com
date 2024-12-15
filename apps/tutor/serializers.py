@@ -22,21 +22,12 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = ['id', 'name', 'description', 'subject', 'level', 'cost']
         read_only_fields = ['id']
-     
-
-class LessonSerializer(serializers.ModelSerializer):
-    """
-    Lesson serializer for viswamedha.com
-    """
-    class Meta:
-        model = Lesson
-        fields = ['id', 'name', 'description', 'course', 'lesson_plan']
-        read_only_fields = ['id']
 
 class LessonPlanSerializer(serializers.ModelSerializer):
     """
     Lesson Plan serializer for viswamedha.com
     """
+    course = CourseSerializer()
     class Meta:
         model = LessonPlan
         fields = ['id', 'course', 'student']
@@ -48,16 +39,28 @@ class EventSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Event
-        fields = ['id', 'name', 'description', 'date', 'lesson_plan']
+        fields = ['id', 'event_uuid', 'start', 'end', 'clashing']
         read_only_fields = ['id']
+
+class LessonSerializer(serializers.ModelSerializer):
+    """
+    Lesson serializer for viswamedha.com
+    """
+    event = EventSerializer()
+    class Meta:
+        model = Lesson
+        fields = ['lesson_id', 'lesson_uuid', 'event', 'lesson_plan', 'cost', 'paid']
+        read_only_fields = ['lesson_id', 'lesson_uuid']
+        depth = 2
 
 class StudentSerializer(serializers.ModelSerializer):
     """
     Student serializer for viswamedha.com
     """
+    lesson_plan = LessonPlanSerializer(many=True)
     class Meta:
         model = Student
-        fields = ['id', 'user']
+        fields = ['id', 'user', 'lesson_plan', 'student_uuid']
         read_only_fields = ['id']
         depth = 2
 
