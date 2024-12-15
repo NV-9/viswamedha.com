@@ -14,6 +14,7 @@ BUILD_DIR = BASE_DIR / "build"
 DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = list(config("DJANGO_ALLOWED_HOSTS", cast=Csv()))
+DOMAIN_NAME = config("DOMAIN_NAME")
 
 # APPS
 DEFAULT_APPS = [
@@ -27,6 +28,7 @@ DEFAULT_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'corsheaders',
+    'django_filters',
 ]
 CUSTOM_APPS = [
     'apps.users',
@@ -122,7 +124,10 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny', 
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
 }
 
 # SOCIAL ACCOUNT LINKS
@@ -139,6 +144,6 @@ SOCIAL_ACCOUNT_LINKS = {
 # CORS
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://localhost:5173',
+    f'http://{DOMAIN_NAME}',
+    f'http://{DOMAIN_NAME}:5173',
 ]
