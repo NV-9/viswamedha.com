@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, MenuItem, Select, Typography} from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, Link, MenuItem, Select, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
@@ -41,7 +41,7 @@ export default function Courses({ setDrawerOpen }) {
             <Grid container justifyContent="center">
                 <Grid item="true" xs={12} md={8}>
                     <Typography variant="body1" align="justify">
-                        Here are a list of courses I offer! If you have any questions or would like to request a different course that isn't specified here, please feel free to contact me. 
+                        Here are a list of courses I offer! If you have any questions or would like to request a different course that isn't specified here, please feel free to <Link href={mapping["Contact"].getPath()}>contact me</Link>. 
                     </Typography>
                 </Grid>
             </Grid>
