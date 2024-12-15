@@ -1,8 +1,7 @@
-import { Button, Typography, Box, Grid2 as Grid } from '@mui/material';
-import { IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Box, Button, IconButton, Grid2 as Grid, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { API_ENDPOINTS } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
@@ -16,7 +15,6 @@ export default function Tutoring({ setDrawerOpen }) {
         .then(setReviews);
     }, []);
 
-
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative', color: 'white' }}>
         <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
@@ -25,7 +23,6 @@ export default function Tutoring({ setDrawerOpen }) {
             <Typography variant="h2" sx={{ alignSelf: 'center', textAlign: 'center', width: '100%', mt: 2 }} gutterBottom>
                 Welcome
             </Typography>
-
             <Grid container justifyContent="center">
                 <Grid item="true" xs={12} md={8}>
                     <Typography variant="body1" align="justify">
@@ -39,7 +36,6 @@ export default function Tutoring({ setDrawerOpen }) {
                     </Typography>
                 </Grid>
             </Grid>
-
             <Grid container justifyContent="center" sx={{ mt: 2 }}>
                 <Grid item="true">
                     <Button variant="contained" color="primary" onClick={() => navigate("/courses")}>
@@ -47,7 +43,6 @@ export default function Tutoring({ setDrawerOpen }) {
                     </Button>
                 </Grid>
             </Grid>
-
             {reviews && reviews.length > 0 && (
                 <>
                     <Grid container justifyContent="center" sx={{ mt: 4 }}>
