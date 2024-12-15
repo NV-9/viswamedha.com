@@ -51,6 +51,10 @@ export default function Blog({ setDrawerOpen }) {
                     </Button>
                 </Typography>
             </>)}
+            <Divider sx={{ width: '100%', backgroundColor: 'rgba(248, 253, 0, 1.00)', mt: 2, mb: 2 }} />
+            <Typography variant="body2" align="center" sx={{ mt: 2, color: 'rgba(255, 255, 255, 0.6)' }}>
+                © {new Date().getFullYear()} Viswamedha Nalabotu
+            </Typography>
         </Box>
     );
 }
