@@ -18,10 +18,7 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
                     setAdmin(data.isStaff);
                 }
             });
-
-        console.log(sortedItems);
     }, []);
-
 
     const sortedItems = Object.keys(mapping)
 		.filter(key => mapping[key].order >= 0)
@@ -46,11 +43,19 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
             }
             return acc;
         }, {});
+    
+    const filteredSortedItems = Object.keys(sortedItems)
+    .filter(group => sortedItems[group].length > 0)
+    .reduce((acc, group) => {
+        acc[group] = sortedItems[group];
+        return acc;
+    }, {});
+
 
     return (
         <Drawer open={Boolean(drawerOpen)} onClose={() => setDrawerOpen(false)}>
             <Box sx={{ width: 250 }} role="presentation" onClick={() => setDrawerOpen(false)} onKeyDown={() => setDrawerOpen(false)}>
-                {Object.keys(sortedItems).map((domain, index) => (
+                {Object.keys(filteredSortedItems).map((domain, index) => (
                     <Box key={domain}>
                         {index > 0 && <Divider />}
                         <List>
