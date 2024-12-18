@@ -50,12 +50,12 @@ class Post(TimeStampMixin, Model):
     def save(self, *args, **kwargs) -> None:
         if self.slug is None or self.slug == '':
             self.slug = slugify(self.heading)
-        if self.__previous_image is not None and self.image != self.__previous_image:
+        if self.__previous_image.name not in [None, ''] and self.image.name != self.__previous_image.name:
             image_file = Path(settings.BUILD_DIR, 'media', self.__previous_image.name)
             if image_file.exists():
                 os.remove(image_file)
         super().save(*args, **kwargs)
-        if self.image:
+        if self.image.name not in [None, '']:
             source_path = Path(self.image.path)
             destination_path = Path(settings.BUILD_DIR, 'media', self.image.name)
             os.makedirs(destination_path.parent, exist_ok = True)
