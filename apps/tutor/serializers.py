@@ -52,6 +52,17 @@ class LessonSerializer(serializers.ModelSerializer):
         fields = ['lesson_id', 'lesson_uuid', 'event', 'lesson_plan', 'cost', 'paid']
         read_only_fields = ['lesson_id', 'lesson_uuid']
         depth = 2
+    
+    def update(self, instance, validated_data):
+        instance.event.start = validated_data.get('start', instance.event.start)
+        instance.event.end = validated_data.get('end', instance.event.end)
+        instance.event.clashing = validated_data.get('clashing', instance.event.clashing)
+        instance.event.save()
+        instance.lesson_plan = validated_data.get('lesson_plan', instance.lesson_plan)
+        instance.cost = validated_data.get('cost', instance.cost)
+        instance.paid = validated_data.get('paid', instance.paid)
+        instance.save()
+        return instance
 
 class StudentSerializer(serializers.ModelSerializer):
     """
