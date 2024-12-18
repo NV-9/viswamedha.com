@@ -1,10 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
 import { Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
-import { API_ENDPOINTS } from '../../utils/Mapping';
-import { ApiRouter } from '../../utils/Api';
 
 export default function Course({ setDrawerOpen }) {
     return (
