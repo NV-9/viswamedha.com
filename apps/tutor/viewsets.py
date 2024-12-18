@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event
 from apps.tutor.serializers import ReviewSerializer, SubjectSerializer, LevelSerializer, StudentSerializer, CourseSerializer, LessonSerializer, LessonPlanSerializer, EventSerializer
+from apps.tutor.permissions import IsInLessonPlanOrIsAdmin
 
 class ReviewViewSet(viewsets.ModelViewSet):
     """
@@ -51,8 +54,14 @@ class LessonViewSet(viewsets.ModelViewSet):
     """
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsInLessonPlanOrIsAdmin]
+    lookup_field = 'lesson_uuid'
     filterset_fields = ['lesson_plan', 'lesson_plan__student__student_uuid']
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return super().get_queryset()
+        return super().get_queryset().filter(lesson_plan__student = self.request.user.student)
 
 class LessonPlanViewSet(viewsets.ModelViewSet):
     """
