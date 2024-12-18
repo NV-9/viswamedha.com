@@ -6,8 +6,8 @@ class IsOwnerOrAdmin(BasePermission):
     """
     message = 'You must be the owner of this object.'
 
-    def has_permission(self, request, view): 
-        return (request.user.is_authenticated and request.user.is_staff) or request.method == 'POST'
+    def has_permission(self, request, view):
+        return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        return obj.owner == request.user or request.user.is_staff
+        return obj == request.user or request.user.is_staff
