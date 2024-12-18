@@ -42,7 +42,10 @@ FIRST_APPS = [
     'jet',
     'daphne',
 ]
-INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS
+LAST_APPS = [
+    'django_cleanup.apps.CleanupConfig',
+]
+INSTALLED_APPS = FIRST_APPS + DEFAULT_APPS + THIRD_APPS + CUSTOM_APPS + LAST_APPS
 
 # MIDDLEWARE
 MIDDLEWARE = [
@@ -114,8 +117,8 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = BUILD_DIR / 'static'
-MEDIA_ROOT = BUILD_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # REST FRAMEWORK
@@ -125,7 +128,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny', 
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
