@@ -15,7 +15,7 @@ class MyUserAdmin(UserAdmin):
         (
             'Identification', {
                 'fields': (
-                    ('id', 'user_uuid',),
+                    ('id', 'user_uuid', 'username'),
                 )
             }
         ),
@@ -40,4 +40,4 @@ class MyUserAdmin(UserAdmin):
             }
         ),
     )
-    readonly_fields = ['id', 'user_uuid', 'created_at', 'updated_at', 'last_login', 'password_reset_at']
+    readonly_fields = ['id', 'user_uuid', 'created_at', 'updated_at', 'last_login', 'password_reset_at', 'username']
