@@ -2,7 +2,8 @@ from typing import ClassVar
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.db.models import AutoField, BooleanField, CharField, DateField, DateTimeField, EmailField, UUIDField, Model
+from django.db.models import AutoField, BooleanField, CharField, DateField, DateTimeField, EmailField, UUIDField, Model, UniqueConstraint, Q
+from django.db.models.functions import Lower
 from django.utils.translation import gettext_lazy as _
 
 from apps.users.managers import UserManager
@@ -57,6 +58,9 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
     class Meta:
         verbose_name = _('User')
         verbose_name_plural = _('Users')
+        constraints = [
+            UniqueConstraint(fields = ['username'], name = 'unique_username'),
+        ]
     
     @property
     def full_name(self):
@@ -64,3 +68,8 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
 
     def __str__(self):
         return self.full_name
+
+    def save(self, *args, **kwargs):
+        if self.username:
+            self.username = self.username.lower()
+        super().save(*args, **kwargs)
