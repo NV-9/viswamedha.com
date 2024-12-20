@@ -1,4 +1,9 @@
 
+export const validateUsername = (username) => {
+    const regex = /^[a-z0-9]+$/;
+    return regex.test(username);
+}
+
 export const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
