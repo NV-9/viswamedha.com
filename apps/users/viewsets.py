@@ -9,6 +9,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsOwnerOrAdmin]
     lookup_field = 'user_uuid'
+    filterset_fields = ['email_address', 'first_name', 'last_name', 'is_active', 'username']
 
     def get_queryset(self):
         if self.request.user.is_staff:
