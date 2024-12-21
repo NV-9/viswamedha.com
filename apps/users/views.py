@@ -70,4 +70,9 @@ def socials_view(request):
     return JsonResponse(settings.SOCIAL_ACCOUNT_LINKS)
 
 def me_view(request):
-    return JsonResponse(UserSerializer(request.user).data if request.user.is_authenticated else {'detail': 'You\'re not logged in.', 'success': False})
+    if request.user.is_authenticated:
+        user_data = UserSerializer(request.user).data
+        user_data.update({'success': True})
+        return JsonResponse(user_data)
+    else:
+        return JsonResponse({'detail': "You're not logged in.", 'success': False})
