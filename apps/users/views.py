@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.conf import settings
 
 from apps.users.models import User
+from apps.users.serializers import UserSerializer
 
 import json
 
@@ -67,3 +68,6 @@ def session_view(request):
 
 def socials_view(request):
     return JsonResponse(settings.SOCIAL_ACCOUNT_LINKS)
+
+def me_view(request):
+    return JsonResponse(UserSerializer(request.user).data if request.user.is_authenticated else {'detail': 'You\'re not logged in.', 'success': False})
