@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from './Mapping';
+import { API_ENDPOINTS, mapping } from './Mapping';
 import { ApiRouter } from './Api';
 import { format, parseISO, isSameDay, isBefore } from 'date-fns';
 
@@ -31,7 +31,7 @@ export const routeToHomeIfNotLoggedIn = (navigate) => {
     ApiRouter.get(API_ENDPOINTS.SESSION())
     .then(data => {
         if (!data.isAuthenticated) {
-            navigate('/');
+            navigate(mapping['Home'].getPath());
         }
     });
 }
@@ -40,7 +40,16 @@ export const routeToHomeIfNotAdmin = (navigate) => {
     ApiRouter.get(API_ENDPOINTS.SESSION())
     .then(data => {
         if (!data.isStaff) {
-            navigate('/');
+            navigate(mapping['Home'].getPath());
+        }
+    });
+}
+
+export const routeToLoginIfNotLoggedIn = (navigate) => {
+    ApiRouter.get(API_ENDPOINTS.SESSION())
+    .then(data => {
+        if (!data.isAuthenticated) {
+            navigate(mapping['Login'].getPath());
         }
     });
 }
