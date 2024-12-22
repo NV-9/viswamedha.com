@@ -5,44 +5,44 @@ import { useEffect, useState } from 'react';
 import { ApiRouter } from './Api';
 import { API_ENDPOINTS, mapping } from './Mapping';
 
-export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
+export default function DrawerMenu({ drawerOpen, setDrawerOpen, accessChange }) {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);
     const [admin, setAdmin] = useState(false);
 
     useEffect(() => {
         ApiRouter.get(API_ENDPOINTS.SESSION())
-            .then(data => {
-                if (!data.detail) {
-                    setLoggedIn(data.isAuthenticated);
-                    setAdmin(data.isStaff);
-                }
-            });
-    }, []);
+        .then(data => {
+            if (!data.detail) {
+                setLoggedIn(data.isAuthenticated);
+                setAdmin(data.isStaff);
+            }
+        });
+    }, [accessChange]);
 
     const sortedItems = Object.keys(mapping)
-		.filter(key => mapping[key].order >= 0)
-        .sort((a, b) => mapping[a].order - mapping[b].order) 
-        .reduce((acc, key) => {
-            const group = mapping[key].grouping;
-            if (!acc[group]) {
-                acc[group] = [];
-            }
-            if (mapping[key].loggedIn.require) {
-                if (mapping[key].loggedIn.state == loggedIn) {
-                    if (mapping[key].admin.require) {
-                        if (mapping[key].admin.state == admin) {
-                            acc[group].push(key);
-                        }
-                    } else {
+    .filter(key => mapping[key].order >= 0)
+    .sort((a, b) => mapping[a].order - mapping[b].order) 
+    .reduce((acc, key) => {
+        const group = mapping[key].grouping;
+        if (!acc[group]) {
+            acc[group] = [];
+        }
+        if (mapping[key].loggedIn.require) {
+            if (mapping[key].loggedIn.state == loggedIn) {
+                if (mapping[key].admin.require) {
+                    if (mapping[key].admin.state == admin) {
                         acc[group].push(key);
                     }
+                } else {
+                    acc[group].push(key);
                 }
-            } else {
-                acc[group].push(key);
             }
-            return acc;
-        }, {});
+        } else {
+            acc[group].push(key);
+        }
+        return acc;
+    }, {});
     
     const filteredSortedItems = Object.keys(sortedItems)
     .filter(group => sortedItems[group].length > 0)
@@ -50,7 +50,6 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen }) {
         acc[group] = sortedItems[group];
         return acc;
     }, {});
-
 
     return (
         <Drawer open={Boolean(drawerOpen)} onClose={() => setDrawerOpen(false)}>
