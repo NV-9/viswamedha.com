@@ -37,6 +37,10 @@ export class ApiRouter {
         return this.request('PUT', path, data);
     }
 
+    static patch(path, data) {
+        return this.request('PATCH', path, data);
+    }
+
     static delete(path) {
         return this.request('DELETE', path);
     }
