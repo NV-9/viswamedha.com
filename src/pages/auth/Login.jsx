@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { ApiRouter } from '../../utils/Api';
 import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
 
-export default function Login({ setDrawerOpen }) {
+export default function Login({ setDrawerOpen, setAccessChange, accessChange }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorShown, setErrorShown] = useState(false);
@@ -15,14 +15,17 @@ export default function Login({ setDrawerOpen }) {
 
     useEffect(() => {
         ApiRouter.get(API_ENDPOINTS.SESSION()).then(data => {
-            if (data.isAuthenticated) navigate('/profile/');
+            if (data.isAuthenticated) navigate(mapping['Profile'].getPath());
         });
     }, []);
 
     const loginRequest = () => {
         const userLoginData = { username, password };
         ApiRouter.post(API_ENDPOINTS.LOGIN(), userLoginData).then(data => {
-            if (data.success) navigate('/profile/');
+            if (data.success) {
+                setAccessChange(!accessChange);
+                navigate(mapping['Profile'].getPath());
+            }
             else {
                 setPassword('');
                 setErrorShown(true);
@@ -56,7 +59,13 @@ export default function Login({ setDrawerOpen }) {
                                 </FormControl>
                                 <FormControl fullWidth sx={{ mb: 3 }}>
                                     <InputLabel htmlFor="password">Password</InputLabel>
-                                    <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="on" />
+                                    <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="on" 
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            loginRequest();
+                                        }
+                                    }}/>
                                 </FormControl>
                             </Grid>
                             <Button variant="contained" color="primary" fullWidth sx={{ mb: 2 }} onClick={loginRequest} disabled={!username || !password}>Login</Button>
