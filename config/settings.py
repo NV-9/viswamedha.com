@@ -29,6 +29,7 @@ THIRD_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters',
+    'django_celery_results',
 ]
 CUSTOM_APPS = [
     'apps.users',
@@ -160,5 +161,8 @@ SOCIAL_ACCOUNT_LINKS = {
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     f'http://{DOMAIN_NAME}',
-    f'http://{DOMAIN_NAME}:5173',
 ]
+if DEBUG:
+    CORS_ALLOWED_ORIGINS.append(f'http://{DOMAIN_NAME}:5173')
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
