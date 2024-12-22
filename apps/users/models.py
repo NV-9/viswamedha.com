@@ -65,6 +65,10 @@ class User(AbstractBaseUser, TimeStampMixin, PermissionsMixin):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+    
+    @property
+    def is_student(self):
+        return hasattr(self, 'student')
 
     def __str__(self):
         return self.full_name
