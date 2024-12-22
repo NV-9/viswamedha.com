@@ -10,6 +10,8 @@ import ChatIcon from '@mui/icons-material/Chat';
 import ArticleIcon from '@mui/icons-material/Article';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 import LinkIcon from '@mui/icons-material/Link';
+import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import Home from '../pages/main/Home';
 import About from '../pages/main/About';
@@ -30,7 +32,6 @@ import Student from '../pages/tutor/Student';
 import Course from '../pages/tutor/Course';
 import Chat from '../pages/chat/Chat';
 import Room from '../pages/chat/Room';
-import Listing from '../pages/chat/Listing';
 import Legacy from '../pages/main/Legacy';
 import Lesson from '../pages/tutor/Lesson';
 import EditLesson from '../pages/tutor/EditLesson';
@@ -151,7 +152,7 @@ export const mapping = {
     Course: {
         component: Course,
         path: '/course/:id/',
-        icon: SchoolIcon,
+        icon: null,
         order: -1,
         admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
@@ -161,10 +162,10 @@ export const mapping = {
     LessonCalendar: {
         component: LessonCalendar,
         path: '/calendar/',
-        icon: SchoolIcon,
+        icon: CalendarViewMonthIcon,
         order: 10,
         admin: {state: false, require: false},
-        loggedIn: {state: false, require: false},
+        loggedIn: {state: true, require: true},
         getPath: () => '/calendar/',
         grouping: 'tutor',
     },
@@ -173,8 +174,8 @@ export const mapping = {
         path: '/students/',
         icon: BookIcon,
         order: 12,
-        admin: {state: false, require: false},
-        loggedIn: {state: false, require: false},
+        admin: {state: true, require: true},
+        loggedIn: {state: true, require: true},
         getPath: () => '/students/',
         grouping: 'tutor',
     },
@@ -242,7 +243,7 @@ export const mapping = {
     Logout: {
         component: Logout,
         path: '/logout/',
-        icon: LoginIcon,
+        icon: LogoutIcon,
         order: 23,
         admin: {state: false, require: false},
         loggedIn: {state: true, require: true},
@@ -262,22 +263,12 @@ export const mapping = {
     },
     Room: {
         component: Room,
-        path: '/room/:id/',
+        path: '/room/:room_uuid/',
         icon: ChatIcon,
         order: -1,
         admin: {state: false, require: false},
         loggedIn: {state: true, require: true},
-        getPath: (id) => `/room/${id}/`,
-        grouping: 'chat',
-    },
-    Listing: {
-        component: Listing,
-        path: '/listing/',
-        icon: ChatIcon,
-        order: 12,
-        admin: {state: false, require: false},
-        loggedIn: {state: true, require: true},
-        getPath: () => '/listing/',
+        getPath: (room_uuid) => `/room/${room_uuid}/`,
         grouping: 'chat',
     },
 };
@@ -302,5 +293,20 @@ export const API_ENDPOINTS = {
     STUDENTS: () => 'student/',
     STUDENT: (uuid) => `student/${uuid}/`,
     LESSONS: () => 'lesson/',
-    STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`
+    ME: () => 'me/',
+    STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`,
+    DIRECT_CHAT: (user_uuid) => `direct-chat/?users__user_uuid=${user_uuid}`,
+    DIRECT_CHAT_ROOM: (room_uuid) => `direct-chat/${room_uuid}/`,
+    GROUP_CHAT: (user_uuid) => `group-chat/?users__user_uuid=${user_uuid}`,
+    GROUP_CHAT_ROOM: (room_uuid) => `group-chat/${room_uuid}/`,
+    USERNAME: (name) => `user/?username=${name}`,
+    CREATE_DIRECT_CHAT: (username) => `create-direct-chat/?username=${username}`,
+    JOIN_GROUP_CHAT: (invite_code) => `join-group-chat/?invite_code=${invite_code}`,
+    ROOM: (room_uuid) => `room/${room_uuid}/`,
+    MESSAGES: (room_uuid, limit = null, offset = null) => `message/?room__room_uuid=${room_uuid}&limit=${limit}&offset=${offset}`,
+}
+
+export const WS_ENDPOINTS = {
+    DIRECT_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/direct/${room_uuid}/`,
+    GROUP_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/group/${room_uuid}/`,
 }
