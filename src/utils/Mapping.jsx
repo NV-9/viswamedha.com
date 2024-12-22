@@ -12,6 +12,7 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 import LinkIcon from '@mui/icons-material/Link';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import Home from '../pages/main/Home';
 import About from '../pages/main/About';
@@ -223,7 +224,7 @@ export const mapping = {
     Signup: {
         component: Signup,
         path: '/signup/',
-        icon: LoginIcon,
+        icon: HowToRegIcon,
         order: 21,
         admin: {state: false, require: false},
         loggedIn: {state: false, require: true},
@@ -294,6 +295,7 @@ export const API_ENDPOINTS = {
     STUDENT: (uuid) => `student/${uuid}/`,
     LESSONS: () => 'lesson/',
     ME: () => 'me/',
+    USER: (user_uuid) => `user/${user_uuid}/`,
     STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`,
     DIRECT_CHAT: (user_uuid) => `direct-chat/?users__user_uuid=${user_uuid}`,
     DIRECT_CHAT_ROOM: (room_uuid) => `direct-chat/${room_uuid}/`,
