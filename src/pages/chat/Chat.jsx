@@ -157,27 +157,31 @@ export default function Chat({ setDrawerOpen }) {
                             Start Chat
                         </Button>
                     </Box>
-                    <Typography variant="body2" color="white" mt={2}>
-                        Below are following users you have previously chatted with:
-                    </Typography>
-                    <Grid container spacing={2} mt={2}>
-                        {directChats && directChats.map((chat, index) => (
-                            <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Card sx={{ width: 200}}>
-                                    <CardContent>
-                                        <Typography variant="body2">
-                                            User: {chat.name}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions >
-                                        <Button variant="contained" color="primary" onClick={() => navigate(mapping['Room'].getPath(chat.room_uuid))}>
-                                            Resume
-                                        </Button>
-                                    </CardActions>
-                                </Card>
+                    { directChats && directChats.length > 0 && (
+                        <>
+                            <Typography variant="body2" color="white" mt={2}>
+                                Below are following users you have previously chatted with:
+                            </Typography>
+                            <Grid container spacing={2} mt={2}>
+                                {directChats.map((chat, index) => (
+                                    <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Card sx={{ width: 200}}>
+                                            <CardContent>
+                                                <Typography variant="body2">
+                                                    User: {chat.name}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions >
+                                                <Button variant="contained" color="primary" onClick={() => navigate(mapping['Room'].getPath(chat.room_uuid))}>
+                                                    Resume
+                                                </Button>
+                                            </CardActions>
+                                        </Card>
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
+                        </>
+                    )}
                 </CardContent>
             </Card>
 
@@ -207,33 +211,36 @@ export default function Chat({ setDrawerOpen }) {
                             Join Chat
                         </Button>
                     </Box>
-                    <Typography variant="body2" color="white" mt={2}>
-                        Below are following groups that you have access to:
-                    </Typography>
-                    <Grid container spacing={2} mt={2}>
-                        {groupChats && groupChats.map((chat, index) => (
-                            <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Card sx={{ width: 200}}>
-                                    <CardContent>
-                                        <Typography variant="h5">
-                                            {chat.name}
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            {chat.description}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions >
-                                        <Button variant="contained" color="primary" onClick={() => navigate(mapping['Room'].getPath(chat.room_uuid))}>
-                                            Resume
-                                        </Button>
-                                    </CardActions>
-                                </Card>
+                    { groupChats && groupChats.length > 0 && (
+                        <>
+                            <Typography variant="body2" color="white" mt={2}>
+                                Below are following groups that you have access to:
+                            </Typography>
+                            <Grid container spacing={2} mt={2}>
+                                {groupChats.map((chat, index) => (
+                                    <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Card sx={{ width: 200}}>
+                                            <CardContent>
+                                                <Typography variant="h5">
+                                                    {chat.name}
+                                                </Typography>
+                                                <Typography variant="body2">
+                                                    {chat.description}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions >
+                                                <Button variant="contained" color="primary" onClick={() => navigate(mapping['Room'].getPath(chat.room_uuid))}>
+                                                    Resume
+                                                </Button>
+                                            </CardActions>
+                                        </Card>
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
+                        </>
+                    )}
                 </CardContent>
             </Card>
-            
         </Box>
     );
 }
