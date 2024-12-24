@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+wait-for-it postgres:5432
+
+python /code/manage.py collectstatic --noinput
+
+python /code/manage.py makemigrations
+python /code/manage.py migrate
+
+for fixture in /code/data/*.json; do
+    echo "Loading fixture: $fixture"
+    python /code/manage.py loaddata "$fixture"
+done
+
+python /code/manage.py runserver 0.0.0.0:8000
