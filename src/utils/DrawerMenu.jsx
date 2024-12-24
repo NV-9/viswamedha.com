@@ -52,24 +52,24 @@ export default function DrawerMenu({ drawerOpen, setDrawerOpen, accessChange }) 
     }, {});
 
     return (
-        <Drawer open={Boolean(drawerOpen)} onClose={() => setDrawerOpen(false)}>
-            <Box sx={{ width: 250 }} role="presentation" onClick={() => setDrawerOpen(false)} onKeyDown={() => setDrawerOpen(false)}>
+        <Drawer open={Boolean(drawerOpen)} onClose={() => setDrawerOpen(false)} PaperProps={{sx: { backgroundColor: 'rgba(15,15,15,0.95)', boxShadow: '0px 0px 15px 5px rgba(55,235,243,0.8)', border: '1px solid #37EBF3' }}}>
+            <Box sx={{ width: 250, color: '#37EBF3',fontFamily: 'Monospace, sans-serif' }} role="presentation" onClick={() => setDrawerOpen(false)} onKeyDown={() => setDrawerOpen(false)}>
                 {Object.keys(filteredSortedItems).map((domain, index) => (
                     <Box key={domain}>
-                        {index > 0 && <Divider />}
+                        {index > 0 && <Divider sx={{ borderColor: '#37EBF3', opacity: 0.7 }} />}
                         <List>
                             {sortedItems[domain].map((key) => {
                                 const Icon = mapping[key].icon;
                                 const path = mapping[key].path;
                                 return (
                                     <ListItem disablePadding key={key}>
-                                        <ListItemButton onClick={() => {navigate(path)}}>
-                                            <ListItemIcon>
+                                        <ListItemButton sx={{ '&:hover': { backgroundColor: 'rgba(55,235,243,0.1)', boxShadow: '0px 0px 10px 2px rgba(55,235,243,0.5)' }, borderRadius: '4px' }}onClick={() => {navigate(path)}}>
+                                            <ListItemIcon sx={{ color: '#37EBF3' }}>
                                                 <Icon />
                                             </ListItemIcon>
-                                            <ListItemText primary={key} />
+                                            <ListItemText primary={key} primaryTypographyProps={{ style: { color: '#37EBF3', fontWeight: 'bold' },}} />
                                         </ListItemButton>
-                                    </ListItem>
+                                    </ListItem> 
                                 );
                             })}
                         </List>
