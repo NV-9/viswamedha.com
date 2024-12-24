@@ -85,10 +85,18 @@ TEMPLATES = [
 
 # DATABASE
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("POSTGRES_DB"),
+        'USER': config("POSTGRES_USER"),
+        'PASSWORD': config("POSTGRES_PASSWORD"),
+        'HOST': config("POSTGRES_HOST"),
+        'PORT': config("POSTGRES_PORT"),
+    },
 }
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -141,7 +149,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [(config("REDIS_HOST", default = 'localhost'), config("REDIS_PORT", default = 6379, cast = int))],
         },
     },
 }
@@ -156,13 +164,62 @@ SOCIAL_ACCOUNT_LINKS = {
     'cv': config("SOCIAL_LINK_CV", default=None),
 }
 
+# JET THEMES
+JET_THEMES = [
+    {
+        'theme': 'default', 
+        'color': '#47bac1', 
+        'title': 'Default' 
+    },
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': '#5EADDE',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    }
+]
 
-# CORS
+# SECURITY
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     f'http://{DOMAIN_NAME}',
 ]
+CSRF_TRUSTED_ORIGINS = [
+    f'http://{DOMAIN_NAME}',
+]
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append(f'http://{DOMAIN_NAME}:5173')
+    CORS_ALLOWED_ORIGINS.append(f'http://{DOMAIN_NAME}:8000')
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS.append(f'http://{DOMAIN_NAME}:5173')
+    CSRF_TRUSTED_ORIGINS.append(f'http://{DOMAIN_NAME}:8000')
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 2_592_000
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', "https")
+    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+    REFERRER_POLICY = 'strict-origin'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = None
