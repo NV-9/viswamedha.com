@@ -1,0 +1,202 @@
+[
+    {
+        "model": "tutor.course",
+        "pk": 1,
+        "fields": {
+            "subject": 1,
+            "level": 4,
+            "description": "Develop computational thinking and programming skills aligned with the KS3 syllabus.",
+            "cost": 15
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 2,
+        "fields": {
+            "subject": 1,
+            "level": 5,
+            "description": "Comprehensive GCSE course covering programming, theory, and exam preparation.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 3,
+        "fields": {
+            "subject": 1,
+            "level": 6,
+            "description": "Advanced A-Level course focusing on programming, algorithms, and theory.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 4,
+        "fields": {
+            "subject": 2,
+            "level": 4,
+            "description": "Explore mathematical reasoning and problem-solving for KS3 students.",
+            "cost": 15
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 5,
+        "fields": {
+            "subject": 2,
+            "level": 5,
+            "description": "GCSE Maths course focusing on core topics and exam-style questions.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 6,
+        "fields": {
+            "subject": 2,
+            "level": 6,
+            "description": "In-depth A-Level Maths course tailored to the student's chosen syllabus.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 7,
+        "fields": {
+            "subject": 3,
+            "level": 4,
+            "description": "Introduction to physics concepts for KS3, emphasizing practical understanding.",
+            "cost": 15
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 8,
+        "fields": {
+            "subject": 3,
+            "level": 5,
+            "description": "GCSE Physics course covering theoretical and practical aspects of the curriculum.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 9,
+        "fields": {
+            "subject": 3,
+            "level": 6,
+            "description": "Advanced Physics course with a focus on problem-solving and A-Level preparation.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 10,
+        "fields": {
+            "subject": 4,
+            "level": 1,
+            "description": "Python for beginners, introducing programming basics and logical thinking.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 11,
+        "fields": {
+            "subject": 4,
+            "level": 2,
+            "description": "Intermediate Python course focusing on data structures and problem-solving.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 12,
+        "fields": {
+            "subject": 4,
+            "level": 3,
+            "description": "Advanced Python programming covering algorithms and software development.",
+            "cost": 30
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 13,
+        "fields": {
+            "subject": 5,
+            "level": 1,
+            "description": "Java programming for beginners, including object-oriented principles.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 14,
+        "fields": {
+            "subject": 5,
+            "level": 2,
+            "description": "Intermediate Java course covering advanced programming topics and plugins.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 15,
+        "fields": {
+            "subject": 6,
+            "level": 1,
+            "description": "C programming basics for beginners to understand low-level programming.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 16,
+        "fields": {
+            "subject": 7,
+            "level": 1,
+            "description": "Introduction to C# for beginners, covering basic programming constructs.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 17,
+        "fields": {
+            "subject": 7,
+            "level": 2,
+            "description": "Intermediate C# programming course, focusing on object-oriented principles.",
+            "cost": 25
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 18,
+        "fields": {
+            "subject": 7,
+            "level": 3,
+            "description": "Advanced C# development for applications, including .NET framework concepts.",
+            "cost": 30
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 19,
+        "fields": {
+            "subject": 8,
+            "level": 1,
+            "description": "Web development basics covering HTML, CSS, and introductory JavaScript.",
+            "cost": 20
+        }
+    },
+    {
+        "model": "tutor.course",
+        "pk": 20,
+        "fields": {
+            "subject": 8,
+            "level": 2,
+            "description": "Intermediate web development with frameworks like React and backend integration",
+            "cost": 25
+        }
+    }
+]

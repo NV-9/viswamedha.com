@@ -1,0 +1,149 @@
+[
+{
+    "model": "blog.tag",
+    "pk": 1,
+    "fields": {
+        "name": "Life"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 2,
+    "fields": {
+        "name": "Travel"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Food"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Health"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 6,
+    "fields": {
+        "name": "Wellness"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 7,
+    "fields": {
+        "name": "Fitness"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 8,
+    "fields": {
+        "name": "Personal Development"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 9,
+    "fields": {
+        "name": "Technology"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 10,
+    "fields": {
+        "name": "Productivity"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 11,
+    "fields": {
+        "name": "Finance"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 12,
+    "fields": {
+        "name": "Education"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 13,
+    "fields": {
+        "name": "Learning"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 14,
+    "fields": {
+        "name": "Mental Health"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 15,
+    "fields": {
+        "name": "Self-Care"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 16,
+    "fields": {
+        "name": "DIY"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 17,
+    "fields": {
+        "name": "Crafts"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 18,
+    "fields": {
+        "name": "Entertainment"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 19,
+    "fields": {
+        "name": "Books"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 20,
+    "fields": {
+        "name": "Motivation"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 21,
+    "fields": {
+        "name": "Gaming"
+    }
+},
+{
+    "model": "blog.tag",
+    "pk": 22,
+    "fields": {
+        "name": "Security"
+    }
+}
+]

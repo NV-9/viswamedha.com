@@ -1,0 +1,44 @@
+[
+{
+    "model": "tutor.level",
+    "pk": 1,
+    "fields": {
+        "name": "Beginner"
+    }
+},
+{
+    "model": "tutor.level",
+    "pk": 2,
+    "fields": {
+        "name": "Intermediate"
+    }
+},
+{
+    "model": "tutor.level",
+    "pk": 3,
+    "fields": {
+        "name": "Advanced"
+    }
+},
+{
+    "model": "tutor.level",
+    "pk": 4,
+    "fields": {
+        "name": "KS3"
+    }
+},
+{
+    "model": "tutor.level",
+    "pk": 5,
+    "fields": {
+        "name": "GCSE"
+    }
+},
+{
+    "model": "tutor.level",
+    "pk": 6,
+    "fields": {
+        "name": "A-Level"
+    }
+}
+]
