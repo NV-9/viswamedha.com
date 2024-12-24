@@ -1,0 +1,49 @@
+# General files and directories to ignore
+.git
+.gitignore
+.gitlab-ci.yml
+.github
+.editorconfig
+.idea
+.vscode
+.vs
+.travis.yml
+.pre-commit-config.yaml
+.readthedocs.yml
+
+# Python-related files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.dbmdl
+
+# Node.js and JavaScript-related files
+node_modules/
+npm-debug.log
+
+# Build and temporary files
+build/
+env/
+**/env
+**/.cache
+**/obj
+**/charts
+
+# Docker-related files
+**/docker-compose*
+**/.dockerignore
+
+# IDE and project-specific files
+**/.classpath
+**/.project
+**/.settings
+**/.toolstarget
+**/*.*proj.user
+
+# Secrets and configuration files
+
+
+# Documentation and miscellaneous
+LICENSE
+README.md
+CONTRIBUTORS.txt
