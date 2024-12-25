@@ -35,7 +35,6 @@ import Chat from '../pages/chat/Chat';
 import Room from '../pages/chat/Room';
 import Legacy from '../pages/main/Legacy';
 import Lesson from '../pages/tutor/Lesson';
-import EditLesson from '../pages/tutor/EditLesson';
 
 export const mapping = {
     // Main
@@ -200,16 +199,6 @@ export const mapping = {
         getPath: (uuid) => `/lesson/${uuid}/`,
         grouping: 'tutor',
     },
-    EditLesson: {
-        component: EditLesson,
-        path: '/lesson/:uuid/edit/',
-        icon: BookIcon,
-        order: -1,
-        admin: {state: false, require: false},
-        loggedIn: {state: false, require: false},
-        getPath: (uuid) => `/lesson/${uuid}/edit/`,
-        grouping: 'tutor',
-    },
     // Auth
     Login: {
         component: Login,
@@ -293,6 +282,7 @@ export const API_ENDPOINTS = {
     SUBJECTS: () => 'subject/',
     STUDENTS: () => 'student/',
     STUDENT: (uuid) => `student/${uuid}/`,
+    STUDENT_BY_USER: (user_uuid) => `student/?user__user_uuid=${user_uuid}`,
     LESSONS: () => 'lesson/',
     ME: () => 'me/',
     USER: (user_uuid) => `user/${user_uuid}/`,
@@ -306,6 +296,8 @@ export const API_ENDPOINTS = {
     JOIN_GROUP_CHAT: (invite_code) => `join-group-chat/?invite_code=${invite_code}`,
     ROOM: (room_uuid) => `room/${room_uuid}/`,
     MESSAGES: (room_uuid, limit = null, offset = null) => `message/?room__room_uuid=${room_uuid}&limit=${limit}&offset=${offset}`,
+    LESSON: (lesson_uuid) => `lesson/${lesson_uuid}/`,
+    LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
 }
 
 export const WS_ENDPOINTS = {
