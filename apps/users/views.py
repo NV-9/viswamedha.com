@@ -73,7 +73,7 @@ def me_view(request):
     if request.user.is_authenticated:
         user_data = UserSerializer(request.user).data
         user_data.update({'success': True})
-        user_data.update({'student_uuid': request.user.student.student_uuid if request.user.student else None})
+        user_data.update({'student_uuid': request.user.student.student_uuid if hasattr(request.user, 'student') else None})
         return JsonResponse(user_data)
     else:
         return JsonResponse({'detail': "You're not logged in.", 'success': False})
