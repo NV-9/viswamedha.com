@@ -1,6 +1,6 @@
 import { API_ENDPOINTS, mapping } from './Mapping';
 import { ApiRouter } from './Api';
-import { format, parseISO, isSameDay, isBefore } from 'date-fns';
+import { format, parseISO, isSameDay, isBefore } from 'date-fns'; 
 
 
 export const formatDate = (dateString) => {
@@ -73,4 +73,15 @@ export function isLessonCompleted(endDateString) {
     const endDate = parseISO(endDateString);
     const now = new Date(); 
     return isBefore(endDate, now);
+}
+
+export const getFormattedDurationBetween = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const diff = endDate - startDate;
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor(diff / 1000 / 60 - (hours * 60));
+    const hoursPart = hours > 0 ? `${hours} hour${hours > 1 ? 's': ''}` : '';
+    const minutesPart = minutes > 0 ? ` ${minutes} minutes` : '';
+    return `${hoursPart}${minutesPart}`;
 }
