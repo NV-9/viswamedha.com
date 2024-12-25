@@ -297,6 +297,7 @@ export const API_ENDPOINTS = {
     ROOM: (room_uuid) => `room/${room_uuid}/`,
     MESSAGES: (room_uuid, limit = null, offset = null) => `message/?room__room_uuid=${room_uuid}&limit=${limit}&offset=${offset}`,
     LESSON: (lesson_uuid) => `lesson/${lesson_uuid}/`,
+    EVENT: (event_uuid) => `event/${event_uuid}/`,
     LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
 }
 
