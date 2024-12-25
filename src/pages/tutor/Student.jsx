@@ -33,8 +33,12 @@ export default function Student({ setDrawerOpen }) {
 
     useEffect(() => {
         if (student !== null) {
-            if (session && !session.isStaff && session.user_uuid !== student.user.user_uuid) 
-                navigate(mapping['Home'].getPath());
+            ApiRouter.get(API_ENDPOINTS.ME())
+            .then((userData) => {
+                if (!userData.success) navigate(mapping['Home'].getPath());
+                if (session && !session.isStaff && userData.student_uuid !== student.student_uuid) 
+                    navigate(mapping['Home'].getPath());
+            });
             setLessonPlans(student.lesson_plan);
             if (student.lesson_plan.length > 0) {
                 setSelectedLessonPlan(student.lesson_plan[0].course.name);
