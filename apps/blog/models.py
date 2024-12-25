@@ -1,10 +1,7 @@
-from django.conf import settings
 from django.db.models import AutoField, BooleanField, CharField, DateField, ImageField, ManyToManyField, SlugField, TextField, UUIDField, Model
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-import os, shutil
 from uuid import uuid4
-from pathlib import Path 
 
 from apps.users.models import TimeStampMixin
 from apps.blog.utils import PathAndRename
