@@ -21,6 +21,7 @@ export default function Profile({ setDrawerOpen }) {
     const [open, setOpen] = useState(false);
     const [isStaff, setIsStaff] = useState(false);
     const [isStudent, setIsStudent] = useState(false);
+    const [studentUUID, setStudentUUID] = useState(null);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -50,6 +51,21 @@ export default function Profile({ setDrawerOpen }) {
             }
         });
     }, []);
+
+    useEffect(() => {
+        if (isStudent === true) {
+            ApiRouter.get(API_ENDPOINTS.STUDENT_BY_USER(userUUID)) 
+            .then(data => {
+                if (data.length === 0) {
+                    setErrorMessage("Student data not found");
+                    setErrorShown(true);
+                }
+                else {
+                    setStudentUUID(data[0].student_uuid);
+                }
+            });
+        }
+    }, [isStudent]);
 
     useEffect(() => {
         const fieldValues = [firstName, lastName, dateOfBirth];
@@ -166,6 +182,11 @@ export default function Profile({ setDrawerOpen }) {
                             {(isStudent || isStaff)  && (<>
                                 <Button variant="contained" color="primary" fullWidth onClick={() => navigate(mapping['LessonCalendar'].getPath())} sx={{ mb: 2 }}>
                                     Lesson Calendar
+                                </Button>
+                            </>)}
+                            {isStudent && (<>
+                                <Button variant="contained" color="primary" fullWidth onClick={() => navigate(mapping['Student'].getPath(studentUUID))} sx={{ mb: 2 }}>
+                                    Lessons
                                 </Button>
                             </>)}
                             {isStaff && (<>
