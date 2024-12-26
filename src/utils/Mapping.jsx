@@ -299,6 +299,8 @@ export const API_ENDPOINTS = {
     LESSON: (lesson_uuid) => `lesson/${lesson_uuid}/`,
     EVENT: (event_uuid) => `event/${event_uuid}/`,
     LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
+    LESSON_FILE: () => `lesson-file/`,
+    LESSON_FILE_DELETE: (file_uuid) => `lesson-file/${file_uuid}/`,
 }
 
 export const WS_ENDPOINTS = {
