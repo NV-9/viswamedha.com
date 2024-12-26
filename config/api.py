@@ -1,12 +1,11 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from rest_framework.routers import SimpleRouter
-from django.urls import path, include
 
 from apps.blog.viewsets import PostViewSet, TagViewSet
 from apps.chat.viewsets import DirectChatViewSet, GroupChatViewSet, MessageViewSet, RoomViewSet
 from apps.main.viewsets import ContactMessageViewSet, PhotoViewSet, ReferenceViewSet
-from apps.tutor.viewsets import ReviewViewSet, SubjectViewSet, LevelViewSet, StudentViewSet, CourseViewSet, LessonViewSet, LessonPlanViewSet, EventViewSet
+from apps.tutor.viewsets import ReviewViewSet, SubjectViewSet, LevelViewSet, StudentViewSet, CourseViewSet, LessonViewSet, LessonPlanViewSet, EventViewSet, LessonFileViewSet
 from apps.users.viewsets import UserViewSet
 from apps.users.urls import urlpatterns as user_api_urlpatterns
 from apps.chat.urls import urlpatterns as chat_api_urlpatterns
@@ -25,6 +24,7 @@ router.register("level", LevelViewSet)
 router.register("student", StudentViewSet)
 router.register("course", CourseViewSet)
 router.register("lesson", LessonViewSet)
+router.register("lesson-file", LessonFileViewSet)
 router.register("lesson-plan", LessonPlanViewSet)
 router.register("event", EventViewSet)
 router.register("direct-chat", DirectChatViewSet)
