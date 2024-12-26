@@ -1,7 +1,8 @@
-from django.db.models import Model, AutoField, CharField, IntegerField, TextField, ForeignKey, CASCADE, OneToOneField, ManyToManyField, DateTimeField, BooleanField, UUIDField
+from django.db.models import Model, AutoField, CharField, IntegerField, TextField, FileField, ForeignKey, CASCADE, OneToOneField, ManyToManyField, DateTimeField, BooleanField, UUIDField
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
+import os
 from uuid import uuid4
 
 from apps.users.models import User
@@ -165,17 +166,25 @@ class Lesson(Event):
     lesson_id   = AutoField(primary_key = True)
     lesson_uuid = UUIDField(verbose_name = _('Lesson UUID'), default = uuid4, editable = False)
     event       = OneToOneField(Event, parent_link = True, on_delete = CASCADE)
-    lesson_plan = ForeignKey(LessonPlan, verbose_name = _('Lesson Plan'), related_name = 'lesson', on_delete = CASCADE)
+    lesson_plan = ForeignKey(LessonPlan, verbose_name = _('Lesson Plan'), related_name = 'lesson', on_delete = CASCADE, blank = True)
     
-    cost = IntegerField(verbose_name = _('Cost'))
+    cost = IntegerField(verbose_name = _('Cost'), blank = True)
     paid = BooleanField(verbose_name = _('Paid'), default = False)
 
+    note     = TextField(verbose_name = _('Note'), blank = True, default = '')
+    homework = TextField(verbose_name = _('Homework'), blank = True, default = '')
+    
     class Meta:
         verbose_name = 'Lesson'
         verbose_name_plural = 'Lessons'
 
     def __str__(self):
         return f"{self.id} | {self.lesson_plan}"
+
+    def save(self, *args, **kwargs):
+        if not self.cost:
+            self.cost = self.lesson_plan.cost * self.lesson_plan.student.count()
+        super().save(*args, **kwargs)
 
     def next_week_lesson(self) -> 'Lesson':
         """
@@ -188,3 +197,31 @@ class Lesson(Event):
             student = self.student,
             cost = self.cost
         )
+
+def lesson_file_upload_to(instance: "LessonFile", filename):
+    lesson_uuid = instance.lesson.lesson_uuid
+    folder_path = f'lesson_files/{lesson_uuid}'
+    return os.path.join(folder_path, filename)
+
+class LessonFile(Model):
+    """
+    Lesson File model for viswamedha.com
+    """
+
+    id        = AutoField(primary_key = True)
+    file_uuid = UUIDField(verbose_name = _('Lesson UUID'), default = uuid4, editable = False)
+    
+    file   = FileField(verbose_name = _('File'), upload_to = lesson_file_upload_to)
+    lesson = ForeignKey(Lesson, verbose_name = _('Lesson'), related_name = 'lesson_file', on_delete = CASCADE)
+
+    class Meta:
+        verbose_name = 'Lesson File'
+        verbose_name_plural = 'Lesson Files'
+
+    def __str__(self):
+        return self.file.name
+
+    @property
+    def filename(self):
+        return os.path.basename(self.file.name)
+

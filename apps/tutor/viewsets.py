@@ -1,10 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.decorators import action
-from rest_framework.response import Response
+from rest_framework.parsers import FormParser, MultiPartParser
 
-from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event
-from apps.tutor.serializers import ReviewSerializer, SubjectSerializer, LevelSerializer, StudentSerializer, CourseSerializer, LessonSerializer, LessonPlanSerializer, EventSerializer
+from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event, LessonFile
+from apps.tutor.serializers import ReviewSerializer, SubjectSerializer, LevelSerializer, StudentSerializer, CourseSerializer, LessonSerializer, LessonPlanSerializer, EventSerializer, LessonFileSerializer
 from apps.tutor.permissions import IsInLessonPlanOrIsAdmin
 
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -39,6 +38,7 @@ class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = 'student_uuid'
+    filterset_fields = ['student_uuid', 'user__user_uuid']
 
 class CourseViewSet(viewsets.ModelViewSet):
     """
@@ -63,6 +63,17 @@ class LessonViewSet(viewsets.ModelViewSet):
             return super().get_queryset()
         return super().get_queryset().filter(lesson_plan__student = self.request.user.student)
 
+class LessonFileViewSet(viewsets.ModelViewSet):
+    """
+    Lesson File viewset for viswamedha.com
+    """
+    queryset = LessonFile.objects.all()
+    serializer_class = LessonFileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'file_uuid'
+    filterset_fields = ['lesson', 'lesson__lesson_uuid']
+    parser_classes = [MultiPartParser, FormParser]
+
 class LessonPlanViewSet(viewsets.ModelViewSet):
     """
     Lesson Plan viewset for viswamedha.com
@@ -79,4 +90,5 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'event_uuid'
 
