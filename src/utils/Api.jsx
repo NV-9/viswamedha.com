@@ -3,23 +3,28 @@ import Cookies from "universal-cookie";
 export const API_URL = import.meta.env.VITE_API_URL;
 
 export class ApiRouter {
-    static request(method, path, data = {}) {
+    static request(method, path, data = {}, headers = {}) {
         const cookies = new Cookies();
         const token = cookies.get('csrftoken');
+        const isFormData = data instanceof FormData;
         var options = {
             method: method,
             headers: {
-                'Content-Type': 'application/json',
                 'accept': 'application/json',
                 'X-CSRFToken': token,
+                ...headers,
             },
         }
-        if (method !== 'GET' && method !== 'HEAD') {
+        if (isFormData) {
+            options.body = data;
+            delete options.headers['Content-Type'];
+        } else if (method !== 'GET' && method !== 'HEAD') {
+            options.headers['Content-Type'] = 'application/json';
             options.body = JSON.stringify(data);
         }
         path = API_URL + path;
         return new Promise((resolve, reject) => {
-            fetch(path, options).then(result => result.json())
+            fetch(path, options).then(result => result.headers.get("Content-Type")?.includes("application/json")? result.json(): null)
             .then(resolve)
             .catch(reject);
         })
