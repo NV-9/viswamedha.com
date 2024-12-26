@@ -10,4 +10,8 @@ class IsInLessonPlanOrIsAdmin(BasePermission):
         return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        return obj.lesson_plan.student.contains(request.user.student) or request.user.is_staff
+        if request.user.is_staff:
+            return True
+        if not request.user.student:
+            return False
+        return obj.lesson_plan.student.contains(request.user.student)
