@@ -7,7 +7,7 @@ import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 import { routeToHomeIfNotAdmin } from '../../utils/Helpers';
 
-export default function Courses({ setDrawerOpen }) {
+export default function Students({ setDrawerOpen }) {
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
 
