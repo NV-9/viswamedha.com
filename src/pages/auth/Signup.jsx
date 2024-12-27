@@ -25,7 +25,7 @@ export default function Signup({ setDrawerOpen}) {
         ApiRouter.get(API_ENDPOINTS.SESSION())
         .then(data => {
             if (data.isAuthenticated) {
-                navigate('/profile/');
+                navigate(mapping['Profile'].getPath());
             }
         });
     }, []);

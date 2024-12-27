@@ -22,6 +22,7 @@ import Login from '../pages/auth/Login';
 import Signup from '../pages/auth/Signup';
 import Logout from '../pages/auth/Logout';
 import Profile from '../pages/auth/Profile';
+import ChangePassword from '../pages/auth/ChangePassword';
 import Tutor from '../pages/tutor/Tutor';
 import Courses from '../pages/tutor/Courses';
 import LessonCalendar from '../pages/tutor/LessonCalendar';
@@ -240,6 +241,16 @@ export const mapping = {
         getPath: () => '/logout/',
         grouping: 'auth',
     },
+    ChangePassword: {
+        component: ChangePassword,
+        path: '/profile/change-password/',
+        icon: null,
+        order: -1,
+        admin: {state: false, require: false},
+        loggedIn: {state: true, require: true},
+        getPath: () => '/profile/change-password/',
+        grouping: 'auth',
+    },
     // Chat   
     Chat: {
         component: Chat,
@@ -267,6 +278,7 @@ export const API_ENDPOINTS = {
     LOGIN: () => 'login/',
     LOGOUT: () => 'logout/',
     SIGNUP: () => 'signup/',
+    CHANGE_PASSWORD: () => 'change-password/',
     SESSION: () => 'session/',
     SOCIALS: () => 'socials/',
     CONTACT: () => 'contact-message/',

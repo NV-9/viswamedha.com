@@ -156,6 +156,9 @@ export default function Profile({ setDrawerOpen }) {
                                 <Button variant="contained" color="white" fullWidth sx={{ mb: 2 }} onClick={updateUserData} disabled={disabled}>
                                     Update Details
                                 </Button>
+                                <Button variant="contained" color="white" fullWidth sx={{ mb: 2 }} onClick={() => navigate(mapping['ChangePassword'].getPath())} disabled={disabled}>
+                                    Change Password
+                                </Button>
                                 <Button variant="outlined" color="secondary" fullWidth onClick={() => navigate(mapping['Logout'].getPath())}>
                                     Logout
                                 </Button>

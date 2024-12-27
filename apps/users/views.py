@@ -77,3 +77,21 @@ def me_view(request):
         return JsonResponse(user_data)
     else:
         return JsonResponse({'detail': "You're not logged in.", 'success': False})
+
+def change_password_view(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'detail': "You're not logged in.", 'success': False})
+    try:
+        data = json.loads(request.body)
+    except:
+        return JsonResponse({'detail': 'Invalid JSON provided.', 'success': False}, status = 401)
+    for key in ['old_password', 'password', 'confirm_password']:
+        data: dict
+        if data.get(key, None) is None:
+            return JsonResponse({'detail': f'"{key}" not provided', 'succes': True})
+    if data.get('password') != data.get('confirm_password'):
+        return JsonResponse({'detail': 'Passwords do not match', 'success': True})
+    user: User = request.user
+    user.set_password(data.get('password'))
+    user.save()
+    return JsonResponse({'success': True})
