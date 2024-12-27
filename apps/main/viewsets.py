@@ -12,6 +12,7 @@ class ContactMessageViewSet(ModelViewSet):
 class PhotoViewSet(ModelViewSet):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
+    permission_classes = [IsAdminForObjectOrReadOnlyPermission]
 
 class ReferenceViewSet(ModelViewSet):
     queryset = Reference.objects.all()
