@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../../utils/Api';
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { validatePassword } from '../../utils/Validation';
 import { routeToLoginIfNotLoggedIn } from '../../utils/Helpers';
 

@@ -5,7 +5,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { ApiRouter } from '../../utils/Api';
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 
 export default function Reference({ setDrawerOpen }) {
     const { key } = useParams();

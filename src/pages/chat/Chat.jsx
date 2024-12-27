@@ -4,7 +4,8 @@ import { Alert, Box, Button, Card, CardActions, CardContent,  Collapse, FormCont
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 import { routeToLoginIfNotLoggedIn } from '../../utils/Helpers';
 

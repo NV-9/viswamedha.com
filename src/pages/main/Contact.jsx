@@ -3,7 +3,7 @@ import { Box, Button, Collapse, Container, FormControl, Input, InputLabel, Typog
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { ApiRouter } from '../../utils/Api'; 
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { validateEmail } from '../../utils/Validation';
 
 export default function Contact({ setDrawerOpen }) {

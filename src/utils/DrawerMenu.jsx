@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { ApiRouter } from './Api';
-import { API_ENDPOINTS, mapping } from './Mapping';
+import { API_ENDPOINTS } from './Endpoints';
+import { mapping } from './Mapping';
 
 export default function DrawerMenu({ drawerOpen, setDrawerOpen, accessChange }) {
     const navigate = useNavigate();

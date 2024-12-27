@@ -6,7 +6,8 @@ import { TextField } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
 
 import { routeToLoginIfNotLoggedIn, getFormattedDurationBetween, isLessonCompleted } from '../../utils/Helpers';
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 
 const ColorScheme = {

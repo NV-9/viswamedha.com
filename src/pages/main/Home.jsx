@@ -7,8 +7,8 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { ReactTyped } from 'react-typed';
 import { useState, useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
-import { SmokeScene } from 'react-smoke'; // Import SmokeScene
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { SmokeScene } from 'react-smoke';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';
 
 const mapping = {

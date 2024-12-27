@@ -2,7 +2,7 @@ import { Box, Typography, Button, IconButton, Grid2 as Grid } from '@mui/materia
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useEffect } from 'react';
 import { ApiRouter } from '../../utils/Api';
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import profileImage from '/img/About.png';
 
 export default function About({ setDrawerOpen }) {

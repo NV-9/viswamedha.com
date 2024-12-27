@@ -4,7 +4,8 @@ import { Box, Button, Card, CardActions, CardContent, Chip, Grid2 as Grid, IconB
 import MenuIcon from '@mui/icons-material/Menu';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import { API_ENDPOINTS, mapping, WS_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS, WS_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 import { routeToLoginIfNotLoggedIn, formatDate } from '../../utils/Helpers';
 

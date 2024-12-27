@@ -3,7 +3,7 @@ import { Box, Grid2 as Grid, Typography, IconButton, Divider, Button } from '@mu
 import { useParams } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';
 import { formatDate } from '../../utils/Helpers';
 import { mapping } from '../../utils/Mapping';

@@ -4,7 +4,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, MenuItem, Select, Typography} from '@mui/material';
 
 import { formatLessonDate, isLessonCompleted } from '../../utils/Helpers';
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 import { routeToLoginIfNotLoggedIn } from '../../utils/Helpers';
 

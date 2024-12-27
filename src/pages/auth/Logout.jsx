@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRouter } from '../../utils/Api';
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 
 export default function Logout({ setAccessChange, accessChange}) {
     const navigate = useNavigate();

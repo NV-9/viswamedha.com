@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Card, CardActions, CardContent, Chip, Grid2 as Grid, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { API_ENDPOINTS, mapping } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
+import { mapping } from '../../utils/Mapping';
 import { ApiRouter } from '../../utils/Api';
 
 export default function Course({ setDrawerOpen }) {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, IconButton, Grid2 as Grid, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';
 
 export default function Tutoring({ setDrawerOpen }) {

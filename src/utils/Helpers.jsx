@@ -1,4 +1,5 @@
-import { API_ENDPOINTS, mapping } from './Mapping';
+import { API_ENDPOINTS } from './Endpoints';
+import { mapping } from './Mapping';
 import { ApiRouter } from './Api';
 import { format, parseISO, isSameDay, isBefore } from 'date-fns'; 
 

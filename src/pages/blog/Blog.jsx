@@ -3,7 +3,7 @@ import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button, Sele
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
-import { API_ENDPOINTS } from '../../utils/Mapping';
+import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';
 import { mapping } from '../../utils/Mapping';
 import { formatDate } from '../../utils/Helpers';

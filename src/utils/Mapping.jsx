@@ -13,6 +13,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import PhotoIcon from '@mui/icons-material/Photo';
 
 import Home from '../pages/main/Home';
 import About from '../pages/main/About';
@@ -28,6 +29,7 @@ import Courses from '../pages/tutor/Courses';
 import LessonCalendar from '../pages/tutor/LessonCalendar';
 import Blog from '../pages/blog/Blog';
 import Post from '../pages/blog/Post';
+import Photos from '../pages/main/Photos';
 import Reference from '../pages/main/Reference';
 import Students from '../pages/tutor/Students';
 import Student from '../pages/tutor/Student';
@@ -79,34 +81,44 @@ export const mapping = {
         getPath: (slug) => `/post/${slug}/`,
         grouping: 'main',
     },
+    Photos: {
+        component: Photos,
+        path: '/photos/',
+        icon: PhotoIcon,
+        order: 3,
+        admin: {state: false, require: false},
+        loggedIn: {state: false, require: false},
+        getPath: () => '/photos/',
+        grouping: 'main',
+    },
     Contact: {
         component: Contact,
         path: '/contact/',
         icon: ContactSupportIcon,
-        order: 3,
+        order: 4,
         admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         getPath: () => '/contact/',
-        grouping: 'main',
-    },
-    Privacy: {
-        component: Privacy,
-        path: '/privacy/',
-        icon: AccountCircleIcon,
-        order: 5,
-        admin: {state: false, require: false},
-        loggedIn: {state: false, require: false},
-        getPath: () => '/privacy/',
         grouping: 'main',
     },
     Legacy: {
         component: Legacy,
         path: '/legacy/',
         icon: ElderlyIcon,
-        order: 4,
+        order: 5,
         admin: {state: false, require: false},
         loggedIn: {state: false, require: false},
         getPath: () => '/legacy/',
+        grouping: 'main',
+    },
+    Privacy: {
+        component: Privacy,
+        path: '/privacy/',
+        icon: AccountCircleIcon,
+        order: 6,
+        admin: {state: false, require: false},
+        loggedIn: {state: false, require: false},
+        getPath: () => '/privacy/',
         grouping: 'main',
     },
     References: {
@@ -273,49 +285,3 @@ export const mapping = {
         grouping: 'chat',
     },
 };
-
-export const API_ENDPOINTS = {
-    LOGIN: () => 'login/',
-    LOGOUT: () => 'logout/',
-    SIGNUP: () => 'signup/',
-    CHANGE_PASSWORD: () => 'change-password/',
-    SESSION: () => 'session/',
-    SOCIALS: () => 'socials/',
-    CONTACT: () => 'contact-message/',
-    REVIEWS: () => 'review/',
-    COURSES: () => 'course/',
-    COURSE: (id) => `course/${id}/`,
-    POSTS: () => 'post/',
-    POST: (slug) => `post/${slug}/`,
-    TAGS: () => 'tag/',
-    REFERENCES: () => 'reference/',
-    REFERENCE: (key) => `reference/${key}/`,
-    LEVELS: () => 'level/',
-    SUBJECTS: () => 'subject/',
-    STUDENTS: () => 'student/',
-    STUDENT: (uuid) => `student/${uuid}/`,
-    STUDENT_BY_USER: (user_uuid) => `student/?user__user_uuid=${user_uuid}`,
-    LESSONS: () => 'lesson/',
-    ME: () => 'me/',
-    USER: (user_uuid) => `user/${user_uuid}/`,
-    STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`,
-    DIRECT_CHAT: (user_uuid) => `direct-chat/?users__user_uuid=${user_uuid}`,
-    DIRECT_CHAT_ROOM: (room_uuid) => `direct-chat/${room_uuid}/`,
-    GROUP_CHAT: (user_uuid) => `group-chat/?users__user_uuid=${user_uuid}`,
-    GROUP_CHAT_ROOM: (room_uuid) => `group-chat/${room_uuid}/`,
-    USERNAME: (name) => `user/?username=${name}`,
-    CREATE_DIRECT_CHAT: (username) => `create-direct-chat/?username=${username}`,
-    JOIN_GROUP_CHAT: (invite_code) => `join-group-chat/?invite_code=${invite_code}`,
-    ROOM: (room_uuid) => `room/${room_uuid}/`,
-    MESSAGES: (room_uuid, limit = null, offset = null) => `message/?room__room_uuid=${room_uuid}&limit=${limit}&offset=${offset}`,
-    LESSON: (lesson_uuid) => `lesson/${lesson_uuid}/`,
-    EVENT: (event_uuid) => `event/${event_uuid}/`,
-    LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
-    LESSON_FILE: () => `lesson-file/`,
-    LESSON_FILE_DELETE: (file_uuid) => `lesson-file/${file_uuid}/`,
-}
-
-export const WS_ENDPOINTS = {
-    DIRECT_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/direct/${room_uuid}/`,
-    GROUP_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/group/${room_uuid}/`,
-}
