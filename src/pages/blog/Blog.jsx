@@ -34,7 +34,7 @@ export default function Blog({ setDrawerOpen }) {
     ).sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
 
     return (
-        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', p: 3, px: 10 }}>
+        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', p: 2, px: { xs: 2, sm: 2, md: 10, lg: 10} }}>
             <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
@@ -101,7 +101,7 @@ export default function Blog({ setDrawerOpen }) {
                 ))}
             </Grid>
             <Grid container direction="column" spacing={4} sx={{ width: '100%', maxWidth: { xs: '100%', sm: '95%', md: '90%', lg: '85%', xl: '80%' } }}>
-                <Divider sx={{ width: '100%', backgroundColor: 'rgba(248, 253, 0, 1.00)', mt: 2, mb: 2 }} />
+                <Divider sx={{ width: '100%', backgroundColor: 'rgba(248, 253, 0, 1.00)', my: 2 }} />
                 <Typography variant="body2" align="center" sx={{ mt: 2, color: 'rgba(255, 255, 255, 0.6)' }}>
                     © {new Date().getFullYear()} Viswamedha Nalabotu
                 </Typography>

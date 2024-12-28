@@ -14,29 +14,29 @@ export default function About({ setDrawerOpen }) {
     }, []);
 
     return (
-        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative' }}>
+        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 2, px: { xs: 2, sm: 2, md: 10, lg: 10}, position: 'relative', color: 'white', height: {md: '100vh', lg: '100vh'} }}>
            <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h2" sx={{ color: 'white', mb: 4, textAlign: 'center', width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <Typography variant="h2" sx={{ textAlign: 'center', mt: 4, width: '100%', display: 'flex', justifyContent: 'center' }} gutterBottom>
                 About
             </Typography>
-            <Grid container spacing={12} alignItems="center" justifyContent="center" sx={{ padding: '20px', flexDirection: { xs: 'column', sm: 'row' }}}>
-                <Grid item="true" xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center', order: { xs: 1, sm: 0 }}} >
-                    <Box component="img" src={profileImage} alt="Profile" sx={{ borderRadius: '20px', boxShadow: 3, width: { xs: '80%', sm: '100%' }, maxWidth: { xs: '300px', sm: '500px' }, height: 'auto' }}/>
-                </Grid>
-                <Grid item="true" xs={12} sm={6} sx={{ textAlign: { xs: 'center', sm: 'left' }, padding: { xs: 2, sm: 1 }}}>
+            <Box sx={{ display: 'flex', flexGrow: 1, width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: { xs: 'column', md: 'row'} }}>
+                <Box sx={{ width: '100%', p: 2, flexDirection: 'column', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box component="img" src={profileImage} alt="Profile" sx={{ height: '70vh', width: 'auto', borderRadius: '20px' }}/>
+                </Box>
+                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', width: '100%', alignItems: { xs: 'center', sm: 'center', md: 'flex-start' }, textAlign: { xs: 'center', md: 'left' }}}>
                     <Typography variant="h4" sx={{ color: 'white', mb: 2 }}>
                         I’m a third-year Computer Science student
                     </Typography>
                     <Typography variant="body1" sx={{ color: 'white', mb: 3 }}>
                         I have experience in Full Stack, Ethical Hacking, Machine Learning, Software Engineering & Web Development.
                     </Typography>
-                    <Button variant="contained" color="primary" href={socialLinks ? socialLinks.cv : ''} sx={{ color: 'white', mb: 2 }}>
+                    <Button variant="contained" color="primary" href={socialLinks ? socialLinks.cv : ''} sx={{ color: 'white'}}>
                         Download CV
                     </Button>
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
         </Box>
     );
 }

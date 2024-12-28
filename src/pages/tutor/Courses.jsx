@@ -32,12 +32,12 @@ export default function Courses({ setDrawerOpen }) {
     }, [courses, selectedSubject, selectedLevel]);
 
     return (
-        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', p: 3, px: 10 }}>
+        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', p: 2, px: { sm: 2, md: 10, lg: 10} }}>
             <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
             <Typography variant="h2" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>
-                View Courses
+                Courses
             </Typography>
             <Grid container justifyContent="center">
                 <Grid item="true" xs={12} md={8}>
@@ -73,7 +73,7 @@ export default function Courses({ setDrawerOpen }) {
             <Grid container spacing={4}>
                 {filteredCourses.map((course, index) => (
                     <Grid xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', width: 300}}>
+                        <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', width: {xs: '90vw', sm: '90vw', md: 300, lg: 300}}}>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom noWrap sx={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
                                     {course.name}

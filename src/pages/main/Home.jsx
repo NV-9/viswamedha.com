@@ -30,7 +30,7 @@ export default function Home({ setDrawerOpen }) {
     return (
         <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             <SmokeScene style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
-            <Box sx={{ backgroundColor: 'rgba(5,10,14,0.85)', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: { xs: 'center', md: 'flex-start' },textAlign: { xs: 'center', md: 'left' }, p: 3, pl: { md: 6 }, position: 'relative', zIndex: 1 }}>
+            <Box sx={{ backgroundColor: 'rgba(5,10,14,0.85)', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: { xs: 'center', md: 'flex-start' },textAlign: { xs: 'center', md: 'left' }, p: 3, pl: { md: 6, lg: 6 }, position: 'relative', zIndex: 1 }}>
                 <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                     <MenuIcon />
                 </IconButton>
