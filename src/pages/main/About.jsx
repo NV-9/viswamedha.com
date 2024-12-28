@@ -15,7 +15,7 @@ export default function About({ setDrawerOpen }) {
 
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative' }}>
-           <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
+           <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
             <Typography variant="h2" sx={{ color: 'white', mb: 4, textAlign: 'center', width: '100%', display: 'flex', justifyContent: 'center'}}>

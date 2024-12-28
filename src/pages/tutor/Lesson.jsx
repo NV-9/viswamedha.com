@@ -182,7 +182,7 @@ export default function Lesson({ setDrawerOpen }) {
 
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'white', p: 2, px: {sx: 2, md: 10} }}>
-            <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
+            <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
             <Typography variant="h2" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>

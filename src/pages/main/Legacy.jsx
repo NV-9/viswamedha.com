@@ -7,7 +7,7 @@ export default function Legacy({ setDrawerOpen }) {
     };
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'white', p: 3, px: 10 }}>
-            <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
+            <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
             <iframe src="/legacy/home.html" title="Legacy Home Page" style={{ width: '100%',  height: '100vh', border: 'none' }}/>

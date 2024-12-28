@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 export default function Privacy({setDrawerOpen}) {
     return (
         <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', backgroundSize: 'cover', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', p: 3, pl: 10, position: 'relative', color: 'white' }}>
-             <IconButton sx={{ position: 'absolute', top: 64, left: 64, color: 'white' }} onClick={setDrawerOpen}>
+             <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
             
