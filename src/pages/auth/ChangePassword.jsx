@@ -48,7 +48,7 @@ export default function Signup({ setDrawerOpen,  setAccessChange, accessChange})
         .then(data => {
             if (data.success == true) {
                 setAccessChange(!accessChange);
-                navigate(mapping['Logout'].getPath());
+                navigate(mapping['Login'].getPath() + '?password_changed=true');
             } else {
                 setOldPassword('');
                 setPassword('');

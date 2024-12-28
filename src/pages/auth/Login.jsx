@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Alert, Box, Button, Card, CardContent, Collapse, Container, FormControl, Grid2 as Grid, IconButton, Input, InputLabel, Typography} from '@mui/material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Alert, Box, Button, Card, CardContent, Collapse, Container, FormControl, Grid2 as Grid, IconButton, Input, InputLabel, Snackbar, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -12,13 +12,30 @@ export default function Login({ setDrawerOpen, setAccessChange, accessChange }) 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorShown, setErrorShown] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     useEffect(() => {
         ApiRouter.get(API_ENDPOINTS.SESSION()).then(data => {
             if (data.isAuthenticated) navigate(mapping['Profile'].getPath());
         });
+        const paramName = 'password_changed';
+        const passwordChanged = searchParams.get(paramName);
+        if (passwordChanged && passwordChanged == 'true') {
+            setOpen(true);
+        } else {
+            searchParams.delete(paramName);
+            setSearchParams(searchParams);
+        }
     }, []);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+    };
 
     const loginRequest = () => {
         const userLoginData = { username, password };
@@ -75,6 +92,11 @@ export default function Login({ setDrawerOpen, setAccessChange, accessChange }) 
                     </CardContent>
                 </Card>
             </Container>
+            <Snackbar open={open} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>
+                    Your password has been changed successfully. Please log in again.
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }
