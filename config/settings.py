@@ -26,6 +26,7 @@ DEFAULT_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_APPS = [
+    'drf_material',
     'rest_framework',
     'corsheaders',
     'django_filters',
