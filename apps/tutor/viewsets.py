@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.parsers import FormParser, MultiPartParser
 
 from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event, LessonFile
@@ -36,9 +36,14 @@ class StudentViewSet(viewsets.ModelViewSet):
     """
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'student_uuid'
     filterset_fields = ['student_uuid', 'user__user_uuid']
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return super().get_queryset()
+        return super().get_queryset().filter(user__id = self.request.user.id)
 
 class CourseViewSet(viewsets.ModelViewSet):
     """

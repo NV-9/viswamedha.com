@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from .models import Course, Event, Lesson, LessonPlan, Review, Student, Subject, Level, LessonFile
+from apps.tutor.models import Course, Event, Lesson, LessonPlan, Review, Student, Subject, Level, LessonFile
+from apps.users.serializers import UserSerializer
 
 class ReviewSerializer(serializers.ModelSerializer):
     """
@@ -30,7 +31,7 @@ class LessonPlanSerializer(serializers.ModelSerializer):
     course = CourseSerializer()
     class Meta:
         model = LessonPlan
-        fields = ['id', 'course', 'student']
+        fields = ['id', 'course']
         read_only_fields = ['id']
 
 class EventSerializer(serializers.ModelSerializer):
@@ -100,6 +101,7 @@ class StudentSerializer(serializers.ModelSerializer):
     Student serializer for viswamedha.com
     """
     lesson_plan = LessonPlanSerializer(many=True)
+    user = UserSerializer()
     class Meta:
         model = Student
         fields = ['id', 'user', 'lesson_plan', 'student_uuid']
