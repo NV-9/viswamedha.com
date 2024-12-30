@@ -58,7 +58,7 @@ export default function Contact({ setDrawerOpen }) {
             <Container>
                 <Grid container justifyContent="center">
                     <Grid item="true" xs={12} sm={8} md={4}>
-                        <Card sx={{ padding: { xs: 4, md: 3 }, maxWidth: { xs: '100%', md: '90%' }, boxShadow: 3, borderRadius: 2, color: 'white', backgroundImage: 'url("/img/Contact.jpeg")',  backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', }}>
+                        <Card sx={{ padding: { xs: 4, md: 3 }, maxWidth: { xs: '100%', md: '90%' }, boxShadow: 3, borderRadius: 2, color: 'white', backgroundImage: 'url("/img/Contact.jpg")',  backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', }}>
                             <Typography variant="h5" textAlign="center" gutterBottom>
                                 Contact Me
                             </Typography>
