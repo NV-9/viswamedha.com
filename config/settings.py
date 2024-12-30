@@ -127,8 +127,8 @@ USE_TZ = True
 # STATIC & MEDIA FILES
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = BASE_DIR / 'static'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = config("DJANGO_STATIC_ROOT", default = BASE_DIR / 'static')
+MEDIA_ROOT = config("DJANGO_MEDIA_ROOT", default = BASE_DIR / 'media')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # REST FRAMEWORK
