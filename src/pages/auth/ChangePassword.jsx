@@ -30,7 +30,7 @@ export default function Signup({ setDrawerOpen,  setAccessChange, accessChange})
 
     const changePasswordRequest = () => {        
         if (!validatePassword(password)) {
-            setErrorMessage('Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character. Special characters include @$!%*?&');
+            setErrorMessage('Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character. Special characters include: !@#$%^&*()-_=+[]{};:\'",.<>?/\\|`~');
             setErrorShown(true);
             return;
         }
