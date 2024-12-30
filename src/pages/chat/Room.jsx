@@ -113,7 +113,9 @@ export default function Room({ setDrawerOpen }) {
             if (messageData.type === 'online') 
                 setOnlineUsers(messageData.users);
             else if (messageData.type === 'message') 
-                setMessageHistory((prev) => prev.concat(messageData));    
+                setMessageHistory((prev) => prev.concat(messageData)); 
+            else if (messageData.type === 'unauthorised')
+                navigate(mapping['Chat'].getPath());
         }
     }, [lastMessage]);
 
@@ -132,7 +134,7 @@ export default function Room({ setDrawerOpen }) {
     }[readyState];
 
     return (
-        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', color: 'white', justifyContent: 'center', px: 12, py: 4, flexDirection: 'column' }}>
+        <Box sx={{ backgroundColor: 'rgba(5,10,14,1.00)', minHeight: '100vh', display: 'flex', color: 'white', justifyContent: 'center', px: {xs: 2, sm: 2, md: 10, lg: 10}, py: 4, flexDirection: 'column' }}>
             <IconButton sx={{ position: 'absolute', top: { xs: 16, md: 64 }, left: { xs: 16, md: 64 }, color: 'white' }} onClick={setDrawerOpen}>
                 <MenuIcon />
             </IconButton>
@@ -143,8 +145,8 @@ export default function Room({ setDrawerOpen }) {
                 <Typography variant="body1" sx={{ textAlign: 'center', mb: 2 }} gutterBottom>{roomDescription}</Typography>
             )}
             
-            <Box sx={{ display: 'flex', flexGrow: 1, mt: 2, width: '100%', justifyContent: 'center' }}>
-                <Box sx={{ width: '100%', maxWidth: '300px', p: 2, backgroundColor: 'rgba(20, 25, 30, 1.00)', borderRadius: 2, display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', flexGrow: 1, mt: 2, width: '100%', justifyContent: 'center', flexDirection: { xs: 'column', md: 'row'} }}>
+                <Box sx={{ width: '100%', maxWidth: {md: '300px', lg: '300px'}, p: 2, backgroundColor: 'rgba(20, 25, 30, 1.00)', borderRadius: 2, display: 'flex', flexDirection: 'column' }}>
                     <Typography variant="h6" sx={{ mb: 2 }}>
                         Status: {connectionStatus}
                     </Typography>
@@ -174,7 +176,7 @@ export default function Room({ setDrawerOpen }) {
                     )}
                     <Button variant="contained" color="secondary" onClick={handleExit} fullWidth>Exit Room</Button>
                 </Box>
-                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '800px', ml: 4 }}>
+                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '800px', ml: { md: 4 }, mt: {sm: 2, xs: 2} }}>
                     <Card sx={{ flexGrow: 1, backgroundColor: 'rgba(30, 35, 40, 1.00)', overflowY: 'auto', mb: 2 }}>
                         <CardContent sx={{ maxHeight: '75vh', overflowY: 'auto'}}>
                             {messageHistory.length ? (

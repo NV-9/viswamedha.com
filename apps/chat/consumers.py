@@ -32,6 +32,9 @@ class DirectChatConsumer(WebsocketConsumer):
         room = self.__get_current_room(room_uuid)
         if user is None or room is None:
             return self.close()
+        if not room.users.contains(user):
+            self.send_unauthorised()
+            return self.close()
         room.online.add(user)
         room.save()
     
@@ -51,6 +54,7 @@ class DirectChatConsumer(WebsocketConsumer):
             self.room_group_name, self.channel_name
         )
         self.accept()
+
         self.__add_online_user(self.room_name, self.scope['user'].user_uuid)
         self.send_online()
 
@@ -77,6 +81,9 @@ class DirectChatConsumer(WebsocketConsumer):
             case _:
                 self.close()
             
+    def send_unauthorised(self):
+        self.send(text_data = json.dumps({"type": "unauthorised"}))
+    
     def send_online(self):
         try:
             room = self.current_class.objects.get(room_uuid = self.room_name)
