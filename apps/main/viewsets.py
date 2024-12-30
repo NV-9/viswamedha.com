@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import status
 
 from apps.main.models import ContactMessage, Photo, Reference
 from apps.main.serializers import ContactMessageSerializer, PhotoSerializer, ReferenceSerializer
@@ -19,3 +21,9 @@ class ReferenceViewSet(ModelViewSet):
     serializer_class = ReferenceSerializer
     lookup_field = 'name'
     permission_classes = [IsAdminForObjectOrReadOnlyPermission]
+
+    def list(self, request, *args, **kwargs):
+        if (not request.user.is_staff):
+            return Response(status = status.HTTP_403_FORBIDDEN)
+        return super().list(request, *args, **kwargs)
+            

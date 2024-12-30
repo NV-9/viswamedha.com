@@ -5,6 +5,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event, LessonFile
 from apps.tutor.serializers import ReviewSerializer, SubjectSerializer, LevelSerializer, StudentSerializer, CourseSerializer, LessonSerializer, LessonPlanSerializer, EventSerializer, LessonFileSerializer
 from apps.tutor.permissions import IsInLessonPlanOrIsAdmin
+from apps.main.permissions import IsAdminForObjectOrReadOnlyPermission
 
 class ReviewViewSet(viewsets.ModelViewSet):
     """
@@ -12,7 +13,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     """
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
 
 class SubjectViewSet(viewsets.ModelViewSet):
     """
@@ -20,7 +21,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
 
 class LevelViewSet(viewsets.ModelViewSet):
     """
@@ -28,7 +29,7 @@ class LevelViewSet(viewsets.ModelViewSet):
     """
     queryset = Level.objects.all()
     serializer_class = LevelSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
 
 class StudentViewSet(viewsets.ModelViewSet):
     """
@@ -51,7 +52,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
 
 class LessonViewSet(viewsets.ModelViewSet):
     """
@@ -74,7 +75,7 @@ class LessonFileViewSet(viewsets.ModelViewSet):
     """
     queryset = LessonFile.objects.all()
     serializer_class = LessonFileSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
     lookup_field = 'file_uuid'
     filterset_fields = ['lesson', 'lesson__lesson_uuid']
     parser_classes = [MultiPartParser, FormParser]
@@ -85,7 +86,7 @@ class LessonPlanViewSet(viewsets.ModelViewSet):
     """
     queryset = LessonPlan.objects.all()
     serializer_class = LessonPlanSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
     lookup_field = 'lesson_plan_uuid'
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -94,6 +95,6 @@ class EventViewSet(viewsets.ModelViewSet):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
     lookup_field = 'event_uuid'
 

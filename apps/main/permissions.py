@@ -13,7 +13,7 @@ class IsAdminForObjectOrReadOnlyPermission(BasePermission):
     """
     Custom permission to only admin to edit objects
     """
-    message = 'You do not have the required permissions to view this.'
+    message = 'You do not have the required permissions to access this.'
 
     def has_permission(self, request, view): 
         if request.method in ['GET', 'HEAD', 'OPTIONS']:
