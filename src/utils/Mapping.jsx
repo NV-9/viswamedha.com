@@ -38,6 +38,7 @@ import Chat from '../pages/chat/Chat';
 import Room from '../pages/chat/Room';
 import Legacy from '../pages/main/Legacy';
 import Lesson from '../pages/tutor/Lesson';
+import PageNotFound from '../pages/PageNotFound';
 
 export const mapping = {
     // Main
@@ -283,5 +284,16 @@ export const mapping = {
         loggedIn: {state: true, require: true},
         getPath: (room_uuid) => `/room/${room_uuid}/`,
         grouping: 'chat',
+    },
+    // Error pages
+    PageNotFound: {
+        component: PageNotFound,
+        path: '*',
+        icon: null,
+        order: -1,
+        admin: {state: false, require: false},
+        loggedIn: {state: false, require: false},
+        getPath: () => '*',
+        grouping: 'error',
     },
 };
