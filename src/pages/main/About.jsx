@@ -23,7 +23,7 @@ export default function About({ setDrawerOpen }) {
             </Typography>
             <Box sx={{ display: 'flex', flexGrow: 1, width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: { xs: 'column', md: 'row'} }}>
                 <Box sx={{ width: '100%', p: 2, flexDirection: 'column', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Box component="img" src={profileImage} alt="Profile" sx={{ height: '70vh', width: 'auto', borderRadius: '20px' }}/>
+                    <Box component="img" src={profileImage} alt="Profile" sx={{ height: { xs: 'auto', md: '70vh' }, width: '100%', maxWidth: '500px',  objectFit: 'cover',  borderRadius: '20px' }}/>
                 </Box>
                 <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', width: '100%', alignItems: { xs: 'center', sm: 'center', md: 'flex-start' }, textAlign: { xs: 'center', md: 'left' }}}>
                     <Typography variant="h4" sx={{ color: 'white', mb: 2 }}>
