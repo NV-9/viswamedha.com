@@ -6,7 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { ReactTyped } from 'react-typed';
 import { useState, useEffect } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import { SmokeScene } from 'react-smoke';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';

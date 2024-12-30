@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Card, CardActions, CardContent, Chip, Grid2 as Grid, IconButton, Input, List, ListItem, Tooltip, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 import { API_ENDPOINTS, WS_ENDPOINTS } from '../../utils/Endpoints';

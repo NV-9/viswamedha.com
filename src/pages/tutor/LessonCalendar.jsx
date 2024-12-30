@@ -1,5 +1,5 @@
 import { Box, Typography, IconButton, Grid2 as Grid } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 
 export default function LessonCalendar({ setDrawerOpen }) {
     return (

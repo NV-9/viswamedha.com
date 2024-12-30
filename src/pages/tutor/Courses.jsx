@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, Link, MenuItem, Select, Typography} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 
 import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { mapping } from '../../utils/Mapping';

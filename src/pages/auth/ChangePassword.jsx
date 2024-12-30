@@ -1,6 +1,6 @@
 import { Alert, Button, Box, Card, CardContent, Collapse, Container, FormControl, Grid2 as Grid, IconButton, Input, InputLabel, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

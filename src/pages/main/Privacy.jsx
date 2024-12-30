@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 
 
 export default function Privacy({setDrawerOpen}) {

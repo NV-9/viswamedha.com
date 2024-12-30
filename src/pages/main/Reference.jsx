@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Alert, Box, Button, Card, CardActions, CardContent, Collapse, Grid2 as Grid, IconButton, TextField, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { ApiRouter } from '../../utils/Api';

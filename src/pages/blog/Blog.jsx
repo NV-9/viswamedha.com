@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button, Select, MenuItem } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import { useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
 import { ApiRouter } from '../../utils/Api';

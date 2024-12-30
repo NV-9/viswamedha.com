@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Container, Typography, IconButton, Card, Grid2 as Grid } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../icon/MenuIcon';
 
 import { mapping } from '../utils/Mapping';
 

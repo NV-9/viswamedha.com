@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import MenuIcon from '@mui/icons-material/Menu';
+import { MenuIcon } from '../../icon/MenuIcon';
 import { Box, Button, Card, CardActions, CardContent, Chip, FormControl, Grid2 as Grid, IconButton, InputLabel, MenuItem, Select, Typography} from '@mui/material';
 
 import { formatLessonDate, isLessonCompleted } from '../../utils/Helpers';
