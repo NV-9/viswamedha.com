@@ -82,11 +82,10 @@ services:
 
       - "traefik.tcp.routers.websecure.rule=HostSNI(`viswamedha.com`)"
       - "traefik.tcp.routers.websecure.entrypoints=websecure"
-      - "traefik.tcp.routers.websecure.tls.passthrough=true"
       - "traefik.tcp.routers.websecure.service=websecure"
       - "traefik.tcp.services.websecure.loadbalancer.server.port=443"
       - "traefik.tcp.services.websecure.loadbalancer.proxyProtocol.version=2"
-      - "traefik.http.routers.mysite-secure.tls.certresolver=mysiteresolver"
+      - "traefik.http.routers.websecure.tls.certresolver=mysiteresolver"
     depends_on:
       - redis
       - postgres
