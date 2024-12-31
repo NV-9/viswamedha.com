@@ -76,7 +76,7 @@ services:
       - .env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mysite.rule=Host(`viswamedha.com`)"
+      - "traefik.http.routers.web.rule=Host(`viswamedha.com`) || PathPrefix(`/.well-known/acme-challenge/`)"
       - "traefik.http.routers.mysite.entrypoints=web"
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
 
@@ -85,6 +85,7 @@ services:
       - "traefik.tcp.routers.websecure.service=websecure"
       - "traefik.tcp.services.websecure.loadbalancer.server.port=443"
       - "traefik.tcp.services.websecure.loadbalancer.proxyProtocol.version=2"
+      - "traefik.http.routers.mysite.tls.certresolver=mysiteresolver"
       - "traefik.http.routers.websecure.tls.certresolver=mysiteresolver"
     depends_on:
       - redis
