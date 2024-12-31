@@ -43,6 +43,10 @@ services:
       - "--entrypoints.imaps.address=:imaps"
       - "--entrypoints.pop3s.address=:pop3s"
       - "--entrypoints.sieve.address=:sieve"
+      - "--certificatesresolvers.le.acme.email=nalabotuviswamedha@gmail.com"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
       # - "--api.insecure=true"
       # - "--log.level=DEBUG"
     ports:
@@ -56,6 +60,7 @@ services:
       # - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
   
   mysite:  
     container_name: mysite
@@ -75,12 +80,13 @@ services:
       - "traefik.http.routers.mysite.entrypoints=web"
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
 
-      - "traefik.tcp.routers.websecure.rule=HostSNI(`viswamedha.com`) || HostSNI(`autoconfig.viswamedha.com`) || HostSNI(`mta-sts.viswamedha.com`)"
+      - "traefik.tcp.routers.websecure.rule=HostSNI(`viswamedha.com`)"
       - "traefik.tcp.routers.websecure.entrypoints=websecure"
       - "traefik.tcp.routers.websecure.tls.passthrough=true"
       - "traefik.tcp.routers.websecure.service=websecure"
       - "traefik.tcp.services.websecure.loadbalancer.server.port=443"
       - "traefik.tcp.services.websecure.loadbalancer.proxyProtocol.version=2"
+      - "traefik.http.routers.mysite-secure.tls.certresolver=mysiteresolver"
     depends_on:
       - redis
       - postgres
