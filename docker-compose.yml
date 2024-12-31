@@ -65,6 +65,8 @@ services:
     volumes:  
       - ./.:/code
       - ./build:/code/static
+      - "/mailu/certs:/certs"
+      - "/mailu/overrides/nginx:/overrides:ro"
     env_file:
       - .env
     labels:
@@ -79,7 +81,6 @@ services:
       - "traefik.tcp.routers.websecure.service=websecure"
       - "traefik.tcp.services.websecure.loadbalancer.server.port=443"
       - "traefik.tcp.services.websecure.loadbalancer.proxyProtocol.version=2"
-
     depends_on:
       - redis
       - postgres
