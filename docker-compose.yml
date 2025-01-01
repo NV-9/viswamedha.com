@@ -56,7 +56,7 @@ services:
       - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
       # - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
 
-      - "--api.insecure=true"
+      # - "--api.insecure=true"
       - "--log.level=DEBUG"
     ports:
       - "25:25"
@@ -67,7 +67,7 @@ services:
       - "995:995"
       - "4190:4190"
       # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
+      # - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
