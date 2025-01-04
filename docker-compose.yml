@@ -83,6 +83,7 @@ services:
       - ./build:/code/static
       - "/mailu/certs:/certs"
       - "/mailu/overrides/nginx:/overrides:ro"
+      - ./media:/code/media
     env_file:
       - .env
     ports:
@@ -107,6 +108,19 @@ services:
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
     networks:
       - default
+  
+  media:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ./media:/usr/share/nginx/html/media  
+    ports:
+      - "8080:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=PathPrefix(`/media`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
+
 
   front:
     image: ${DOCKER_ORG:-ghcr.io/mailu}/${DOCKER_PREFIX:-}nginx:${MAILU_VERSION:-2024.06}

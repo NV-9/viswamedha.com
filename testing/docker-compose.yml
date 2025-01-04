@@ -50,6 +50,7 @@ services:
     volumes:  
       - ../.:/code
       - ../build:/code/static
+      - ../media:/code/media
     env_file:
       - ../.env
     ports:
@@ -66,4 +67,17 @@ services:
 
     networks:
       - default
+
+  
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ../media:/usr/share/nginx/html/media  
+    ports:
+      - "8080:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=PathPrefix(`/media`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
 
