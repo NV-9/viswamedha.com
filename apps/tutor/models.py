@@ -1,4 +1,4 @@
-from django.db.models import Model, AutoField, CharField, IntegerField, TextField, FileField, ForeignKey, CASCADE, OneToOneField, ManyToManyField, DateTimeField, BooleanField, UUIDField
+from django.db.models import Model, AutoField, CharField, FloatField, IntegerField, TextField, FileField, ForeignKey, CASCADE, OneToOneField, ManyToManyField, DateTimeField, BooleanField, UUIDField
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
@@ -22,6 +22,10 @@ class Student(Model):
 
     def __str__(self):
         return self.user.full_name
+    
+    @property
+    def username(self):
+        return self.user.username
 
 class Review(Model):
     """
@@ -103,7 +107,7 @@ class LessonPlan(Model):
     lesson_plan_uuid = UUIDField(verbose_name = _('Lesson Plan UUID'), default = uuid4, editable = False)
     course  = ForeignKey(Course, verbose_name = _('Course'), related_name = 'lesson_plan', on_delete = CASCADE)
     student = ManyToManyField(Student, verbose_name = _('Student'), related_name = 'lesson_plan')
-    cost    = IntegerField(verbose_name = _('Cost/hr'))
+    cost    = FloatField(verbose_name = _('Cost/hr'))
 
     class Meta:
         verbose_name = 'Lesson Plan'
@@ -168,7 +172,7 @@ class Lesson(Event):
     event       = OneToOneField(Event, parent_link = True, on_delete = CASCADE)
     lesson_plan = ForeignKey(LessonPlan, verbose_name = _('Lesson Plan'), related_name = 'lesson', on_delete = CASCADE, blank = True)
     
-    cost = IntegerField(verbose_name = _('Cost'), blank = True)
+    cost = FloatField(verbose_name = _('Cost'), blank = True)
     paid = BooleanField(verbose_name = _('Paid'), default = False)
 
     note     = TextField(verbose_name = _('Note'), blank = True, default = '')

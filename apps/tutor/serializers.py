@@ -71,30 +71,6 @@ class LessonFileSerializer(serializers.ModelSerializer):
         lesson = validated_data.pop('lesson') 
         return LessonFile.objects.create(lesson=lesson, **validated_data)
 
-class LessonSerializer(serializers.ModelSerializer):
-    """
-    Lesson serializer for viswamedha.com
-    """
-    event = EventSerializer()
-    lesson_file = LessonFileSerializer(many=True, read_only=True)
-    class Meta:
-        model = Lesson
-        fields = ['lesson_id', 'lesson_uuid', 'event', 'lesson_plan', 'cost', 'paid', 'lesson_file', 'note', 'homework']
-        read_only_fields = ['lesson_id', 'lesson_uuid', 'lesson_file']
-        depth = 3
-    
-    def update(self, instance, validated_data):
-        instance.event.start = validated_data.get('start', instance.event.start)
-        instance.event.end = validated_data.get('end', instance.event.end)
-        instance.event.clashing = validated_data.get('clashing', instance.event.clashing)
-        instance.event.save()
-        instance.lesson_plan = validated_data.get('lesson_plan', instance.lesson_plan)
-        instance.cost = validated_data.get('cost', instance.cost)
-        instance.paid = validated_data.get('paid', instance.paid)
-        instance.note = validated_data.get('note', instance.note)
-        instance.homework = validated_data.get('homework', instance.homework)
-        instance.save()
-        return instance
 
 class StudentSerializer(serializers.ModelSerializer):
     """
@@ -102,11 +78,31 @@ class StudentSerializer(serializers.ModelSerializer):
     """
     lesson_plan = LessonPlanSerializer(many=True)
     user = UserSerializer()
+
     class Meta:
         model = Student
-        fields = ['id', 'user', 'lesson_plan', 'student_uuid']
+        fields = ['id', 'user', 'lesson_plan', 'student_uuid', 'username']
         read_only_fields = ['id']
         depth = 2
+    
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    """
+    Lesson serializer for viswamedha.com
+    """
+    lesson_file = LessonFileSerializer(many=True, read_only=True)
+    lesson_plan = LessonPlanSerializer(read_only=True)
+    students = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Lesson
+        fields = ['lesson_id', 'lesson_uuid', 'lesson_plan', 'cost', 'paid', 'lesson_file', 'note', 'homework', 'students', 'start', 'end', 'clashing']
+        read_only_fields = ['lesson_id', 'lesson_uuid', 'lesson_file']
+        depth = 3
+    
+    def get_students(self, obj: Lesson):
+         return [{"student_uuid": student.student_uuid, "username": student.username} for student in obj.lesson_plan.student.all()]
 
 class SubjectSerializer(serializers.ModelSerializer):
     """

@@ -87,11 +87,11 @@ export default function Student({ setDrawerOpen }) {
                                     <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', width: 300}}>
                                         <CardContent>
                                             <Typography variant="body2" sx={{ mb: 1 }}>
-                                                {formatLessonDate(lesson.event.start, lesson.event.end)}
+                                                {formatLessonDate(lesson.start, lesson.end)}
                                             </Typography>
                                             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, mt: 1 }}>
                                                 <Chip label={lesson.paid ? "Paid" : "Unpaid"} color={lesson.paid ? "success" : "primary"} />
-                                                <Chip label={isLessonCompleted(lesson.event.end) ? "Completed" : "Upcoming"} color={isLessonCompleted(lesson.event.end) ? "success" : "primary"} />
+                                                <Chip label={isLessonCompleted(lesson.end) ? "Completed" : "Upcoming"} color={isLessonCompleted(lesson.end) ? "success" : "primary"} />
                                             </Box>
                                         </CardContent>
                                         <CardActions sx={{ justifyContent: 'space-between', p: 2, mt: 'auto' }}>

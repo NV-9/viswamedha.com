@@ -20,7 +20,7 @@ export const API_ENDPOINTS = {
     STUDENTS: () => 'student/',
     STUDENT: (uuid) => `student/${uuid}/`,
     STUDENT_BY_USER: (user_uuid) => `student/?user__user_uuid=${user_uuid}`,
-    LESSONS: () => 'lesson/',
+    LESSONS: (start_range=null, end_range=null) => `lesson/?start_range=${start_range ? start_range : ''}&end_range=${end_range ? end_range : ''}`,
     ME: () => 'me/',
     USER: (user_uuid) => `user/${user_uuid}/`,
     STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`,
@@ -38,6 +38,7 @@ export const API_ENDPOINTS = {
     LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
     LESSON_FILE: () => `lesson-file/`,
     LESSON_FILE_DELETE: (file_uuid) => `lesson-file/${file_uuid}/`,
+    OTHER_LESSONS: () => 'other-lessons/',
 }
 
 export const WS_ENDPOINTS = {

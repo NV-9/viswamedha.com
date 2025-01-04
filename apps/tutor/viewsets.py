@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.parsers import FormParser, MultiPartParser
+from django_filters import DateTimeFilter, FilterSet
 
 from apps.tutor.models import Review, Subject, Level, Student, Course, Lesson, LessonPlan, Event, LessonFile
 from apps.tutor.serializers import ReviewSerializer, SubjectSerializer, LevelSerializer, StudentSerializer, CourseSerializer, LessonSerializer, LessonPlanSerializer, EventSerializer, LessonFileSerializer
@@ -54,6 +55,15 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
 
+class LessonFilter(FilterSet):
+    start_range = DateTimeFilter(field_name='start', lookup_expr='gte')
+    end_range = DateTimeFilter(field_name='end', lookup_expr='lte')
+
+    class Meta:
+        model = Lesson
+        fields = ['lesson_plan', 'lesson_plan__student__student_uuid', 'start_range', 'end_range']
+
+
 class LessonViewSet(viewsets.ModelViewSet):
     """
     Lesson viewset for viswamedha.com
@@ -62,7 +72,7 @@ class LessonViewSet(viewsets.ModelViewSet):
     serializer_class = LessonSerializer
     permission_classes = [IsInLessonPlanOrIsAdmin]
     lookup_field = 'lesson_uuid'
-    filterset_fields = ['lesson_plan', 'lesson_plan__student__student_uuid']
+    filterset_class = LessonFilter
 
     def get_queryset(self):
         if self.request.user.is_staff:

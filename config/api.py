@@ -9,6 +9,7 @@ from apps.tutor.viewsets import ReviewViewSet, SubjectViewSet, LevelViewSet, Stu
 from apps.users.viewsets import UserViewSet
 from apps.users.urls import urlpatterns as user_api_urlpatterns
 from apps.chat.urls import urlpatterns as chat_api_urlpatterns
+from apps.tutor.urls import urlpatterns as tutor_api_urlpatterns
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
 
@@ -33,4 +34,4 @@ router.register("message", MessageViewSet)
 router.register("room", RoomViewSet)
 
 app_name = "api"
-urlpatterns = user_api_urlpatterns + chat_api_urlpatterns + router.urls
+urlpatterns = user_api_urlpatterns + chat_api_urlpatterns + tutor_api_urlpatterns + router.urls

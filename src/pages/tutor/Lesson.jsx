@@ -57,9 +57,8 @@ export default function Lesson({ setDrawerOpen }) {
     const [open, setOpen] = useState(false);
     const [notifMessage, setNotifMessage] = useState('');
     const [lesson, setLesson] = useState(null);
-    const [lessonEvent, setLessonEvent] = useState(null);
-    const [lessonEventStart, setLessonEventStart] = useState(new Date());
-    const [lessonEventEnd, setLessonEventEnd] = useState(new Date());
+    const [lessonStart, setLessonStart] = useState(new Date());
+    const [lessonEnd, setLessonEnd] = useState(new Date());
     const [lessonPaid, setLessonPaid] = useState(false);
     const [lessonCost, setLessonCost] = useState(0);
     const [lessonNote, setLessonNote] = useState('');
@@ -100,10 +99,9 @@ export default function Lesson({ setDrawerOpen }) {
             if (data.detail)
                 navigate(mapping['Students'].getPath());
             setLesson(data); 
-            setStudents(data.lesson_plan.student);
-            setLessonEvent(data.event);
-            setLessonEventStart(new Date(data.event.start));
-            setLessonEventEnd(new Date(data.event.end));
+            setStudents(data.students);
+            setLessonStart(new Date(data.start));
+            setLessonEnd(new Date(data.end));
             setLessonPaid(data.paid);
             setLessonCost(data.cost);
             setLessonNote(data.note);
@@ -114,7 +112,7 @@ export default function Lesson({ setDrawerOpen }) {
     }, []);
 
     const submitLessonEventData = () => {
-        if (lessonEventEnd < lessonEventStart) {
+        if (lessonEnd < lessonStart) {
             alert("The end date/time cannot be before the start date/time!");
             return;
         }
@@ -124,20 +122,20 @@ export default function Lesson({ setDrawerOpen }) {
             return;
         }
 
-        var lessonEventData = lessonEvent;
-        lessonEventData.start = lessonEventStart.toISOString();
-        lessonEventData.end = lessonEventEnd.toISOString();
+        var lessonData = lesson;
+        lessonData.start = lessonStart.toISOString();
+        lessonData.end = lessonEnd.toISOString();
 
-        ApiRouter.put(API_ENDPOINTS.EVENT(lessonEvent.event_uuid), lessonEventData)
-        .then((event) => {
+        ApiRouter.put(API_ENDPOINTS.LESSON(lesson.lesson_uuid), lessonData)
+        .then((lesson) => {
             setNotifMessage("Lesson event updated successfully!");
-            setOpen(true);  
-            setLessonEvent(event);
+            setOpen(true);
+            setLesson(lesson);
         });
     };
 
     const submitLessonData = () => {
-        if (lessonEventEnd < lessonEventStart) {
+        if (lessonEnd < lessonStart) {
             alert("The end date/time cannot be before the start date/time!");
             return;
         }
@@ -188,18 +186,18 @@ export default function Lesson({ setDrawerOpen }) {
             <Typography variant="h2" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>
                 Lesson
             </Typography>
-            {lesson  && lessonEventStart && lessonEventEnd && (
+            {lesson  && lessonStart && lessonEnd && (
                 <>
                     <Grid item xs={12}>
                         <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', display: 'flex', flexDirection: 'column', p: 2 }}>
                             <CardContent>
                                 <Typography variant="h4" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>Event Details</Typography>
                                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 2 }}>
-                                    <DateTimePicker label="Start" value={lessonEventStart} onChange={setLessonEventStart} sx={ColorScheme} disabled={!isStaff}/>
-                                    <DateTimePicker label="End" value={lessonEventEnd} onChange={setLessonEventEnd} sx={ColorScheme} disabled={!isStaff}/>
-                                    <Chip label={getFormattedDurationBetween(lessonEventStart.toISOString(), lessonEventEnd.toISOString())} color="success" />
+                                    <DateTimePicker label="Start" value={lessonStart} onChange={setLessonStart} sx={ColorScheme} disabled={!isStaff}/>
+                                    <DateTimePicker label="End" value={lessonEnd} onChange={setLessonEnd} sx={ColorScheme} disabled={!isStaff}/>
+                                    <Chip label={getFormattedDurationBetween(lessonStart.toISOString(), lessonEnd.toISOString())} color="success" />
                                     <Chip label={lesson.paid ? "Paid" : "Unpaid"} color={lesson.paid ? "success" : "primary"} />
-                                    <Chip label={isLessonCompleted(lessonEventEnd.toISOString()) ? "Completed" : "Upcoming"} color={isLessonCompleted(lessonEventEnd.toISOString()) ? "success" : "primary"}/>
+                                    <Chip label={isLessonCompleted(lessonEnd.toISOString()) ? "Completed" : "Upcoming"} color={isLessonCompleted(lessonEnd.toISOString()) ? "success" : "primary"}/>
                                 </Box>
                                 {isStaff && (
                                     <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={submitLessonEventData}>Save</Button>
@@ -210,7 +208,19 @@ export default function Lesson({ setDrawerOpen }) {
                     <Grid item xs={12}>
                         <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', display: 'flex', flexDirection: 'column', p: 2 }}>
                             <CardContent>
-                                <Typography variant="h4" sx={{ textAlign: 'center', mt: 2 }} gutterBottom>Lesson Details</Typography>
+                                <Typography variant="h4" sx={{ textAlign: 'center' }} gutterBottom>Students in Lesson</Typography>
+                                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 2 }}>
+                                    {students && students.map((student, index) => (
+                                        <Chip key={student.student_uuid} label={student.username} color="primary" onClick={() => isStaff ? navigate(mapping['Student'].getPath(student.student_uuid)) : '#'}/>
+                                    ))}
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Card sx={{ backgroundColor: 'rgba(20, 25, 30, 1.00)', color: 'white', display: 'flex', flexDirection: 'column', p: 2 }}>
+                            <CardContent>
+                                <Typography variant="h4" sx={{ textAlign: 'center' }} gutterBottom>Lesson Details</Typography>
                                 <Typography variant="h6" sx={{ mb: 1 }}>Lesson Cost</Typography>
                                 <TextField type="number" fullWidth value={lessonCost} onChange={(e) => setLessonCost(e.target.value)} placeholder="Enter the lesson cost" variant="outlined" disabled={!isStaff}
                                     sx={{ backgroundColor: 'rgba(30, 35, 40, 1.00)', color: 'white', borderRadius: 1, ...ColorScheme}}
@@ -281,7 +291,7 @@ export default function Lesson({ setDrawerOpen }) {
                         { isStaff ? 
                             <>
                                 {students && students.map((student, index) => 
-                                    <Button size="small" color="primary" key={student.student_uuid} onClick={() => navigate(mapping['Student'].getPath(student.student_uuid))}>{student.user.username}</Button>
+                                    <Button size="small" color="primary" key={student.student_uuid} onClick={() => navigate(mapping['Student'].getPath(student.student_uuid))}>{student.username}</Button>
                                 )}
                             </>: 
                             <Button size="small" color="primary" onClick={() => navigate(mapping['Student'].getPath(currentStudentUUID))}>Back</Button> 
