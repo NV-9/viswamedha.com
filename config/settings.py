@@ -204,9 +204,11 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     f'http://{DOMAIN_NAME}',
+    f'https://{DOMAIN_NAME}',
 ]
 CSRF_TRUSTED_ORIGINS = [
     f'http://{DOMAIN_NAME}',
+    f'https://{DOMAIN_NAME}',
 ]
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append(f'http://{DOMAIN_NAME}:5173')
