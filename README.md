@@ -162,3 +162,14 @@ Follow these steps to run a local instance of my website without Docker:
     ```sh
     npm run dev
     ```
+
+## License
+
+This project is licensed under the terms of the MIT License.
+
+### Usage Restrictions
+- This project is intended for educational purposes only.
+- You are not permitted to use the code or content for commercial purposes.
+- You cannot redistribute or make copies of the project for commercial use or personal gain.
+
+See the [LICENSE](./LICENSE) file for more details.
