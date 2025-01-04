@@ -18,7 +18,7 @@
 ## Development
 My website is currently live, but far from perfection. I do try to work on it when time allows as I use it for showcasing my skillset in the domain of web development and I have quite a few more ideas yet to implement for this iteration.
 
-![alt text](images\screenshot.png)
+![HomePage](images/Home.png)
 
 ## Features
 - [x] Blog & Posts
