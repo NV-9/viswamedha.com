@@ -16,4 +16,5 @@ for fixture in /code/data/*.json; do
     python /code/manage.py loaddata "$fixture"
 done
 
-python /code/manage.py runserver 0.0.0.0:8000
+echo "Starting Daphne server..."
+daphne config.asgi:application --bind "0.0.0.0" --port 8000
