@@ -199,6 +199,9 @@ export default function LessonCalendar({ setDrawerOpen }) {
                 eventChange={eventChange}
                 eventContent={eventContent}
                 eventClick={eventClick}
+                height="100%"
+                contentHeight="auto"
+                expandRows={true}
             />
         </Box>
     );
