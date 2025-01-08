@@ -179,7 +179,7 @@ export const mapping = {
         icon: CalendarViewMonthIcon,
         order: 10,
         admin: {state: false, require: false},
-        loggedIn: {state: false, require: false}, // CHANGE ME
+        loggedIn: {state: true, require: true},
         getPath: () => '/calendar/',
         grouping: 'tutor',
     },
