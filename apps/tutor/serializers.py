@@ -1,3 +1,4 @@
+import magic
 from rest_framework import serializers
 
 from apps.tutor.models import Course, Event, Lesson, LessonPlan, Review, Student, Subject, Level, LessonFile
@@ -73,6 +74,36 @@ class LessonFileSerializer(serializers.ModelSerializer):
     def validate_file(self, file):
         if file.size > self.MAX_FILE_SIZE_BYTES:
             raise serializers.ValidationError(f"The file size exceeds the limit of {self.MAX_FILE_SIZE_MB} MB.")
+        allowed_extensions = [".txt",".pdf",".docx",".pptx",".xlsx",".java",".class",".c",".h",".cs",".html",".css",".js",".py",".ipynb",".xml",".json",".md",".yaml",".cpp",".php",".sql",".sh",".bat",".rb",".go",".swift",".kt",".ts",".svg",".png",".jpg",".zip",".tar.gz",".gz"]
+        if not any(file.name.lower().endswith(ext) for ext in allowed_extensions):
+            raise serializers.ValidationError("Unsupported file extension.")
+        mime = magic.Magic(mime=True)
+        mime_type = mime.from_buffer(file.read(1024))
+        file.seek(0) 
+        allowed_mime_types = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.ms-powerpoint",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "text/plain",
+            "text/csv",
+            "application/zip",
+            "image/png",
+            "image/jpeg",
+            "application/x-tar",
+            "application/gzip",
+            "text/html",
+            "text/javascript",
+            "application/json",
+            "application/xml",
+            "application/x-python",
+        ]
+        if mime_type not in allowed_mime_types:
+            raise serializers.ValidationError(f"Unsupported file type: {mime_type}")
+
         return file
     
     def create(self, validated_data):

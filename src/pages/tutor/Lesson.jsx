@@ -66,6 +66,16 @@ export default function Lesson({ setDrawerOpen }) {
     const [lessonFiles, setLessonFiles] = useState([]);
     const [students, setStudents] = useState([]);
     const [currentStudentUUID, setCurrentStudentUUID] = useState();
+    const allowedExtensions = [
+        ".txt", ".pdf", ".docx", ".pptx", ".xlsx", 
+        ".java", ".class", ".c", ".h", ".cs", ".html", 
+        ".css", ".js", ".py", ".ipynb", ".xml", 
+        ".json", ".md", ".yaml", ".cpp", ".php", 
+        ".sql", ".sh", ".bat", ".rb", ".go", 
+        ".swift", ".kt", ".ts", ".svg", ".png", 
+        ".jpg", ".zip", ".tar.gz", ".gz"
+    ];
+    const acceptAttribute = allowedExtensions.join(',');
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -159,6 +169,11 @@ export default function Lesson({ setDrawerOpen }) {
             const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
             if (newFile.size > maxSizeInBytes) {
                 alert(`File size exceeds the limit of ${maxSizeInMB} MB. Please upload a smaller file.`);
+                return;
+            }
+            const fileExtension = newFile.name.substring(newFile.name.lastIndexOf('.')).toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert(`File type not allowed. Allowed extensions are: ${allowedExtensions.join(', ')}`);
                 return;
             }
             const formData = new FormData();
@@ -289,7 +304,7 @@ export default function Lesson({ setDrawerOpen }) {
                                                 <Button variant="outlined" color="error" onClick={() => handleDeleteFile(file.file_uuid)}>Delete</Button>
                                         </Box>
                                     ))}
-                                    <TextField type="file" fullWidth variant="outlined" onChange={handleAddNewFile} sx={{ backgroundColor: 'rgba(30, 35, 40, 1.00)', color: 'white', borderRadius: 1, ...ColorScheme}} label="Add New File"/>
+                                    <TextField type="file" fullWidth variant="outlined" onChange={handleAddNewFile} sx={{ backgroundColor: 'rgba(30, 35, 40, 1.00)', color: 'white', borderRadius: 1, ...ColorScheme}} slotProps={{htmlInput: { accept: acceptAttribute }}}/>
                                 </Box>
                             </CardContent>
                         </Card>
