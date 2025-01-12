@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.utils.dateparse import parse_datetime
 
 from apps.tutor.models import Lesson
-from apps.tutor.serializers import LessonSerializer
 
 
 def other_lessons_view(request):
