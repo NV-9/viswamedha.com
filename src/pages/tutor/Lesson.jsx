@@ -155,6 +155,12 @@ export default function Lesson({ setDrawerOpen }) {
     const handleAddNewFile = (event) => {
         const newFile = event.target.files[0];
         if (newFile) {
+            const maxSizeInMB = 10;
+            const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+            if (newFile.size > maxSizeInBytes) {
+                alert(`File size exceeds the limit of ${maxSizeInMB} MB. Please upload a smaller file.`);
+                return;
+            }
             const formData = new FormData();
             formData.append("file", newFile);
             formData.append("lesson", uuid);
@@ -168,6 +174,7 @@ export default function Lesson({ setDrawerOpen }) {
             })
             .catch((error) => {
                 console.error("Error uploading file:", error);
+                alert("Error uploading file!");
             });     
         }
     };  

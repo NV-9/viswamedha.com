@@ -49,6 +49,9 @@ class LessonFileSerializer(serializers.ModelSerializer):
     file = serializers.FileField()
     lesson = serializers.UUIDField(write_only=True)
 
+    MAX_FILE_SIZE_MB = 10
+    MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
+
     class Meta:
         model = LessonFile
         fields = ['id', 'file', 'name', 'file_uuid', 'lesson']
@@ -66,6 +69,11 @@ class LessonFileSerializer(serializers.ModelSerializer):
         except Lesson.DoesNotExist:
             raise serializers.ValidationError("Invalid lesson UUID.")
         return lesson
+
+    def validate_file(self, file):
+        if file.size > self.MAX_FILE_SIZE_BYTES:
+            raise serializers.ValidationError(f"The file size exceeds the limit of {self.MAX_FILE_SIZE_MB} MB.")
+        return file
     
     def create(self, validated_data):
         lesson = validated_data.pop('lesson') 
