@@ -37,6 +37,7 @@ const ColorScheme = {
     },
     '& .Mui-disabled': { 
         'color': 'white !important',
+        WebkitTextFillColor: 'white !important',
         '& input': { 
             color: 'white !important',
             WebkitTextFillColor: 'white !important',
