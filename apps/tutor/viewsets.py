@@ -85,7 +85,7 @@ class LessonFileViewSet(viewsets.ModelViewSet):
     """
     queryset = LessonFile.objects.all()
     serializer_class = LessonFileSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminForObjectOrReadOnlyPermission]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = 'file_uuid'
     filterset_fields = ['lesson', 'lesson__lesson_uuid']
     parser_classes = [MultiPartParser, FormParser]
