@@ -101,6 +101,16 @@ class LessonFileSerializer(serializers.ModelSerializer):
             "application/xml",
             "application/x-python",
             "text/x-python",
+            "text/x-c++",
+            "text/x-c",
+            "text/x-java-source",
+            "text/x-java",
+            "text/x-csharp",
+            "text/x-csrc",
+            "text/x-h",
+            "text/x-c-header",
+            "text/x-script.python",
+            "application/javascript"
         ]
         if mime_type not in allowed_mime_types:
             raise serializers.ValidationError(f"Unsupported file type: {mime_type}")
