@@ -15,9 +15,9 @@ admin.site.register(Event)
 
 @admin.register(Lesson)
 class LessonAdmin(ModelAdmin):
-    list_display = ('event', 'lesson_plan', 'cost', 'paid', 'note', 'homework')
+    list_display = ('event', 'lesson_plan', 'cost', 'paid')
     list_filter = ('event', 'lesson_plan', 'cost', 'paid')
-    search_fields = ('event', 'lesson_plan', 'cost', 'paid', 'note', 'homework')
-    ordering = ('event', 'lesson_plan', 'cost', 'paid', 'note', 'homework')
+    search_fields = ('event', 'lesson_plan', 'cost', 'paid')
+    ordering = ('event', 'lesson_plan', 'cost', 'paid')
 
     form = AddLessonForm
