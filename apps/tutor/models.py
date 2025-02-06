@@ -198,8 +198,8 @@ class Lesson(Event):
             start = self.start + timedelta(weeks = 1),
             end = self.end + timedelta(weeks = 1),
             lesson_plan = self.lesson_plan,
-            student = self.student,
-            cost = self.cost
+            cost = self.cost,
+            clashing = self.clashing
         )
 
 def lesson_file_upload_to(instance: "LessonFile", filename):
