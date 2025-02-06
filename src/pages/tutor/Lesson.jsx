@@ -264,7 +264,7 @@ export default function Lesson({ setDrawerOpen }) {
                                 )}
                                 <Typography variant="h6" sx={{ mb: 1 }}>Lesson Note</Typography>
                                 <TextField 
-                                    multiline rows={4} fullWidth value={lessonNote} 
+                                    multiline minRows={4} fullWidth value={lessonNote} 
                                     onChange={(e) => setLessonNote(e.target.value)}
                                     placeholder="Add a note here" 
                                     variant="outlined"
@@ -272,7 +272,7 @@ export default function Lesson({ setDrawerOpen }) {
                                 />
                                 <Typography variant="h6" sx={{ mb: 1 }}>Homework</Typography>
                                 <TextField 
-                                    multiline rows={4} fullWidth value={lessonHomework} 
+                                    multiline minRows={4} fullWidth value={lessonHomework} 
                                     onChange={(e) => setLessonHomework(e.target.value)}
                                     placeholder="Homework details..." 
                                     variant="outlined" 
