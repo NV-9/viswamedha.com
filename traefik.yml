@@ -1,0 +1,50 @@
+
+services:
+  reverse-proxy:
+  # The official v2 Traefik docker image
+    image: traefik:v2.11
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.allowEmptyServices=true"
+      - "--entrypoints.web.address=:http"
+      - "--entrypoints.websecure.address=:https"
+      - "--entrypoints.smtp.address=:smtp"
+      - "--entrypoints.submissions.address=:submissions"
+      - "--entrypoints.imaps.address=:imaps"
+      - "--entrypoints.pop3s.address=:pop3s"
+      - "--entrypoints.sieve.address=:sieve"
+
+      - "--certificatesresolvers.myresolver.acme.email=nalabotuviswamedha@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      # - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+
+      # - "--api.insecure=true"
+      - "--log.level=DEBUG"
+    ports:
+      - "25:25"
+      - "80:80"
+      - "443:443"
+      - "465:465"
+      - "993:993"
+      - "995:995"
+      - "4190:4190"
+      # The Web UI (enabled by --api.insecure=true)
+      # - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt 
+
+
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.203.0/24
