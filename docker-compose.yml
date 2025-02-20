@@ -69,6 +69,7 @@ services:
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
     networks:
       - default
+      - proxy
   
   media:
     image: nginx:alpine
@@ -83,6 +84,8 @@ services:
       - "traefik.http.routers.media.entrypoints=websecure"
       - "traefik.http.routers.media.tls=true"
       - "traefik.http.routers.media.tls.certresolver=myresolver"
+    networks:
+      - proxy
 
   front:
     image: ${DOCKER_ORG:-ghcr.io/mailu}/${DOCKER_PREFIX:-}nginx:${MAILU_VERSION:-2024.06}
@@ -140,6 +143,7 @@ services:
     networks:
       - default
       - webmail
+      - proxy
     volumes:
       - "/mailu/certs:/certs"
       - "/mailu/overrides/nginx:/overrides:ro"
@@ -302,3 +306,5 @@ networks:
   oletools:
     driver: bridge
     internal: true
+  proxy:
+    external: true
