@@ -55,6 +55,7 @@ services:
       - resolver
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
 
       - "traefik.http.routers.mysitehttp.rule=Host(`viswamedha.com`)"
       - "traefik.http.routers.mysitehttp.entrypoints=web"
@@ -80,6 +81,7 @@ services:
       - "8080:80"
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.media.rule=Host(`viswamedha.com`) && PathPrefix(`/media`)"
       - "traefik.http.routers.media.entrypoints=websecure"
       - "traefik.http.routers.media.tls=true"
@@ -97,6 +99,7 @@ services:
         tag: mailu-front
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
 
       - "traefik.http.routers.web.rule=Host(`mail.viswamedha.com`) || PathPrefix(`/.well-known/acme-challenge/`)"
       - "traefik.http.routers.web.entrypoints=web"
