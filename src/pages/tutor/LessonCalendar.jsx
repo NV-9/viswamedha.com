@@ -83,6 +83,7 @@ export default function LessonCalendar({ setDrawerOpen }) {
         allDay: false,
         lesson_uuid: lesson.lesson_uuid,
         clashing: lesson.clashing,
+        paid: lesson.paid,
     });
 
     const datesSet = (info) => {
@@ -116,10 +117,9 @@ export default function LessonCalendar({ setDrawerOpen }) {
             hour: '2-digit',
             minute: '2-digit',
         });
-
         return (
             <div>
-                <div className="fc-event-dot" style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'red', borderRadius: '50%', marginRight: '4px' }}/>
+                <div className="fc-event-dot" style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: (eventInfo.event.extendedProps.paid ? 'green' : 'red'), borderRadius: '50%', marginRight: '4px' }}/>
                 <strong>{`${startTime} - ${endTime}`}</strong>
                 <br />
                 <span>{eventInfo.event.title}</span>
