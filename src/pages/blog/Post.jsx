@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid2 as Grid, Typography, IconButton, Divider, Button } from '@mui/material';
 import { useParams } from "react-router-dom";
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import { MenuIcon } from '../../icon/MenuIcon';
 import { useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
@@ -37,11 +39,9 @@ export default function Blog({ setDrawerOpen }) {
                         <Box component="img" src={post.image} alt={post.title} sx={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 1 }}/>
                     </Box>
                 </Grid>
-                {post.content.split('\n').map((paragraph, index) => (
-                    <Typography variant="body1" key={index} sx={{ mb: 2 }}>
-                        {paragraph}
-                    </Typography>
-                ))}
+                <Typography variant="body1" sx={{ mb: 2 }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(post.content)) }}
+                />
                 <Typography variant="body1" key={"s"} sx={{ mb: 2 }}>
                     <Button variant="outlined" sx={{ color: 'white', mb: 1, mr: 1 }} color="white">
                         {formatDate(post.publish_date)}
