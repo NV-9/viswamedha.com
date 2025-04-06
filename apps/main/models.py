@@ -1,10 +1,16 @@
 from uuid import uuid4
 
+from django.core.exceptions import ValidationError
 from django.db.models import Model, AutoField, ImageField, CharField, URLField
 from django.utils.translation import gettext_lazy as _
 
 from apps.blog.utils import PathAndRename
 
+
+def validate_image_file_size(image):
+    max_size = 5 * 1024 * 1024 
+    if image.size > max_size:
+        raise ValidationError(f"Image file size should not exceed 5MB.")
 
 class Photo(Model):
     """
@@ -14,7 +20,7 @@ class Photo(Model):
     image_path_folder = 'main/photos/'
 
     id    = AutoField(primary_key = True)
-    image = ImageField(verbose_name = 'Image', upload_to = PathAndRename(image_path_folder), blank = True)
+    image = ImageField(verbose_name = 'Image', upload_to = PathAndRename(image_path_folder), validators=[validate_image_file_size], blank = True)
     alt   = CharField(max_length = 255, default = '')
     
     class Meta:

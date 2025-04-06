@@ -50,7 +50,7 @@ export default function Photos({ setDrawerOpen }) {
                             loading="lazy"
                             onLoad={() => handleImageLoad(index)}
                             style={{
-                                display: loadedImages[index] ? 'block' : 'none',
+                                display: loadedImages[index] !== false ? 'block' : 'none',
                                 cursor: 'pointer',
                             }}
                         />
