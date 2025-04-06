@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid2 as Grid, Chip, Typography, IconButton, Divider, Button, Select, MenuItem } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import DOMPurify from 'dompurify';
+import { marked } from 'marked';
 import { MenuIcon } from '../../icon/MenuIcon';
 import { useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
@@ -77,7 +79,7 @@ export default function Blog({ setDrawerOpen }) {
                                     {post.heading}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    {post.content.length > 100 ? `${post.content.substring(0, 100)}...` : post.content}
+                                    {post.content.length > 100 ? `${DOMPurify.sanitize(marked.parse(post.content.substring(0, 100)))}...` : post.content}
                                 </Typography>
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
                                     {post.tags.map((tag) => (
