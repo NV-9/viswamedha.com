@@ -10,6 +10,17 @@ import { ApiRouter } from '../../utils/Api';
 import { mapping } from '../../utils/Mapping';
 import { formatDate } from '../../utils/Helpers';
 
+function getShort(markdown, limit = 100) {
+    if (!markdown) return '';
+    const html = DOMPurify.sanitize(marked.parse(markdown));
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+    return plainText.length > limit
+        ? `${plainText.substring(0, limit)}...`
+        : plainText;
+}
+
 export default function Blog({ setDrawerOpen }) {
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
@@ -78,8 +89,9 @@ export default function Blog({ setDrawerOpen }) {
                                 <Typography variant="h5" sx={{ mb: 1 }}>
                                     {post.heading}
                                 </Typography>
-                                <Typography variant="body1" sx={{ mb: 1 }} dangerouslySetInnerHTML={{ __html: `${DOMPurify.sanitize(marked.parse(post.content.length > 100 ? 
-                                    post.content.substring(0, 100) : post.content))}...` }} />
+                                <Typography variant="body1" sx={{ mb: 1 }} >
+                                    {getShort(post.content, 100)}
+                                </Typography>
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
                                     {post.tags.map((tag) => (
                                         <Chip key={tag.name} label={tag.name} variant="outlined" sx={{ color: 'white' }} />
