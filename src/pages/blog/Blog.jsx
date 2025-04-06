@@ -78,8 +78,8 @@ export default function Blog({ setDrawerOpen }) {
                                 <Typography variant="h5" sx={{ mb: 1 }}>
                                     {post.heading}
                                 </Typography>
-                                <Typography variant="body1" sx={{ mb: 1 }} dangerouslySetInnerHTML={
-                                    `${DOMPurify.sanitize(marked.parse(post.content.length > 100 ?  post.content.substring(0, 100) : post.content))}...` }/>
+                                <Typography variant="body1" sx={{ mb: 1 }} dangerouslySetInnerHTML={{ __html: `${DOMPurify.sanitize(marked.parse(post.content.length > 100 ? 
+                                    post.content.substring(0, 100) : post.content))}...` }} />
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
                                     {post.tags.map((tag) => (
                                         <Chip key={tag.name} label={tag.name} variant="outlined" sx={{ color: 'white' }} />
