@@ -34,8 +34,6 @@ import Reference from '../pages/main/Reference';
 import Students from '../pages/tutor/Students';
 import Student from '../pages/tutor/Student';
 import Course from '../pages/tutor/Course';
-import Chat from '../pages/chat/Chat';
-import Room from '../pages/chat/Room';
 import Legacy from '../pages/main/Legacy';
 import Lesson from '../pages/tutor/Lesson';
 import PageNotFound from '../pages/PageNotFound';
@@ -263,27 +261,6 @@ export const mapping = {
         loggedIn: {state: true, require: true},
         getPath: () => '/profile/change-password/',
         grouping: 'auth',
-    },
-    // Chat   
-    Chat: {
-        component: Chat,
-        path: '/chat/',
-        icon: ChatIcon,
-        order: 11,
-        admin: {state: false, require: false},
-        loggedIn: {state: true, require: true},
-        getPath: () => '/chat/',
-        grouping: 'chat',
-    },
-    Room: {
-        component: Room,
-        path: '/room/:room_uuid/',
-        icon: ChatIcon,
-        order: -1,
-        admin: {state: false, require: false},
-        loggedIn: {state: true, require: true},
-        getPath: (room_uuid) => `/room/${room_uuid}/`,
-        grouping: 'chat',
     },
     // Error pages
     PageNotFound: {

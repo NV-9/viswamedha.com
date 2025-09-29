@@ -24,24 +24,10 @@ export const API_ENDPOINTS = {
     ME: () => 'me/',
     USER: (user_uuid) => `user/${user_uuid}/`,
     STUDENT_LESSONS: (student_uuid) => `lesson/?lesson_plan__student__student_uuid=${student_uuid}`,
-    DIRECT_CHAT: (user_uuid) => `direct-chat/?users__user_uuid=${user_uuid}`,
-    DIRECT_CHAT_ROOM: (room_uuid) => `direct-chat/${room_uuid}/`,
-    GROUP_CHAT: (user_uuid) => `group-chat/?users__user_uuid=${user_uuid}`,
-    GROUP_CHAT_ROOM: (room_uuid) => `group-chat/${room_uuid}/`,
-    USERNAME: (name) => `user/?username=${name}`,
-    CREATE_DIRECT_CHAT: (username) => `create-direct-chat/?username=${username}`,
-    JOIN_GROUP_CHAT: (invite_code) => `join-group-chat/?invite_code=${invite_code}`,
-    ROOM: (room_uuid) => `room/${room_uuid}/`,
-    MESSAGES: (room_uuid, limit = null, offset = null) => `message/?room__room_uuid=${room_uuid}&limit=${limit}&offset=${offset}`,
     LESSON: (lesson_uuid) => `lesson/${lesson_uuid}/`,
     EVENT: (event_uuid) => `event/${event_uuid}/`,
     LESSON_FILES: (lesson_uuid) => `lesson-file/?lesson__lesson_uuid=${lesson_uuid}`,
     LESSON_FILE: () => `lesson-file/`,
     LESSON_FILE_DELETE: (file_uuid) => `lesson-file/${file_uuid}/`,
     OTHER_LESSONS: () => 'other-lessons/',
-}
-
-export const WS_ENDPOINTS = {
-    DIRECT_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/direct/${room_uuid}/`,
-    GROUP_CHAT: (room_uuid) => `${window.location.protocol === "https" ? "wss" : "ws"}://${window.location.host}/ws/chat/group/${room_uuid}/`,
 }

@@ -37,7 +37,6 @@ CUSTOM_APPS = [
     'apps.blog',
     'apps.main',
     'apps.tutor',
-    'apps.chat',
 ]
 FIRST_APPS = [
     'jet.dashboard',
