@@ -27,9 +27,8 @@ services:
 
   mysite:  
     container_name: mysite
-    build:   
-      context: .
-      dockerfile: ./Dockerfile
+    image: ghcr.io/nv-9/viswamedha.com:prod
+    restart: unless-stopped
     volumes:  
       - ./.:/code
       - ./build:/code/static
@@ -41,7 +40,6 @@ services:
     depends_on:
       - redis
       - postgres
-      - resolver
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
@@ -52,6 +50,7 @@ services:
       - "traefik.http.routers.mysite.tls=true"
       - "traefik.http.routers.mysite.tls.certresolver=webresolver"
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
+      - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - proxy
   
@@ -67,6 +66,37 @@ services:
       - "traefik.http.routers.media.entrypoints=websecure"
       - "traefik.http.routers.media.tls=true"
       - "traefik.http.routers.media.tls.certresolver=webresolver"
+    networks:
+      - proxy
+  
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+      - "--rolling-restart"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  reverse-proxy:
+    image: traefik:v3.3
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.allowEmptyServices=true"
+      - "--entrypoints.web.address=:http"
+      - "--entrypoints.websecure.address=:https"
+      - "--certificatesresolvers.webresolver.acme.email=nalabotuviswamedha@gmail.com"
+      - "--certificatesresolvers.webresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.webresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.webresolver.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt 
     networks:
       - proxy
 

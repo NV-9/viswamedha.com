@@ -1,0 +1,84 @@
+
+services:
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - "/mailu/redis:/data"
+    depends_on:
+      - resolver
+  
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    volumes:
+      - /postgres-data:/var/lib/postgresql/data
+      - /postgres-data-backups:/backups
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysite:  
+    container_name: mysite
+    image: ghcr.io/nv-9/viswamedha.com:prod
+    restart: unless-stopped
+    volumes:  
+      - ./.:/code
+      - ./build:/code/static
+      - "/mailu/certs:/certs"
+      - "/mailu/overrides/nginx:/overrides:ro"
+      - ./media:/code/media
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.mysitehttp.rule=Host(`viswamedha.com`)"
+      - "traefik.http.routers.mysitehttp.entrypoints=web"
+      - "traefik.http.routers.mysite.rule=Host(`viswamedha.com`) && !PathPrefix(`/media`)"
+      - "traefik.http.routers.mysite.entrypoints=websecure"
+      - "traefik.http.routers.mysite.tls=true"
+      - "traefik.http.routers.mysite.tls.certresolver=webresolver"
+      - "traefik.http.services.mysite.loadbalancer.server.port=8000"
+      - "com.centurylinklabs.watchtower.enable=true"
+    networks:
+      - proxy
+  
+  media:
+    image: nginx:alpine
+    container_name: media
+    volumes:
+      - ./media:/usr/share/nginx/html/media  
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.media.rule=Host(`viswamedha.com`) && PathPrefix(`/media`)"
+      - "traefik.http.routers.media.entrypoints=websecure"
+      - "traefik.http.routers.media.tls=true"
+      - "traefik.http.routers.media.tls.certresolver=webresolver"
+    networks:
+      - proxy
+  
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+      - "--rolling-restart"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+networks:
+  proxy:
+    external: true
