@@ -154,16 +154,6 @@ CHANNEL_LAYERS = {
     },
 }
 
-# SOCIAL ACCOUNT LINKS
-SOCIAL_ACCOUNT_LINKS = {
-    'google': config("SOCIAL_LINK_GOOGLE", default=None),
-    'facebook': config("SOCIAL_LINK_FACEBOOK", default=None),
-    'instagram': config("SOCIAL_LINK_INSTAGRAM", default=None),
-    'github': config("SOCIAL_LINK_GITHUB", default=None),
-    'linkedin': config("SOCIAL_LINK_LINKEDIN", default=None),
-    'cv': config("SOCIAL_LINK_CV", default=None),
-}
-
 # JET THEMES
 JET_THEMES = [
     {

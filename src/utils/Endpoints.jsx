@@ -4,7 +4,6 @@ export const API_ENDPOINTS = {
     SIGNUP: () => 'signup/',
     CHANGE_PASSWORD: () => 'change-password/',
     SESSION: () => 'session/',
-    SOCIALS: () => 'socials/',
     CONTACT: () => 'contact-message/',
     REVIEWS: () => 'review/',
     COURSES: () => 'course/',

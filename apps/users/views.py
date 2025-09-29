@@ -66,9 +66,6 @@ def signup_view(request):
 def session_view(request):
     return JsonResponse({'isAuthenticated': request.user.is_authenticated, 'isStaff': request.user.is_staff})
 
-def socials_view(request):
-    return JsonResponse(settings.SOCIAL_ACCOUNT_LINKS)
-
 def me_view(request):
     if request.user.is_authenticated:
         user_data = UserSerializer(request.user).data

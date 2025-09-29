@@ -3,28 +3,24 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { ReactTyped } from 'react-typed';
 import { useState, useEffect } from "react";
 import { MenuIcon } from '../../icon/MenuIcon';
 import { SmokeScene } from 'react-smoke';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
-import { ApiRouter } from '../../utils/Api';
 
 const mapping = {
     'linkedin': LinkedInIcon,
     'facebook': FacebookIcon,
     'instagram': InstagramIcon,
-    'github': GitHubIcon,
-    'google': MailOutlineIcon
+    'github': GitHubIcon
 };
 
 export default function Home({ setDrawerOpen }) {
     const [socialLinks, setSocialLinks] = useState(null);
 
     useEffect(() => {
-        ApiRouter.get(API_ENDPOINTS.SOCIALS())
-        .then(setSocialLinks);
+        setSocialLinks(Object.fromEntries(Object.keys(mapping).map(key => [key, API_ENDPOINTS.REFERENCE(key)])));
     }, []);
     
     return (

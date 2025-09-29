@@ -59,12 +59,6 @@ Follow these steps to run a local instance of my website using Docker:
     REDIS_PORT=6379
     VITE_API_URL=/api/
     DOMAIN_NAME=localhost
-    SOCIAL_LINK_GOOGLE=https://google.com
-    SOCIAL_LINK_FACEBOOK=https://google.com
-    SOCIAL_LINK_LINKEDIN=https://google.com
-    SOCIAL_LINK_INSTAGRAM=https://google.com
-    SOCIAL_LINK_GITHUB=https://google.com
-    SOCIAL_LINK_CV=https://google.com
     ```
 5. Move into the `testing` folder as follows:
     ```sh
@@ -134,12 +128,6 @@ Follow these steps to run a local instance of my website without Docker:
     REDIS_PORT=6379
     VITE_API_URL=/api/
     DOMAIN_NAME=localhost
-    SOCIAL_LINK_GOOGLE=https://google.com
-    SOCIAL_LINK_FACEBOOK=https://google.com
-    SOCIAL_LINK_LINKEDIN=https://google.com
-    SOCIAL_LINK_INSTAGRAM=https://google.com
-    SOCIAL_LINK_GITHUB=https://google.com
-    SOCIAL_LINK_CV=https://google.com
     ```
     Ensure that POSTGRES_HOST and REDIS_HOST point to your local installations of PostgreSQL and Redis.
 8. **Run database migrations**  
