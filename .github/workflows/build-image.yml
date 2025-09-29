@@ -25,4 +25,4 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
 
       - name: Build the Docker image
-        run: docker build . -f Dockerfile -t ghcr.io/nv-9/viswamedha.com:prod --push
+        run: docker build . -f Dockerfile --build-arg VITE_API_URL="/api/" -t ghcr.io/nv-9/viswamedha.com:prod --push
