@@ -6,8 +6,6 @@ services:
     restart: always
     volumes:
       - "/mailu/redis:/data"
-    depends_on:
-      - resolver
   
   postgres:
     container_name: postgres
