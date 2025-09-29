@@ -189,3 +189,4 @@ build-ssr
 *.sw?
 
 media
+backups
