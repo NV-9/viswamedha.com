@@ -32,7 +32,7 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY --from=frontend /code/build /code/static/
+COPY --from=frontend /code/build /code/build
 COPY ./ /code
 
 COPY ./start /start
