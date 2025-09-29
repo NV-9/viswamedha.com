@@ -50,6 +50,7 @@ services:
       - "traefik.http.services.mysite.loadbalancer.server.port=8000"
       - "com.centurylinklabs.watchtower.enable=true"
     networks:
+      - default
       - proxy
   
   media:
