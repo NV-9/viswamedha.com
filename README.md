@@ -1,6 +1,6 @@
 
 # viswamedha.com
-[viswamedha.com](https://viswamedha.com) is my personal website, designed to showcase my services and portfolio. This release marks the `fourth` iteration of the site, featuring a custom mail server, a reworked CSS theme for a fresh look, and enhanced consistency across all pages. Subdomains were removed due to site authentication incompatibilities, but I hope to implement them again in the future. Additionally, several key optimizations have been implemented to improve performance and functionality.
+[viswamedha.com](https://viswamedha.com) is my personal website, designed to showcase my services and portfolio. This release marks the `fourth` iteration of the site, featuring some new ideas (see below), a reworked CSS theme for a fresh look, and enhanced consistency across all pages. Subdomains were removed due to site authentication incompatibilities, but I hope to implement them again in the future. Additionally, several key optimizations have been implemented to improve performance and functionality.
 
 ## Built with
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -25,10 +25,9 @@ My website is currently live, but far from perfection. I do try to work on it wh
 - [x] Calendar
 - [x] Student Management
 - [x] API
-- [x] Live Chat
-- [x] Mail Server
+- [x] Programmable Redirects
 - [ ] Subdomain Routing
-- [ ] Optimize Database Queries
+- [ ] Database Query Optimization
 
 ## Run Locally
 ### Run Locally - Docker

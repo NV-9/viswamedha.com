@@ -8,8 +8,6 @@ services:
       - "/mailu/redis:/data"
     depends_on:
       - resolver
-    dns:
-      - 192.168.203.254
   
   postgres:
     container_name: postgres
@@ -26,8 +24,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    dns:
-      - 192.168.203.254
 
   mysite:  
     container_name: mysite
@@ -42,8 +38,6 @@ services:
       - ./media:/code/media
     env_file:
       - .env
-    ports:
-      - "8000:8000"
     depends_on:
       - redis
       - postgres
@@ -66,8 +60,6 @@ services:
     container_name: media
     volumes:
       - ./media:/usr/share/nginx/html/media  
-    ports:
-      - "8080:80"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"

@@ -7,8 +7,6 @@ services:
     restart: always
     volumes:
       - "/redis-data:/data"
-    dns:
-      - 192.168.203.254
   
   postgres:
     container_name: postgres
@@ -25,8 +23,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    dns:
-      - 192.168.203.254
 
   reverse-proxy:
     image: traefik:v2.11
@@ -67,7 +63,6 @@ services:
 
     networks:
       - default
-
   
   nginx:
     image: nginx:alpine
