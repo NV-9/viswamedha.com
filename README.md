@@ -59,19 +59,15 @@ Follow these steps to run a local instance of my website using Docker:
     VITE_API_URL=/api/
     DOMAIN_NAME=localhost
     ```
-5. Move into the `testing` folder as follows:
+5. Run the container with the following command:
     ```sh
-    cd testing
+    docker compose -f docker-compose.dev.yml up -d
     ```
-4. Run the container with the following command:
-    ```sh
-    docker compose up -d
-    ```
-5. You will need to use this command to create a superuser account, to access the admin and restricted pages.
+6. You will need to use this command to create a superuser account, to access the admin and restricted pages.
     ```python
     docker exec -it mysite python manage.py createsuperuser
     ```
-6. Simply navigate to `localhost` in any modern browser to view the running website.
+7. Simply navigate to `localhost` in any modern browser to view the running website.
 
 ### Run Locally - Manual Setup  
 Follow these steps to run a local instance of my website without Docker:  
