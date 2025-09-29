@@ -4,6 +4,9 @@ USER node
 
 WORKDIR /code
 
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
+
 COPY ./package.json ./package-lock.json /code/
 RUN npm ci && npm cache clean --force
 
