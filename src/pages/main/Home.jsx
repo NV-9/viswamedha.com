@@ -16,13 +16,7 @@ const mapping = {
     'github': GitHubIcon
 };
 
-export default function Home({ setDrawerOpen }) {
-    const [socialLinks, setSocialLinks] = useState(null);
-
-    useEffect(() => {
-        setSocialLinks(Object.fromEntries(Object.keys(mapping).map(key => [key, API_ENDPOINTS.REFERENCE(key)])));
-    }, []);
-    
+export default function Home({ setDrawerOpen }) {    
     return (
         <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             <SmokeScene style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
@@ -38,10 +32,10 @@ export default function Home({ setDrawerOpen }) {
                         a <ReactTyped strings={["Student", "Developer", "Blogger", "Freelancer", "Photographer", "Gamer"]} typeSpeed={100} backSpeed={50} loop />
                     </Typography>
                     <Grid container direction="row" spacing={2} justifyContent={{ xs: 'center', md: 'flex-start' }} sx={{ mt: 2 }}>
-                        {socialLinks && Object.keys(socialLinks).map((key) => {
+                        {mapping && Object.keys(mapping).map((key) => {
                             const Icon = mapping[key];
                             return (
-                                <IconButton key={key} sx={{ color: '#37EBF3' }} href={socialLinks[key]} target="_blank">
+                                <IconButton key={key} sx={{ color: '#37EBF3' }} href={API_ENDPOINTS.REFERENCE(key)} target="_blank">
                                     {Icon && <Icon />} 
                                 </IconButton>
                             );

@@ -1,7 +1,5 @@
 import { Box, Typography, Button, IconButton, Grid2 as Grid } from '@mui/material';
 import { MenuIcon } from '../../icon/MenuIcon';
-import { useState, useEffect } from 'react';
-import { ApiRouter } from '../../utils/Api';
 import { API_ENDPOINTS } from '../../utils/Endpoints';
 import profileImage from '/img/About.png';
 
