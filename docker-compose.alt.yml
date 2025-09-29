@@ -28,8 +28,6 @@ services:
     image: ghcr.io/nv-9/viswamedha.com:prod
     restart: unless-stopped
     volumes:  
-      - ./.:/code
-      - ./build:/code/static
       - "/mailu/certs:/certs"
       - "/mailu/overrides/nginx:/overrides:ro"
       - ./media:/code/media
