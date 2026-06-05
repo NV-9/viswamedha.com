@@ -11,7 +11,7 @@ function Nav() {
   function NavLinks({ onClick }: { onClick?: () => void }) {
     return (
       <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 text-sm text-base-content/70">
-        <Link to="/" onClick={onClick} className="py-1 sm:py-0">Home</Link>
+        <Link to="/" onClick={onClick} className="py-1 sm:py-0">Me</Link>
         <Link to="/about" onClick={onClick} className="py-1 sm:py-0">About</Link>
         <Link to="https://blog.viswamedha.com" target="_blank" rel="noreferrer" className="py-1 sm:py-0">Blog</Link>
         <Link to="/projects" onClick={onClick} className="py-1 sm:py-0">Projects</Link>
@@ -21,7 +21,7 @@ function Nav() {
   }
 
   return (
-    <nav className="border-b border-white/10 bg-[#0c1015]/90 backdrop-blur">
+    <nav className="border-b border-white/10 bg-[rgba(5,10,14,1.00)] backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 py-2 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/" className="text-sm font-medium uppercase tracking-[0.22em] text-base-content">
@@ -40,7 +40,6 @@ function Nav() {
         </div>
       </div>
 
-      {/* Mobile menu panel */}
       {open && (
         <div className="sm:hidden bg-[#0c1015]/95 border-t border-white/5">
           <div className="mx-auto max-w-6xl px-4 py-3">
@@ -54,7 +53,7 @@ function Nav() {
 
 export function App() {
   return (
-    <div className="min-h-screen bg-[#090c10] text-base-content">
+    <div className="min-h-screen bg-[rgba(5,10,14,1.00)] text-base-content">
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />} />

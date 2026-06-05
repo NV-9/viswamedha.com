@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { siteContent } from '../siteContent'
 
 function ProfileLink({ href, label }: { href: string; label: string }) {

@@ -1,11 +1,10 @@
 FROM node:20-alpine AS build
+WORKDIR /app
 
-WORKDIR /app/site
-
-COPY site/package*.json ./
+COPY site/package.json site/package-lock.json ./
 RUN npm ci
 
-COPY site ./
+COPY site .
 RUN npm run build
 
 FROM nginx:1.27-alpine AS runner
@@ -21,7 +20,7 @@ RUN printf '%s\n' \
   '  }' \
   '}' > /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/site/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,9 +1,8 @@
 FROM node:20-alpine
 
-WORKDIR /app/site
+WORKDIR /app
 
-COPY site/package*.json ./
+COPY site/package.json site/package-lock.json ./
 RUN npm ci
 
 EXPOSE 5173
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
