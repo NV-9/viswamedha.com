@@ -1,9 +1,7 @@
 
 services:
   site:
-    build:
-      context: ../..
-      dockerfile: compose/prod/Dockerfile
+    image: ghcr.io/NV-9/viswamedha.com:latest
     ports:
-      - "8080:80"
+      - "8080:8080"
     restart: unless-stopped
