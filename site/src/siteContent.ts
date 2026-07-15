@@ -145,7 +145,7 @@ export const siteContent = {
       institution: 'University of Birmingham',
       dates: 'Sep. 2022 - July 2026',
       degree: 'BSc AI & Computer Science FT',
-      note: 'On track to receiving a First Class Degree',
+      note: 'Achieved a First Class Degree with Honours',
     },
   ] satisfies EducationEntry[],
   github: {
